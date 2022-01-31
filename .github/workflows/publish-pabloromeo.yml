@@ -1,0 +1,41 @@
+name: "Publish - Pablo Romeo"
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: 
+       - '.github/workflows/publish.yml'
+       - 'posts/pabloromeo/**'
+
+env:
+  username: 'pabloromeo'
+
+# -----------------------------------------------------------------------------
+jobs:
+  prepare:
+    outputs:
+      username: ${{ env.username }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
+  publish:
+    uses: cloudx-labs/posts/.github/workflows/publish.yml@main
+    needs: prepare
+    with:
+      username: ${{ needs.prepare.outputs.username }}
+    secrets:
+      devto_token: ${{ secrets[format('devto_key_{0}', needs.prepare.outputs.username)] }}
+
+#  publish:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout the repo
+#        uses: actions/checkout@v2
+#      - name: Publish articles on dev.to for ${{env.username}}
+#        uses: sinedied/publish-devto@v2
+#        with:
+#          devto_key: ${{ secrets[format('devto_key_{0}', env.username)] }}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          files: 'posts/${{env.username}}/**/*.md'
+#          branch: main
+#          conventional_commits: true
