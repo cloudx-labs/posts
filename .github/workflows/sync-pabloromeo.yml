@@ -12,7 +12,7 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   publish:
-    uses: cloudx-labs/posts/actions/workflows/publish.yml@main
+    uses: cloudx-labs/posts/.github/workflows/publish.yml@main
     with:
       username: ${{ env.username }}
       devto_token: ${{ secrets[format('devto_key_{0}', env.username)] }}
