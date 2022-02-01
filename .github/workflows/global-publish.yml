@@ -24,9 +24,10 @@ jobs:
           echo "others: ${{steps.changes.outputs.others}}"
       - name: Checking out of scope changes
         if: steps.changes.outputs.others == 'true'
-        run: |
-          echo "There are changes outside the user's base path"
-          exit 1
+        uses: actions/github-script@v3
+        with:
+          script: |
+              core.warning("There are changes outside of the user's scope!")
       - name: Lint Markdown
         uses: docker://avtodev/markdown-lint:v1
         with:
