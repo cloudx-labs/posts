@@ -1,4 +1,4 @@
-name: "Sync - Pablo Romeo"
+name: "Publish - Pablo Romeo"
 on:
   workflow_dispatch:
   push:
@@ -12,19 +12,21 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repo
-        uses: actions/checkout@v2
-#      - name: Setup
-#        id: setup
-#        run: echo '::set-output name=username::pabloromeo'
-#      - name: Publish articles on dev.to for ${{steps.setup.outputs.username}}
-      - name: Publish articles on dev.to for ${{env.username}}
-        uses: sinedied/publish-devto@v2
-        with:
-          devto_key: ${{ secrets[format('devto_key_{0}', env.username)] }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          files: 'posts/${{env.username}}/**/*.md'
-          branch: main
-          conventional_commits: true
+    uses: ./.github/workflows/publish.yml@main
+    with:
+      username: ${{ env.username }}
+      devto_token: ${{ secrets[format('devto_key_{0}', env.username)] }}
+
+#  publish:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout the repo
+#        uses: actions/checkout@v2
+#      - name: Publish articles on dev.to for ${{env.username}}
+#        uses: sinedied/publish-devto@v2
+#        with:
+#          devto_key: ${{ secrets[format('devto_key_{0}', env.username)] }}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          files: 'posts/${{env.username}}/**/*.md'
+#          branch: main
+#          conventional_commits: true

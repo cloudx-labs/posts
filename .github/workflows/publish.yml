@@ -12,14 +12,16 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - name: Publish articles on dev.to for ${{inputs.username}}
-      uses: sinedied/publish-devto@v2
-      with:
-        devto_key: ${{secrets.devto_token}}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: 'posts/${{inputs.username}}/**/*.md'
-        # (Optional) The git branch to use. Default is 'main'.
-        branch: main
-        # (Optional) Use conventional commit messages. Default is false.
-        # See https://www.conventionalcommits.org. 
-        conventional_commits: true
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      - name: Publish articles on dev.to for ${{inputs.username}}
+        uses: sinedied/publish-devto@v2
+        with:
+          devto_key: ${{secrets.devto_token}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: 'posts/${{inputs.username}}/**/*.md'
+          # (Optional) The git branch to use. Default is 'main'.
+          branch: main
+          # (Optional) Use conventional commit messages. Default is false.
+          # See https://www.conventionalcommits.org. 
+          conventional_commits: true
