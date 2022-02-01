@@ -29,13 +29,19 @@ jobs:
       - name: Checking out of scope changes
         if: steps.changes.outputs.others == 'true'
         uses: actions/github-script@v3
-        continue-on-error: true
         with:
           script: |
               core.setFailed("There are changes outside of the user's scope!")
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged }}
+    steps:
+      - name: PR Author
+        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
+      - name: Checkout the repo
+        uses: actions/checkout@v2
       - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
         uses: sinedied/publish-devto@v2
-        #if: ${{ github.event.pull_request.merged }}
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
