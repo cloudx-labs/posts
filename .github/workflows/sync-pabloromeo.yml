@@ -6,6 +6,9 @@ on:
     paths: 
        - 'posts/pabloromeo/**'
 
+env:
+  username: 'pabloromeo'
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -15,14 +18,12 @@ jobs:
       - name: Setup
         id: setup
         run: echo '::set-output name=username::pabloromeo'
-      - name: Publish articles on dev.to for ${{steps.setup.outputs.username}}
+#      - name: Publish articles on dev.to for ${{steps.setup.outputs.username}}
+      - name: Publish articles on dev.to for ${{env.username}}
         uses: sinedied/publish-devto@v2
         with:
-          devto_key: ${{ secrets[format('devto_token_{0}', steps.setup.outputs.username)] }}
+          devto_key: ${{ secrets[format('devto_key_{0}', steps.setup.outputs.username)] }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: 'posts/${{steps.setup.outputs.username}}/**/*.md'
-          # (Optional) The git branch to use. Default is 'main'.
           branch: main
-          # (Optional) Use conventional commit messages. Default is false.
-          # See https://www.conventionalcommits.org. 
           conventional_commits: true
