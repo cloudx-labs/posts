@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: PR Author
-        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
+        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
         uses: actions/checkout@v2
       - name: Lint Markdown
