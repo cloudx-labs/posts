@@ -12,7 +12,7 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   publish:
-    uses: ./.github/workflows/publish.yml@main
+    uses: ./.github/workflows/publish.yml
     with:
       username: ${{ env.username }}
       devto_token: ${{ secrets[format('devto_key_{0}', env.username)] }}
