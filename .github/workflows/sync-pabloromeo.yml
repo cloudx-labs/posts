@@ -12,8 +12,10 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   prepare:
+    id: prepare
     outputs:
       username: ${{ env.username }}
+    runs-on: ubuntu-latest
     steps:
       - run: exit 0
   publish:
