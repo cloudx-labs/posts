@@ -27,7 +27,7 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-              core.warning("There are changes outside of the user's scope!")
+              core.error("There are changes outside of the user's scope!")
       - name: Lint Markdown
         uses: docker://avtodev/markdown-lint:v1
         with:
