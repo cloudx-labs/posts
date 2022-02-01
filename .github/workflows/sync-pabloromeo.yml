@@ -15,6 +15,7 @@ jobs:
     uses: cloudx-labs/posts/.github/workflows/publish.yml@main
     with:
       username: pabloromeo
+    secrets:
       devto_token: ${{ secrets.devto_key_pabloromeo }}
 
 #  publish:
