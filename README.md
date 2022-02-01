@@ -1,7 +1,5 @@
 # devto-github-template
 
-[![Build Status](https://github.com/sinedied/devto-github-template/workflows/publish/badge.svg)](https://github.com/sinedied/devto-github-template/actions)
-
 > Example repository setup for synchronizing markdown files as dev.to articles, using assets hosted on GitHub.
 
 ## Getting started

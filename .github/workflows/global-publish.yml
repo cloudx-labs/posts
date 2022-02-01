@@ -1,16 +1,55 @@
 name: "global publish"
 on:
   pull_request:
+    branches:
+      - main
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - name: PR Author
-        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }} ."
+        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
         uses: actions/checkout@v2
       - name: Lint Markdown
         uses: docker://avtodev/markdown-lint:v1
         with:
           args: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            theirs:
+              - 'posts/${{ github.event.pull_request.user.login }}/**'
+            others:
+              - '!posts/${{ github.event.pull_request.user.login }}/**'
+      - name: Analyzing changes
+        run: |
+          echo "theirs: ${{steps.changes.outputs.theirs}}"
+          echo "others: ${{steps.changes.outputs.others}}"
+      - name: Checking out of scope changes
+        if: steps.changes.outputs.others == 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+              core.setFailed("There are changes outside of the user's scope!")
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged }}
+    steps:
+      - name: PR Author
+        run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
+        uses: sinedied/publish-devto@v2
+        with:
+          devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
+          # (Optional) The git branch to use. Default is 'main'.
+          branch: main
+          # (Optional) Use conventional commit messages. Default is false.
+          # See https://www.conventionalcommits.org. 
+          conventional_commits: true
