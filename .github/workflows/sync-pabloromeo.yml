@@ -16,7 +16,7 @@ jobs:
         id: setup
         run: echo '::set-output name=username::pabloromeo'
       - name: Publish
-        uses: ./.github/workflows/publish.yml
+        uses: ./.github/workflows/publish.yml@main
         with:
           username: ${{ steps.setup.outputs.username }}
 #        secrets:
