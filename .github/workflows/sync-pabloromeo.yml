@@ -12,9 +12,8 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   publish:
-    runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/publish.yml
+      - uses: cloudx-labs/posts/actions/workflows/publish.yml@main
         with:
           username: ${{ env.username }}
           devto_token: ${{ secrets[format('devto_key_{0}', env.username)] }}
