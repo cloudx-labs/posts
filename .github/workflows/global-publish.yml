@@ -29,6 +29,7 @@ jobs:
       - name: Checking out of scope changes
         if: steps.changes.outputs.others == 'true'
         uses: actions/github-script@v3
+        continue-on-error: true
         with:
           script: |
               core.setFailed("There are changes outside of the user's scope!")
