@@ -4,6 +4,8 @@ on:
     branches:
       - main
     types: [ opened, closed, synchronize, reopened ]
+    paths:
+    - 'posts/**'
 
 jobs:
   validate:
