@@ -7,22 +7,22 @@ on:
        - 'posts/pabloromeo/**'
 
 jobs:
-  prepare:
-    id: prepare
+  publish:
     runs-on: ubuntu-latest
-    outputs:
-      username: ${{ steps.setup.outputs.username }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
       - name: Setup
         id: setup
         run: echo '::set-output name=username::pabloromeo'
-
-  publish:
-    needs: prepare
-    uses: ./.github/workflows/publish.yml@main
-    with:
-      username: ${{ jobs.prepare.outputs.username }}
-    secrets:
-      devto_token: ${{ secrets[format('{0}_token', jobs.prepare.outputs.username)] }}
+      - name: Publish articles on dev.to for ${{steps.setup.outputs.username}}
+        uses: sinedied/publish-devto@v2
+        with:
+          devto_key: ${{ secrets[format('{0}_token', steps.setup.outputs.username)] }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: 'posts/${{steps.setup.outputs.username}}/**/*.md'
+          # (Optional) The git branch to use. Default is 'main'.
+          branch: main
+          # (Optional) Use conventional commit messages. Default is false.
+          # See https://www.conventionalcommits.org. 
+          conventional_commits: true
