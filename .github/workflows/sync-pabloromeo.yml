@@ -1,0 +1,20 @@
+name: "Sync - Pablo Romeo"
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: 
+       - 'posts/pabloromeo/**'
+
+jobs:
+  publish:
+    steps:
+      - name: Setup
+        id: setup
+        run: echo '::set-output name=username::pabloromeo'
+      - name: Publish
+        uses: ./publish.yml
+        with:
+          username: ${{steps.setup.outputs.username}}
+        secrets:
+          devto_token: ${{ secrets[format('{0}_token', steps.setup.outputs.username)] }}
