@@ -6,8 +6,8 @@ on:
     paths: 
        - 'posts/pabloromeo/**'
 
-#env:
-#  username: 'pabloromeo'
+env:
+  username: 'pabloromeo'
 
 # -----------------------------------------------------------------------------
 jobs:
@@ -16,7 +16,7 @@ jobs:
     with:
       username: pabloromeo
     secrets:
-      devto_token: ${{ secrets.devto_key_pabloromeo }}
+      devto_token: ${{ secrets[format('devto_key_{0}', env.username)] }}
 
 #  publish:
 #    runs-on: ubuntu-latest
