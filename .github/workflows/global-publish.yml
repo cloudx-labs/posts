@@ -10,6 +10,23 @@ jobs:
         run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
         uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            theirs:
+              - 'posts/${{ github.event.pull_request.user.login }}/**'
+            others:
+              - '!posts/${{ github.event.pull_request.user.login }}/**'
+      - name: Analyzing changes
+        run: |
+          echo "theirs: ${{steps.changes.outputs.theirs}}"
+          echo "others: ${{steps.changes.outputs.others}}"
+      - name: Checking out of scope changes
+        if: steps.changes.outputs.others == 'true'
+        run: |
+          echo "There are changes outside the user's base path"
+          exit 1
       - name: Lint Markdown
         uses: docker://avtodev/markdown-lint:v1
         with:
