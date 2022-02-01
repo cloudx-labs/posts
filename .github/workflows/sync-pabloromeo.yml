@@ -12,7 +12,6 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   prepare:
-    id: prepare
     outputs:
       username: ${{ env.username }}
     runs-on: ubuntu-latest
@@ -22,7 +21,7 @@ jobs:
     uses: cloudx-labs/posts/.github/workflows/publish.yml@main
     needs: prepare
     with:
-      username: {{ needs.prepare.outputs.username }}
+      username: ${{ needs.prepare.outputs.username }}
     secrets:
       devto_token: ${{ secrets[format('devto_key_{0}', needs.prepare.outputs.username)] }}
 
