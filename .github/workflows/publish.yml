@@ -1,4 +1,4 @@
-name: "Publish - Reusable workflow"
+name: "Reusable workflow (Publish)"
 on:
   workflow_call:
     inputs:
