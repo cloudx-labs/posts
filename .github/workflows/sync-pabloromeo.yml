@@ -16,6 +16,6 @@ jobs:
       - name: Publish
         uses: ./.github/workflows/publish.yml
         with:
-          username: ${{steps.setup.outputs.username}}
-        secrets:
-          devto_token: ${{ secrets[format('{0}_token', steps.setup.outputs.username)] }}
+          username: ${{ steps.setup.outputs.username }}
+#        secrets:
+#          devto_token: ${{ secrets[format('{0}_token', steps.setup.outputs.username)] }}
