@@ -9,21 +9,22 @@ on:
 env:
   username: 'pabloromeo'
 
+# -----------------------------------------------------------------------------
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
-      - name: Setup
-        id: setup
-        run: echo '::set-output name=username::pabloromeo'
+#      - name: Setup
+#        id: setup
+#        run: echo '::set-output name=username::pabloromeo'
 #      - name: Publish articles on dev.to for ${{steps.setup.outputs.username}}
       - name: Publish articles on dev.to for ${{env.username}}
         uses: sinedied/publish-devto@v2
         with:
-          devto_key: ${{ secrets[format('devto_key_{0}', steps.setup.outputs.username)] }}
+          devto_key: ${{ secrets[format('devto_key_{0}', env.username)] }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          files: 'posts/${{steps.setup.outputs.username}}/**/*.md'
+          files: 'posts/${{env.username}}/**/*.md'
           branch: main
           conventional_commits: true
