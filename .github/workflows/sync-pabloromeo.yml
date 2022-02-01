@@ -14,6 +14,8 @@ jobs:
   prepare:
     outputs:
       username: ${{ env.username }}
+    steps:
+      - run: exit 0
   publish:
     uses: cloudx-labs/posts/.github/workflows/publish.yml@main
     needs: prepare
