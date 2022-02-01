@@ -17,7 +17,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Lint Markdown
         uses: docker://avtodev/markdown-lint:v1
-        continue-on-error: true
         with:
           args: 'posts/${{inputs.username}}/**/*.md'
       - name: Publish articles on dev.to for ${{inputs.username}}
