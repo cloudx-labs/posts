@@ -10,24 +10,15 @@ on:
         required: true
 
 jobs:
-  init:
+  publish-devto:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
-  lint:
-    runs-on: ubuntu-latest
-    needs: init
-    steps:
       - name: Lint Markdown
         uses: docker://avtodev/markdown-lint:v1
         with:
           args: 'posts/${{inputs.username}}/**/*.md'
-
-  publish-devto:
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
       - name: Publish articles on dev.to for ${{inputs.username}}
         uses: sinedied/publish-devto@v2
         with:
