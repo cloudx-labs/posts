@@ -12,8 +12,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout the repo
-      uses: actions/checkout@v2
     - name: Publish articles on dev.to for ${{inputs.username}}
       uses: sinedied/publish-devto@v2
       with:
