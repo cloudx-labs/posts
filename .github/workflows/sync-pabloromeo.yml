@@ -18,7 +18,7 @@ jobs:
       - name: Publish articles on dev.to for ${{steps.setup.outputs.username}}
         uses: sinedied/publish-devto@v2
         with:
-          devto_key: ${{ secrets[format('{0}_token', steps.setup.outputs.username)] }}
+          devto_key: ${{ secrets[format('devto_token_{0}', steps.setup.outputs.username)] }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: 'posts/${{steps.setup.outputs.username}}/**/*.md'
           # (Optional) The git branch to use. Default is 'main'.
