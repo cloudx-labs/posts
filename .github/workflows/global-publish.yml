@@ -34,7 +34,7 @@ jobs:
               core.setFailed("There are changes outside of the user's scope!")
       - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
         uses: sinedied/publish-devto@v2
-        if: ${{ github.event.pull_request.merged }}
+        #if: ${{ github.event.pull_request.merged }}
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
