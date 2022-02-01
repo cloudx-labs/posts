@@ -12,6 +12,7 @@ env:
 # -----------------------------------------------------------------------------
 jobs:
   publish:
+    runs-on: ubuntu-latest
     steps:
       - uses: cloudx-labs/posts/actions/workflows/publish.yml@main
         with:
