@@ -36,7 +36,7 @@ jobs:
               core.setFailed("There are changes outside of the user's scope!")
   publish:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged }}
+    if: github.event.pull_request.merged == true
     steps:
       - name: PR Author
         run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
