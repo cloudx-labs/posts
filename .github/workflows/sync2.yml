@@ -1,23 +1,23 @@
 name: "dev.to sync"
-#on:
-#  pull_request_review:
-#    types: [submitted]
-#    paths:
-#      - 'posts/**'
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths:
+      - 'posts/**'
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    if: github.event.review.state == 'approved'
+    if: ${{ github.event.pull_request.merged }}
     steps:
-      - name: Branch
-        run: echo "branch = ${{ github.event.pull_request.head.ref }}"
       - name: PR Author
         run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
         uses: actions/checkout@v2
-        with:
-          ref: ${{github.event.pull_request.head.ref}}
+          with:
+            token: ${{ secrets.CI_PAT_TOKEN }}
       - name: Store publish timestamp
         # Hack to avoid: https://github.com/sinedied/publish-devto/issues/18
         run: date > posts/${{ github.event.pull_request.user.login }}/.sync 
@@ -27,10 +27,10 @@ jobs:
         uses: sinedied/publish-devto@v2
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.CI_PAT_TOKEN }}
           files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
           # (Optional) The git branch to use. Default is 'main'.
-          branch: ${{ github.event.pull_request.head.ref }}
+          branch: main
           # (Optional) Use conventional commit messages. Default is false.
           # See https://www.conventionalcommits.org. 
           conventional_commits: true

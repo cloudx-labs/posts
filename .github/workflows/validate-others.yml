@@ -1,0 +1,17 @@
+name: "validate"
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'posts/**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No validation required"'
+  scope:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No validation required"'
