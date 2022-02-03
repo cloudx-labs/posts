@@ -25,6 +25,7 @@ jobs:
     needs: changes
     steps:
       - name: Checkout
+        if: needs.changes.outputs.theirs == 'true'
         uses: actions/checkout@v2
       - name: Lint Markdown
         if: needs.changes.outputs.theirs == 'true'
