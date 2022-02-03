@@ -18,6 +18,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{github.event.pull_request.head.ref}}
+      - name: Store publish timestamp
+        # Hack to avoid: https://github.com/sinedied/publish-devto/issues/18
+        run: echo date >> posts/${{ github.event.pull_request.user.login }}/.published
       - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
         uses: sinedied/publish-devto@v2
         with:
