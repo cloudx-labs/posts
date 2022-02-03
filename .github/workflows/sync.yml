@@ -8,8 +8,10 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    if: github.event.review.state == 'approved'
+    #if: github.event.review.state == 'approved'
     steps:
+      - name: Review Status
+        run: echo "status = ${{ github.event.review.state }}"
       - name: PR Author
         run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
