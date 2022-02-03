@@ -16,8 +16,8 @@ jobs:
         run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
         uses: actions/checkout@v2
-          with:
-            token: ${{ secrets.CI_PAT_TOKEN }}
+        with:
+          token: ${{ secrets.CI_PAT_TOKEN }}
       - name: Store publish timestamp
         # Hack to avoid: https://github.com/sinedied/publish-devto/issues/18
         run: date > posts/${{ github.event.pull_request.user.login }}/.sync 
