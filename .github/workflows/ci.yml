@@ -19,7 +19,6 @@ jobs:
               - 'posts/${{ github.event.pull_request.user.login }}/**'
             others:
               - 'posts/!(${{ github.event.pull_request.user.login }}/**)/**'
-
   lint:
     runs-on: ubuntu-latest
     needs: changes
