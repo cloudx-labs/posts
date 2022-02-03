@@ -16,6 +16,8 @@ jobs:
         run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}."
       - name: Checkout the repo
         uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
       - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
         uses: sinedied/publish-devto@v2
         with:
