@@ -12,17 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged }}
     steps:
-      - name: PR Author
-        run: echo "This PR was opened by ${{ github.event.pull_request.user.login }}."
-      - name: Checkout the repo
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.CI_PAT_TOKEN }}
-      - name: Store publish timestamp
+      - uses: actions/checkout@v2
+      - name: Generate sync file
         # Workaround for: https://github.com/sinedied/publish-devto/issues/18
-        run: date > posts/${{ github.event.pull_request.user.login }}/.sync 
-      - name: Add to repo
-        run: git add posts/${{ github.event.pull_request.user.login }}/.sync 
+        run: |
+          date > posts/${{ github.event.pull_request.user.login }}/.sync
+          git add posts/${{ github.event.pull_request.user.login }}/.sync
       - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
         uses: sinedied/publish-devto@v2
         with:
@@ -32,5 +27,5 @@ jobs:
           # (Optional) The git branch to use. Default is 'main'.
           branch: main
           # (Optional) Use conventional commit messages. Default is false.
-          # See https://www.conventionalcommits.org. 
+          # See https://www.conventionalcommits.org.
           conventional_commits: true
