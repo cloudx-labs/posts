@@ -1,0 +1,35 @@
+name: "validate"
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'posts/**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Lint Markdown
+        uses: docker://avtodev/markdown-lint:v1
+        with:
+          args: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
+  scope:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            theirs:
+              - 'posts/${{ github.event.pull_request.user.login }}/**'
+            others:
+              - '!posts/${{ github.event.pull_request.user.login }}/**'
+      - name: Checking out of scope changes
+        if: steps.changes.outputs.others == 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+              core.setFailed("There are changes outside of the user's scope!")
