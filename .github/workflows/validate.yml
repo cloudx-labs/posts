@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       theirs: ${{ steps.changes.outputs.theirs }}
-      any: ${{ steps.changes.outputs.any }}
+      others: ${{ steps.changes.outputs.others }}
     steps:
       - uses: dorny/paths-filter@v2
         id: changes
@@ -17,8 +17,8 @@ jobs:
           filters: |
             theirs:
               - 'posts/${{ github.event.pull_request.user.login }}/**'
-            any:
-              - 'posts/**'
+            others:
+              - '!posts/${{ github.event.pull_request.user.login }}/**'
 
   lint:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
     needs: changes
     steps:
       - name: Checking out of scope changes
-        if: needs.changes.outputs.any == 'true' && needs.changes.outputs.theirs == 'false'
+        if: needs.changes.outputs.others == 'true'
         uses: actions/github-script@v3
         with:
           script: |
