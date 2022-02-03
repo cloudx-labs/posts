@@ -13,6 +13,8 @@ jobs:
     if: ${{ github.event.pull_request.merged }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.CI_PAT_TOKEN }}
       - name: Generate sync file
         # Workaround for: https://github.com/sinedied/publish-devto/issues/18
         run: |
