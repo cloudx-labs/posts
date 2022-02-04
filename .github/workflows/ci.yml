@@ -1,4 +1,4 @@
-name: "validate"
+name: ci
 on:
   pull_request:
     branches:
@@ -22,22 +22,22 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     needs: changes
+    if: needs.changes.outputs.theirs == 'true'
     steps:
-      - name: Checkout
-        if: needs.changes.outputs.theirs == 'true'
-        uses: actions/checkout@v2
-      - name: Lint Markdown
-        if: needs.changes.outputs.theirs == 'true'
-        uses: docker://avtodev/markdown-lint:v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          args: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
+          node-version: 17
+      - run: npm ci
+      - run: npx --no-install markdownlint **/*.md'
+        working-directory: posts/${{ github.event.pull_request.user.login }}
   scope:
     runs-on: ubuntu-latest
     needs: changes
+    if: needs.changes.outputs.others == 'true'
     steps:
       - name: Checking out of scope changes
-        if: needs.changes.outputs.others == 'true'
         uses: actions/github-script@v3
         with:
           script: |
-              core.setFailed("There are changes outside of the user's scope!")
+            core.setFailed("There are changes outside of the user's scope!")
