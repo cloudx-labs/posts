@@ -1,0 +1,24 @@
+{
+  "name": "cloudx-posts",
+  "version": "0.0.1",
+  "description": "Cloud(x) posts for dev.to",
+  "main": "index.js",
+  "scripts": {
+    "test": "markdownlint posts/**/*.md",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "markdownlint-cli": "^0.30.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudx-labs/posts.git"
+  },
+  "author": "Cloud(x)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cloudx-labs/posts/issues"
+  },
+  "homepage": "https://github.com/cloudx-labs/posts"  
+}

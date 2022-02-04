@@ -1,4 +1,4 @@
-name: "dev.to sync"
+name: dev.to sync
 on:
   pull_request:
     types: [closed]
