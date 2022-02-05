@@ -43,6 +43,7 @@ jobs:
             core.setFailed("There are changes outside of the user's scope!")
   dry-run:
     runs-on: ubuntu-latest
+    needs: changes
     if: needs.changes.outputs.theirs == 'true'
     steps:
       - name: Dry-run on dev.to for ${{ github.event.pull_request.user.login }}
