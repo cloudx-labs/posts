@@ -55,5 +55,12 @@ jobs:
           github_token: ${{ secrets.CI_PAT_TOKEN }}
           files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
           dry_run: true
-      - name: Output result
-        run: echo ${{steps.dryrun.outputs.result_summary_table}}
+      - uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '${{steps.dryrun.outputs.result_summary_table}}'
+            })
