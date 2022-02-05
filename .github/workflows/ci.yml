@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Dry-run on dev.to for ${{ github.event.pull_request.user.login }}
-        uses: cloudx-labs/publish-devto@v3
+        uses: cloudx-labs/publish-devto@main
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
