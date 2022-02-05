@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/github-script@v5
         env:
-          SUMMARY = '${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}'
+          SUMMARY = "${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}"
         with:
           script: |
             var summary = process.env.SUMMARY;
