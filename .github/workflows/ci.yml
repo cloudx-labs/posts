@@ -62,11 +62,9 @@ jobs:
     needs: dryrun
     steps:
       - uses: actions/github-script@v5
-        env:
-          SUMMARY = "${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}"
         with:
           script: |
-            var summary = process.env.SUMMARY;
+            var summary = "${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}";
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
