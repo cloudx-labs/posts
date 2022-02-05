@@ -64,9 +64,10 @@ jobs:
       - uses: actions/github-script@v5
         with:
           script: |
+            var summary = '${{ fromJSON(needs.dryrun.outputs.result_summary_table_json) }}';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}'
+              body: summary.content
             })
