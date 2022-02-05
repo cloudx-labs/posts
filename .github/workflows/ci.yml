@@ -60,15 +60,17 @@ jobs:
   result-comment:
     runs-on: ubuntu-latest
     needs: dryrun
+    env:
+      summary_json: ${{ needs.dryrun.outputs.result_summary_table_json }}
     steps:
       - run: echo ${{ needs.dryrun.outputs.result_summary_table_json }} || exit 0
       - uses: actions/github-script@v5
         with:
           script: |
-            var summary = '${{ needs.dryrun.outputs.result_summary_table_json }}';
+            var summary = '${{ fromJSON(env.summary_json) }}';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: summary
+              body: summary.content
             })
