@@ -77,3 +77,9 @@ date: '2022-02-02T18:50:58Z'
 ```
 
 > **IMPORTANT**: Don't manually edit those two properties, you could lose content or create duplicates.
+
+### Markdown Linting
+
+All pull-requests will run markdownlint for you.
+
+But we recommend installing extensions for your Editor, such as [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) for VSCode or setting up husky to add the pre-commit hook available already in this repo.
