@@ -61,6 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: dryrun
     steps:
+      - run: echo ${{ needs.dryrun.outputs.result_summary_table_json }} || exit 0
       - uses: actions/github-script@v5
         with:
           script: |
