@@ -9,9 +9,7 @@ Within this directory is where all articles and assets are to be placed.
 
 The **mandatory** part is that you must create your own directory within `posts` named exactly as your Github username.
 
-How you decide to organize the contents within your directory is up to you.
-
-However, we do recommend the following structure:
+How you decide to organize the contents within your directory is up to you. However, we do recommend the following structure:
 
 ```text
 cloudx-labs/posts/
