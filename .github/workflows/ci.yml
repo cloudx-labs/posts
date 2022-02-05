@@ -48,9 +48,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Dry-run on dev.to for ${{ github.event.pull_request.user.login }}
+        id: dryrun
         uses: cloudx-labs/publish-devto@main
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
           files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
           dry_run: true
+      - name: Output result
+        run: echo ${{steps.dryrun.outputs.result_json}}
