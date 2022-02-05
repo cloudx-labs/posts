@@ -30,7 +30,7 @@ cloudx-labs/posts/
 
 1. Contact Pablo Romeo or Axel Navarro on Slack to get invited into the DEV.to Organization and to set up your API key.
 2. Read the [Dev.to - Editor Guide](https://dev.to/p/editor_guide) to get insights on what formatting is supported and the recommended sizes for cover and content images.
-3. Create a feature branch, start writing your first draft and open a pull-request once you want to get some feedback from reviewers :D
+3. Create a feature branch, start writing your first draft and open a pull-request once you want to get some feedback from reviewers :smiley:
 
 ## Important considerations
 
