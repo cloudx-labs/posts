@@ -61,10 +61,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: dryrun
     steps:
+      - uses: mkungla/actions-set-text-output@v1
+        id: prepare-text
+        with:
+          text: ${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}
       - uses: actions/github-script@v5
         with:
           script: |
-            var summary = "${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}";
+            var summary = "${{ steps.prepare-text.outputs.value }}";
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
