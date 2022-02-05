@@ -34,7 +34,7 @@ cloudx-labs/posts/
 
 ## Important considerations
 
-### - Images -
+### Images
 
 Articles published by the automated process support referencing your content such as images using **relative** paths. 
 
@@ -44,7 +44,7 @@ So for including images from your `assets` directory you'd have something simila
 ![My text](./assets/path-to-my-image.png)
 ```
 
-### - Custom Header -
+### Custom Header
 
 Besides the usual Markdown, articles that are published automatically must contain a Header called [Front Matter](https://jekyllrb.com/docs/front-matter/).
 
@@ -68,3 +68,12 @@ Therefore, if you open a pull-request with:
 
 - `published: false`: Once merged the article will be available as a **Draft** in DEV.to for you to review online.
 - `published: true`: Once merged your article is **public**.
+
+Once the PR is merged, additional properties will be added automatically into the Front Matter header, such `id` and `date`:
+
+```yaml
+id: 123456
+date: '2022-02-02T18:50:58Z'
+```
+
+> **IMPORTANT**: Don't manually edit those two properties, you could lose content or create duplicates.
