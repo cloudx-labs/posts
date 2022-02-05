@@ -55,5 +55,3 @@ jobs:
           github_token: ${{ secrets.CI_PAT_TOKEN }}
           files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
           dry_run: true
-      - name: Output result
-        run: echo ${{steps.dryrun.outputs.result_json}}
