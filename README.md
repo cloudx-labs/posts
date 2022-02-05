@@ -36,7 +36,7 @@ cloudx-labs/posts/
 
 ### Images
 
-Articles published by the automated process support referencing your content such as images using **relative** paths. 
+Articles published by the automated process support referencing your content such as images using **relative** paths.
 
 So for including images from your `assets` directory you'd have something similar to:
 
