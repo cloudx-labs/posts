@@ -46,15 +46,11 @@ jobs:
     needs: changes
     if: needs.changes.outputs.theirs == 'true'
     steps:
+      - uses: actions/checkout@v2
       - name: Dry-run on dev.to for ${{ github.event.pull_request.user.login }}
         uses: cloudx-labs/publish-devto@v3
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
           files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
-          # (Optional) The git branch to use. Default is 'main'.
-          branch: main
-          # (Optional) Use conventional commit messages. Default is false.
-          # See https://www.conventionalcommits.org.
-          conventional_commits: true
           dry_run: true
