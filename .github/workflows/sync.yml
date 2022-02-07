@@ -21,7 +21,7 @@ jobs:
           date > posts/${{ github.event.pull_request.user.login }}/.sync
           git add posts/${{ github.event.pull_request.user.login }}/.sync
       - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
-        uses: sinedied/publish-devto@v2
+        uses: cloudx-labs/publish-devto@main
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
