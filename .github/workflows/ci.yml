@@ -62,7 +62,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: dryrun
     steps:
-      - run: echo ${{ needs.dryrun.outputs.result_json }} > out.txt
+      - run: |
+          cat > out.txt <<EOF
+${{ fromJSON(needs.dryrun.outputs.result_json) }}
+EOF 
       - run: cat out.txt
       - uses: actions/github-script@v5
         with:
