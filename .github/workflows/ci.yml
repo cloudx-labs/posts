@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: dryrun
     env:
-      SUMMARY: ${{ fromJSON(jobs.dryrun.outputs.result_summary_table_json).content }}
+      SUMMARY: ${{ fromJSON(needs.dryrun.outputs.result_summary_table_json).content }}
     steps:
       - uses: actions/github-script@v5
         with:
