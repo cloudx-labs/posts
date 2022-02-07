@@ -60,19 +60,9 @@ jobs:
   result-comment:
     runs-on: ubuntu-latest
     needs: dry-run
-    env:
-      SUMMARY: ${{ fromJSON(needs.dry-run.outputs.result_summary_table_json).content }}
+#    env:
+#      SUMMARY: ${{ fromJSON(needs.dry-run.outputs.result_summary_table_json).content }}
     steps:
-#      - uses: actions/github-script@v5
-#        with:
-#          script: |
-#            var summary = process.env.SUMMARY;
-#            github.rest.issues.createComment({
-#              issue_number: context.issue.number,
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              body: `Dev.to dry-run output:\n\`\`\`\n${summary}\n\`\`\``
-#            })
       - name: Dry-run output comment
         uses: KeisukeYamashita/create-comment@v1
         with:
@@ -80,5 +70,5 @@ jobs:
           comment: |
             Dry-run output:
             ```
-            ${{env.SUMMARY}}
+            ${{ fromJSON(needs.dry-run.outputs.result_summary_table_json).content }}
             ```
