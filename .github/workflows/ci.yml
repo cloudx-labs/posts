@@ -55,8 +55,9 @@ jobs:
         with:
           devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
-          files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
+          files: "posts/${{ github.event.pull_request.user.login }}/**/*.md"
           dry_run: true
+          branch: ${{ github.event.pull_request.head.ref }}
   result-comment:
     runs-on: ubuntu-latest
     needs: dry-run
