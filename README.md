@@ -83,3 +83,10 @@ date: '2022-02-02T18:50:58Z'
 All pull-requests will run markdownlint for you.
 
 But we recommend installing extensions for your Editor, such as [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) for VSCode or setting up husky to add the pre-commit hook available already in this repo.
+
+### Manual Steps
+
+Due to how the Dev.to REST Api works, unfortunately it does not yet support linking a user's article to an organization.
+Because of that, once you merge a PR for a draft article, or directly publish it, you must manually edit the post and change it from `Personal` to `Cloud(x);`.
+
+![Manual change from Personal to Organization](./change-to-org.png)
