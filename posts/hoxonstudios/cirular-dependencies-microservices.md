@@ -51,7 +51,7 @@ This is just a simple example but keep in mind that there are a lot of ways to l
 
 ## Choreography
 
-This communication pattern seems to be very common in Event-Driven systems where services emit events into a common Event Bus so other services can react to them in order to complete a complex distributed process.
+This communication pattern seems to be very common in Event-Driven systems. In it, services emit events into a common Event Bus so others can react to them to complete a complex distributed process. 
 
 ### Example
 
