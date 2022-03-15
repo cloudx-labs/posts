@@ -51,7 +51,7 @@ This is just a simple example but keep in mind that there are a lot of ways to l
 
 ## Choreography
 
-This communication pattern seems to be very common in Event-Driven systems. In it, services emit events into a common Event Bus so others can react to them to complete a complex distributed process. 
+This communication pattern seems to be very common in Event-Driven systems. In it, services emit events into a common Event Bus so others can react to them to complete a complex distributed process.
 
 ### Example
 
@@ -64,7 +64,7 @@ Some people may think that, as we are using events to communicate  between servi
 
 One possible solution to this, without removing the asynchronous nature of our system, is using commands and callbacks for responses. In our example, **UserService** attempts to validate the credit of the person to finish the bigger  process of registering a user. Modeling this with events is a mistake because this is actually a _command_: something to which we expect some response to continue with our work.
 
-To overcome this, we'll need to change a few things. First, our CreditService will need to have an input topic/queue to receive commands. Apart from that, instead of emiting a **UserRegisteredEvent** (we can still do it for other purposes) we are going to explicitly send a **ValidateCreditCommand** into that topic. In the header of that command we'll specify a callback topic where we want to receive the response. In this case, that'll be the input topic of our **UserService**. 
+To overcome this, we'll need to change a few things. First, our CreditService will need to have an input topic/queue to receive commands. Apart from that, instead of emiting a **UserRegisteredEvent** (we can still do it for other purposes) we are going to explicitly send a **ValidateCreditCommand** into that topic. In the header of that command we'll specify a callback topic where we want to receive the response. In this case, that'll be the input topic of our **UserService**.
 
 Now, if we look at our **CreditService** in isolation, we will notice that it doesn't know anything about our **UserService** anymore. With this simple tweak, we have removed the circular dependency.
 
