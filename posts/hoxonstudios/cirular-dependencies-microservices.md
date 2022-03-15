@@ -27,7 +27,7 @@ Suppose we have these services:
 
 Inside our **ProductService** we will surely have a **Product** with each entity having a **ProductId**. In this example **ProductService** will be sending a request to **InvoiceService** to generate an invoice that could be something like this:
 
-```json
+```text
 POST /invoice
 { productId: 3, quantity: 1, ... }
 ```
@@ -36,7 +36,7 @@ In this situation **ProductService** have to know that some invoice service exis
 
 To solve this, first we have to decide which service will depend on the other. Then, after we decided that **InvoiceService** will not depend on **ProductService**, we need to think in the former in isolation, as a separated product. Do we really need to receive a **ProductId**, for example, to validate the existence of the product, get its unit price and description, and then generate the invoice? Or we just need a **ProductCode** to display in the invoice? Most of the time the answer will be that we are good receiving the **ProductCode**, **UnitPrice** and **Description** in the request, and very important, trusting the information that we receive from other services that are behind our control is crucial to avoid unnecessary validations.
 
-```json
+```text
 POST /invoice
 {
   productCode: 'A123',
