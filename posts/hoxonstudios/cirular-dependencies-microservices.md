@@ -64,7 +64,7 @@ Some people may think that, as we are using events to communicate  between servi
 
 One possible solution to this issue, without the need of removing the asynchronous nature of our system, is using commands and callbacks for responses. In our example, our *UserService* is clearly wanting to validate the credit of the person in order to finish the bigger process of registering a user. Modeling this as events is a clear mistake because what we really have here is a _command_ in disguise, something to which we expect some response to continue with our work.
 
-To overcome this, we will need to change a few things. First, our **CreditService** will need to have an input topic/queue to receive commands. Apart from that, instead of emiting a **UserReigsteredEvent** *(we can still do it for other purposes)* now we are going to explicitly send a **ValidateCreditCommand** into that topic and in the header of that command we need to specify the callback topic where we want to receive the response, in this case the input topic of our **UserService**.
+To overcome this, we'll need to change a few things. First, our CreditService will need to have an input topic/queue to receive commands. Apart from that, instead of emiting a **UserRegisteredEvent** (we can still do it for other purposes) we are going to explicitly send a **ValidateCreditCommand** into that topic. In the header of that command we'll specify a callback topic where we want to receive the response. In this case, that'll be the input topic of our **UserService**. 
 
 Now, if we look at our **CreditService** in isolation, we will notice that it doesn't know anything about our **UserService** anymore, we had removed the circular dependency we this simple tweak.
 
