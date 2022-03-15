@@ -10,7 +10,7 @@ Circular dependencies are a bad practice in Microservices architecture that usua
 
 When working in monolithic systems, there's widespread agreement that these dependencies are evil. On microservices, though, the story is completely different. In this pattern, we treat services as independent modules that communicate almost without restriction. This approach is very prone to creating circular dependencies.
 
-Having circular dependencies between microservices will result in  services that are very hard to maintain since you will not be able to think in one service at a time because they will be very couple to each other.
+Having circular dependencies between microservices will result in services that are hardly maintainable. You'll not be able to think on a single service at a time as they'll be highly coupled.
 
 Let's explore some practices that we want to avoid to get rid of circular dependencies in our Microservices architecture.
 
