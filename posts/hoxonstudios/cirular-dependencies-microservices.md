@@ -16,7 +16,7 @@ Let's explore some practices that we want to avoid to get rid of circular depend
 
 ## Leaking domain knowledge
 
-A very imperceptible way of creating circular dependencies between services is sending requests with Ids, value objects, or any other kind of knowledge that belongs to the client service domain. 
+A very imperceptible way of creating circular dependencies between services is sending requests with Ids, value objects, or any other kind of knowledge that belongs to the client service domain.
 
 ### Example
 
@@ -31,6 +31,7 @@ Inside our **ProductService** we will surely have a **Product** with each entity
 POST /invoice
 { productId: 3, quantity: 1, ... }
 ```
+
 In this situation **ProductService** have to know that some invoice service exists to send the request, but now also our **InvoiceService** will be aware of the existence of some **Product** entity that is in the domain of the caller. A good way to verify that we are creating a circular dependency is thinking in the **InvoiceService** as a separated product. If we completely remove the **ProductService** will this request still make sense as it is? The obvious answer will be 'No'.
 
 To solve this, first we have to decide which service will depend on the other. Then, after we decided that **InvoiceService** will not depend on **ProductService**, we need to think in the former in isolation, as a separated product. Do we really need to receive a **ProductId**, for example, to validate the existence of the product, get its unit price and description, and then generate the invoice? Or we just need a **ProductCode** to display in the invoice? Most of the time the answer will be that we are good receiving the **ProductCode**, **UnitPrice** and **Description** in the request, and very important, trusting the information that we receive from other services that are behind our control is crucial to avoid unnecessary validations.
@@ -45,6 +46,7 @@ POST /invoice
   ...
 }
 ```
+
 This is just a simple example but keep in mind that there are a lot of ways to leak domain knowledge to other services without us noticing.
 
 ## Choreography
@@ -60,11 +62,11 @@ This communication pattern seems to be very common in Event-Driven systems where
 
 Some people may think that, as we are using events to communicate between services, we are completelly decoupling them. That is just partially true, because the only kind of coupling we are removing is just the _temporal coupling_. But now, on the other hand, we are creating a circular dependency between them because events, as requests, are part of the API of our services.
 
-One possible solution to this issue, without the need of removing the asynchronous nature of our system, is using commands and callbacks for responses. In our example, our *UserService* is clearly wanting to validate the credit of the person in order to finish the bigger process of registering a user. Modeling this as events is a clear mistake because what we really have here is a _command_ in disguise, something to which we expect some response to continue with our work. 
+One possible solution to this issue, without the need of removing the asynchronous nature of our system, is using commands and callbacks for responses. In our example, our *UserService* is clearly wanting to validate the credit of the person in order to finish the bigger process of registering a user. Modeling this as events is a clear mistake because what we really have here is a _command_ in disguise, something to which we expect some response to continue with our work.
 
 To overcome this, we will need to change a few things. First, our **CreditService** will need to have an input topic/queue to receive commands. Apart from that, instead of emiting a **UserReigsteredEvent** *(we can still do it for other purposes)* now we are going to explicitly send a **ValidateCreditCommand** into that topic and in the header of that command we need to specify the callback topic where we want to receive the response, in this case the input topic of our **UserService**.
 
-Now, if we look at our **CreditService** in isolation, we will notice that it doesn't know anything about our **UserService** anymore, we had removed the circular dependency we this simple tweak. 
+Now, if we look at our **CreditService** in isolation, we will notice that it doesn't know anything about our **UserService** anymore, we had removed the circular dependency we this simple tweak.
 
 ## Conclusion
 
