@@ -6,7 +6,7 @@ tags: 'architecture, programming, microservies, distributedsystems'
 cover_image: ./assets/leaves.jpg
 ---
 
-There is a bad practice in Microservices architecture that seems to be totally forgotten, widespread like the plage, and crucial to reduce the complexity of this architectural pattern.
+Circular dependencies are a bad practice in Microservices architecture that usually goes unnoticed. Yet avoiding them is crucial to reduce complexity in this architectural pattern.
 
 When we work in Monolith systems, there seems to be a common agreement that almost every circular dependency is evil. When we work or read about Microservices, the story is completelly different. In this architectural pattern, services are treated as independent modules that communicate with each other without almost any restriction, and that way of viewing is very prone to create circular dependencies.
 
