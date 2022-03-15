@@ -60,7 +60,7 @@ This communication pattern seems to be very common in Event-Driven systems. In i
 - **CreditService** emits a *CreditValidatedEvent*
 - **UserService** receives that *CreditValidatedEvent* and finishes the user creation process
 
-Some people may think that, as we are using events to communicate between services, we are completelly decoupling them. That is just partially true, because the only kind of coupling we are removing is just the _temporal coupling_. But now, on the other hand, we are creating a circular dependency between them because events, as requests, are part of the API of our services.
+Some people may think that, as we are using events to communicate  between services, we are completelly decoupling them. That is only partially true, because the only kind of coupling we are removing is  the temporal coupling. On the other hand, we are now creating a circular dependency between them because events, as requests, are part of the API of our services.
 
 One possible solution to this issue, without the need of removing the asynchronous nature of our system, is using commands and callbacks for responses. In our example, our *UserService* is clearly wanting to validate the credit of the person in order to finish the bigger process of registering a user. Modeling this as events is a clear mistake because what we really have here is a _command_ in disguise, something to which we expect some response to continue with our work.
 
