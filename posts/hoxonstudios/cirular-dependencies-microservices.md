@@ -15,16 +15,19 @@ Having circular dependencies between microservices will result in  services that
 Let's explore some practices that we want to avoid to get rid of circular dependencies in our Microservices architecture.
 
 ## Leaking domain knowledge
+
 A very imperceptible way of creating circular dependencies between services is sending requests with Ids, value objects, or any other kind of knowledge that belongs to the client service domain. 
 
 ### Example
+
 Suppose we have these services:
+
 - ProductService
 - InvoiceService
 
 Inside our **ProductService** we will surely have a **Product** with each entity having a **ProductId**. In this example **ProductService** will be sending a request to **InvoiceService** to generate an invoice that could be something like this:
 
-```
+```json
 POST /invoice
 { productId: 3, quantity: 1, ... }
 ```
@@ -32,7 +35,7 @@ In this situation **ProductService** have to know that some invoice service exis
 
 To solve this, first we have to decide which service will depend on the other. Then, after we decided that **InvoiceService** will not depend on **ProductService**, we need to think in the former in isolation, as a separated product. Do we really need to receive a **ProductId**, for example, to validate the existence of the product, get its unit price and description, and then generate the invoice? Or we just need a **ProductCode** to display in the invoice? Most of the time the answer will be that we are good receiving the **ProductCode**, **UnitPrice** and **Description** in the request, and very important, trusting the information that we receive from other services that are behind our control is crucial to avoid unnecessary validations.
 
-```
+```json
 POST /invoice
 {
   productCode: 'A123',
@@ -45,9 +48,11 @@ POST /invoice
 This is just a simple example but keep in mind that there are a lot of ways to leak domain knowledge to other services without us noticing.
 
 ## Choreography
+
 This communication pattern seems to be very common in Event-Driven systems where services emit events into a common Event Bus so other services can react to them in order to complete a complex distributed process.
 
 ### Example
+
 - **UserService** emits a *UserRegisteredEvent*
 - **CreditService** receives that *UserRegisteredEvent* and validate the credit of that person
 - **CreditService** emits a *CreditValidatedEvent*
@@ -62,4 +67,5 @@ To overcome this, we will need to change a few things. First, our **CreditServic
 Now, if we look at our **CreditService** in isolation, we will notice that it doesn't know anything about our **UserService** anymore, we had removed the circular dependency we this simple tweak. 
 
 ## Conclusion
+
 There are plenty of examples that I may be missing, but the main point is that cyclic dependencies are something that almost every developer want to avoid. As an advice, we also need to pay atention when implementing Microservices to avoid them at all costs. This will allow us to think in one service at a time and reduce the cognitive load in our brain. Having to think or change a lot of services in every business requirement is tiresome and a good symptom of having circular dependencies in our Microservices architecture.
