@@ -58,7 +58,7 @@ This communication pattern seems to be very common in Event-Driven systems. In i
 - **UserService** emits a `UserRegisteredEvent`
 - **CreditService** receives that `UserRegisteredEvent` and validates the credit of that person
 - **CreditService** emits a `CreditValidatedEvent`
-- **UserService** receives that *CreditValidatedEvent* and finishes the user creation process
+- **UserService** receives that `CreditValidatedEvent` and finishes the user creation process
 
 Some people may think that, as we are using events to communicate between services, we are completelly decoupling them. That is only partially true, because the only kind of coupling we are removing is the temporal coupling. On the other hand, we are now creating a circular dependency between them because events, as requests, are part of the API of our services.
 
