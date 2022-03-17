@@ -16,7 +16,7 @@ Let's explore some practices that we want to avoid to get rid of circular depend
 
 ## Leaking domain knowledge
 
-A very imperceptible way of creating circular dependencies between services is sending requests with Ids, value objects, or any other kind of knowledge that belongs to the client service domain.
+A very imperceptible way of creating circular dependencies between services is sending requests with IDs, value objects, or any other kind of knowledge that belongs to the client service domain.
 
 ### Example
 
