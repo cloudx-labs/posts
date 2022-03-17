@@ -55,7 +55,7 @@ This communication pattern seems to be very common in Event-Driven systems. In i
 
 ### Example
 
-- **UserService** emits a *UserRegisteredEvent*
+- **UserService** emits a `UserRegisteredEvent`
 - **CreditService** receives that *UserRegisteredEvent* and validates the credit of that person
 - **CreditService** emits a *CreditValidatedEvent*
 - **UserService** receives that *CreditValidatedEvent* and finishes the user creation process
