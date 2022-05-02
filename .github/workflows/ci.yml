@@ -24,10 +24,10 @@ jobs:
     needs: changes
     if: needs.changes.outputs.theirs == 'true'
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 17
+          node-version: 18
       - run: npm ci
       - run: npx --no-install markdownlint **/*.md
         working-directory: posts/${{ github.event.pull_request.user.login }}
@@ -37,7 +37,7 @@ jobs:
     if: needs.changes.outputs.others == 'true'
     steps:
       - name: Checking out of scope changes
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed("There are changes outside of the user's scope!")
@@ -48,7 +48,7 @@ jobs:
       result_summary_table_json: ${{ steps.dry-run.outputs.result_summary_table_json }}
     if: needs.changes.outputs.theirs == 'true'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Dry-run on dev.to for ${{ github.event.pull_request.user.login }}
         id: dry-run
         uses: cloudx-labs/publish-devto@main
