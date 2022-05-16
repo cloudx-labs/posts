@@ -1,6 +1,6 @@
 ---
 title: 'Circular dependencies between Microservices'
-published: false
+published: true
 description: There is a bad practice in Microservices architecture that seems to be totally forgotten.
 tags: 'architecture, programming, microservies, distributedsystems'
 cover_image: ./assets/circular.png
