@@ -8,19 +8,36 @@ on:
       - 'posts/**'
 
 jobs:
+  variables: 
+    outputs:
+      author_github_user: ${{ steps.var.outputs.author_github_user}}
+      author_github_user_safe: ${{ steps.var.outputs.author_github_user_safe}}
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Setting global variables
+        uses: actions/github-script@v6
+        id: var
+        with:
+          script: |
+            core.setOutput('author_github_user', '${{ github.event.pull_request.user.login }}');
+            core.setOutput('author_github_user_safe', '${{ github.event.pull_request.user.login }}'.replaceAll('-', '_').trim());
   sync:
+    needs: [variables]
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.merged }}
+    env:
+      AUTHOR_GITHUB_USER: ${{ needs.variables.outputs.author_github_user }}
+      AUTHOR_GITHUB_USER_SAFE: ${{ needs.variables.outputs.author_github_user_safe }}
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.CI_PAT_TOKEN }}
-      - name: Publish articles on dev.to for ${{ github.event.pull_request.user.login }}
+      - name: Publish articles on dev.to for ${{ env.AUTHOR_GITHUB_USER }}
         uses: cloudx-labs/publish-devto@main
         with:
-          devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
+          devto_key: ${{ secrets[format('devto_key_{0}', env.AUTHOR_GITHUB_USER_SAFE)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
-          files: 'posts/${{ github.event.pull_request.user.login }}/**/*.md'
+          files: 'posts/${{ env.AUTHOR_GITHUB_USER }}/**/*.md'
           # (Optional) The git branch to use. Default is 'main'.
           branch: main
           # (Optional) Use conventional commit messages. Default is false.
