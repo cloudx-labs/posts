@@ -5,24 +5,45 @@ on:
       - main
 
 jobs:
+  variables: 
+    outputs:
+      author_github_user: ${{ steps.var.outputs.author_github_user}}
+      author_github_user_safe: ${{ steps.var.outputs.author_github_user_safe}}
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Setting global variables
+        uses: actions/github-script@v6
+        id: var
+        with:
+          script: |
+            core.setOutput('author_github_user', '${{ github.event.pull_request.user.login }}');
+            core.setOutput('author_github_user_safe', '${{ github.event.pull_request.user.login }}'.replaceAll('-', '_').trim());
+
   changes:
     runs-on: ubuntu-latest
+    needs: [variables]
+    env:
+      AUTHOR_GITHUB_USER: ${{ needs.variables.outputs.author_github_user }}
+      AUTHOR_GITHUB_USER_SAFE: ${{ needs.variables.outputs.author_github_user_safe }}
     outputs:
       theirs: ${{ steps.changes.outputs.theirs }}
       others: ${{ steps.changes.outputs.others }}
     steps:
       - uses: dorny/paths-filter@v2
+        name: Checking changes for ${{ env.AUTHOR_GITHUB_USER }} (${{ env.AUTHOR_GITHUB_USER_SAFE }})
         id: changes
         with:
           filters: |
             theirs:
-              - 'posts/${{ github.event.pull_request.user.login }}/**'
+              - 'posts/${{ env.AUTHOR_GITHUB_USER }}/**'
             others:
-              - 'posts/!(${{ github.event.pull_request.user.login }}/**)/**'
+              - 'posts/!(${{ env.AUTHOR_GITHUB_USER }}/**)/**'
   lint:
     runs-on: ubuntu-latest
-    needs: changes
+    needs: [changes, variables]
     if: needs.changes.outputs.theirs == 'true'
+    env:
+      AUTHOR_GITHUB_USER: ${{ needs.variables.outputs.author_github_user }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -30,7 +51,7 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npx --no-install markdownlint **/*.md
-        working-directory: posts/${{ github.event.pull_request.user.login }}
+        working-directory: posts/${{ env.AUTHOR_GITHUB_USER }}
   scope:
     runs-on: ubuntu-latest
     needs: changes
@@ -43,19 +64,22 @@ jobs:
             core.setFailed("There are changes outside of the user's scope!")
   dry-run:
     runs-on: ubuntu-latest
-    needs: changes
+    needs: [changes,variables]
+    env:
+      AUTHOR_GITHUB_USER: ${{ needs.variables.outputs.author_github_user }}
+      AUTHOR_GITHUB_USER_SAFE: ${{ needs.variables.outputs.author_github_user_safe }}
     outputs:
       result_summary_table_json: ${{ steps.dry-run.outputs.result_summary_table_json }}
     if: needs.changes.outputs.theirs == 'true'
     steps:
       - uses: actions/checkout@v3
-      - name: Dry-run on dev.to for ${{ github.event.pull_request.user.login }}
+      - name: Dry-run on dev.to for ${{ env.AUTHOR_GITHUB_USER }} (${{ env.AUTHOR_GITHUB_USER_SAFE }})
         id: dry-run
         uses: cloudx-labs/publish-devto@main
         with:
-          devto_key: ${{ secrets[format('devto_key_{0}', github.event.pull_request.user.login)] }}
+          devto_key: ${{ secrets[format('devto_key_{0}', env.AUTHOR_GITHUB_USER_SAFE)] }}
           github_token: ${{ secrets.CI_PAT_TOKEN }}
-          files: "posts/${{ github.event.pull_request.user.login }}/**/*.md"
+          files: "posts/${{ env.AUTHOR_GITHUB_USER }}/**/*.md"
           dry_run: true
           branch: ${{ github.event.pull_request.head.ref }}
   result-comment:
