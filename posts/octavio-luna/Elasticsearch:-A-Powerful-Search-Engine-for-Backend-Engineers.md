@@ -9,13 +9,13 @@ cover_image: ./assets/Elasticsearch/Elasticsearch_logo.svg.png
 
 Elasticsearch is a powerful search engine that can be used for a variety of tasks, including: Building search applications, Indexing and searching large amounts of data, Monitoring and alerting and xLog analysis
 
-As a backend engineer, you can use Elasticsearch to improve the performance and scalability of your applications. For example, you can use Elasticsearch to index and search large amounts of data, such as customer records or product catalogs. This can help your users find the information they need quickly and easily.
+As a backend engineer, you can use Elasticsearch to improve the performance and scalability of your applications. For example, you can use Elasticsearch to index and search large amounts of data, such as customer records or product catalogs. This can help your users to find the information they need quickly and easily.
 
 ## Elasticsearch Basics
 
-In this article, we will provide an introduction to Elasticsearch for backend engineers. We will cover the basics of Elasticsearch, such as how to create indexes, add documents, and perform searches. We will also discuss some of the benefits of using Elasticsearch for backend applications.
+In this article we will provide an introduction to Elasticsearch for backend engineers. We will cover the basics of Elasticsearch such as how to create indexes, add documents and perform searches. We will also discuss some of the benefits of using Elasticsearch for backend applications.
 
-By the end of this article, you will have a basic understanding of Elasticsearch and how it can be used to improve the performance and scalability of your backend applications.
+By the end of this article you will have a basic understanding of Elasticsearch and how it can be used to improve the performance and scalability of your backend applications.
 
 ## What is Elasticsearch?
 
@@ -36,7 +36,7 @@ There are many benefits to using Elasticsearch for backend applications. Some of
 
 Setting up Elasticsearch is a relatively simple process. The first step is to download and install the Elasticsearch distribution for your platform. You can find the download links on the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
 
-Once you have installed Elasticsearch, you need to start the Elasticsearch service. On Linux and macOS, you can do this by running the following command:
+Once you have installed it, you need to start the Elasticsearch service. On Linux and macOS, you can do this by running the following command:
 
 ```
 sudo service elasticsearch start
@@ -50,7 +50,7 @@ elasticsearch.bat
 ```
 
 
-Once Elasticsearch is started, you can access it using the Elasticsearch Web UI: [https://localhost:9200/](https://localhost:9200/). The Web UI will allow you to create indexes, add documents, and perform searches.
+Once Elasticsearch is started, you can access it using the Elasticsearch Web UI: [https://localhost:9200/](https://localhost:9200/). The Web UI will allow you to create indexes, add documents and perform searches.
 
 ## Steps to Set Up Elasticsearch on Windows:
 
@@ -112,7 +112,7 @@ POST /books/_doc/1
 Here, we've indexed a book with the ID "1" into the "books" index. The JSON document contains the book's title, author, description, and publish date.
 
 # Basic Queries in Elasticsearch
-Once the data is indexed, you can perform various queries to search for specific information. Here are some basic query examples:
+Once data is indexed, you can perform various queries to search for specific information. Here are some basic query examples:
 
 ## Full-Text Search
 To perform a full-text search for books containing the word "novel" in the title:
@@ -130,7 +130,7 @@ This query will return all books with the word "novel" in their title. Pretty st
 
 ## Introducing Analyzers and Tokenizers
 
-Elasticsearch uses analyzers and tokenizers to process text during indexing and searching. Analyzers are composed of one or more tokenizers and optional filters. Tokenizers break the text into individual tokens (words or terms), and filters process the tokens before indexing.
+Elasticsearch uses analyzers and tokenizers to process text during indexing and searching. Analyzers are composed of one or more tokenizers and optional filters while tokenizers break the text into individual tokens (words or terms) and filters process the tokens before indexing.
 
 For instance, we can create a custom analyzer that uses the standard tokenizer and lowercase filter:
 ```
@@ -252,18 +252,19 @@ This query looks for documents with titles similar to "Elastisearch" within an e
 
 # Aggregations and Analytics in Elasticsearch
 
-Elasticsearch's aggregations and analytics capabilities go beyond simple document retrieval. They allow you to perform advanced data analysis on your indexed data, enabling you to gain valuable insights and summarize large datasets in meaningful ways. Aggregations are powerful tools that help you understand your data and identify trends, patterns, and relationships. Let's explore how aggregations can be used for data analysis and showcase some types of aggregations.
+Elasticsearch's aggregations and analytics capabilities go beyond simple document retrieval: they allow you to perform advanced data analysis on your indexed data, enabling you to gain valuable insights and summarize large datasets in meaningful ways. Aggregations are powerful tools that help you understand your data and identify trends, patterns and relationships.
+Let's explore how aggregations can be used for data analysis and showcase some types of aggregations.
 
 ## Understanding Aggregations
 
-Aggregations work on the principle of grouping and processing data to generate summarized results. They can be compared to SQL's GROUP BY clause, but with Elasticsearch, you get more flexibility and the ability to perform complex computations on the grouped data. Aggregations can be applied to various fields in your documents, and you can chain multiple aggregations together to get more insightful results.
+Aggregations work on the principle of grouping and processing data to generate summarized results. They can be compared to SQL's `GROUP BY` clause, but with Elasticsearch you get more flexibility and the ability to perform complex computations on the grouped data. Aggregations can also be applied to various fields in your documents, and you can chain multiple aggregations together to get more insightful results.
 
 ## Aggregations for Data Analysis
 
 Aggregations can be extremely valuable for data analysis tasks. Here are some common use cases where aggregations shine:
 
 1. Summarizing Data
-   Aggregations can help you calculate sums, averages, minimum, and maximum values for numerical fields. For instance, you can find the average rating of products in a catalog or the total sales for a specific period.
+   Aggregations can help you calculate sums, averages, minimum and maximum values for numerical fields. For instance, you can find the average rating of products in a catalog or the total sales for a specific period.
 
 2. Data Distribution
    With histogram and date histogram aggregations, you can analyze data distribution over time or numeric ranges. This is useful for understanding patterns and trends in time-series data or creating histograms of age groups, price ranges, etc.
@@ -313,7 +314,7 @@ In this example, we have three aggregations:
 
 3. "average_price" computes the average value of the "price" field, giving us the average price of the products sold.
 
-These are just a few examples of the wide range of aggregations Elasticsearch offers. By leveraging these capabilities, you can gain deep insights into your data, make informed decisions, and extract valuable information to improve your applications and business processes. Elasticsearch's aggregations empower you to perform sophisticated data analysis tasks with ease.
+These are just a few examples of the wide range of aggregations Elasticsearch offers. By leveraging these capabilities, you can gain deep insights into your data, make informed decisions and extract valuable information to improve your applications and business processes. Elasticsearch's aggregations empower you to perform sophisticated data analysis tasks with ease.
 
 # Scaling and Performance Optimization in Elasticsearch
 Scalability and performance optimization are critical aspects of using Elasticsearch effectively, especially when dealing with large amounts of data and high traffic. Elasticsearch can be resource-intensive, and if not used properly, it can lead to significant costs and inefficiencies. Let's explore strategies for scaling Elasticsearch clusters and techniques for optimizing queries, with a special focus on caching, to ensure smooth operation and cost-effectiveness.
