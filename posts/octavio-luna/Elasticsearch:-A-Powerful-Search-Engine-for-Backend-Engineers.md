@@ -9,11 +9,11 @@ cover_image: ./assets/Elasticsearch/Elasticsearch_logo.svg.png
 
 Elasticsearch is a powerful search engine that can be used for a variety of tasks, including: Building search applications, Indexing and searching large amounts of data, Monitoring and alerting and xLog analysis
 
-As a backend engineer, you can use Elasticsearch to improve the performance and scalability of your applications. For example, you can use Elasticsearch to index and search large amounts of data, such as customer records or product catalogs. This can help your users to find the information they need quickly and easily.
+As a backend engineer, you can use Elasticsearch to improve the performance and scalability of your applications. For example, you can use Elasticsearch to index and search large amounts of data, such as customer records or product catalogs. This can help your users find the information they need quickly and easily.
 
 ## Elasticsearch Basics
 
-In this article we will provide an introduction to Elasticsearch for backend engineers. We will cover the basics of Elasticsearch such as how to create indexes, add documents and perform searches. We will also discuss some of the benefits of using Elasticsearch for backend applications.
+In this article we will provide an introduction to Elasticsearch for backend engineers. We will cover the basics such as how to create indexes, add documents and perform searches. We will also discuss some of the benefits of using it for backend applications.
 
 By the end of this article you will have a basic understanding of Elasticsearch and how it can be used to improve the performance and scalability of your backend applications.
 
@@ -27,14 +27,14 @@ Elasticsearch is a RESTful API, which means that it can be accessed using HTTP r
 
 There are many benefits to using Elasticsearch for backend applications. Some of these benefits include:
 
-- High scalability: Elasticsearch is designed to be highly scalable, making it a good choice for applications that need to handle large amounts of data.
-- Fault tolerance: Elasticsearch is fault-tolerant, meaning that it can continue to operate even if some of its nodes fail.
-- Ease of use: Elasticsearch is easy to use, making it a good choice for developers who are not familiar with search engines.
-- Flexibility: Elasticsearch is flexible, making it a good choice for a variety of applications.
+- High scalability: It is designed to be highly scalable, making it a good choice for applications that need to handle large amounts of data.
+- Fault tolerance: It is fault-tolerant, meaning that it can continue to operate even if some of its nodes fail.
+- Ease of use: It is easy to use, making it a good choice for developers who are not familiar with search engines.
+- Flexibility: It is flexible, making it a good choice for a variety of applications.
 
 ## Setting Up Elasticsearch
 
-Setting up Elasticsearch is a relatively simple process. The first step is to download and install the Elasticsearch distribution for your platform. You can find the download links on the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
+Setting it up is a relatively simple process. The first step is to download and install the Elasticsearch distribution for your platform. You can find the download links on the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
 
 Once you have installed it, you need to start the Elasticsearch service. On Linux and macOS, you can do this by running the following command:
 
@@ -50,7 +50,7 @@ elasticsearch.bat
 ```
 
 
-Once Elasticsearch is started, you can access it using the Elasticsearch Web UI: [https://localhost:9200/](https://localhost:9200/). The Web UI will allow you to create indexes, add documents and perform searches.
+Once it is started, you can access it using the Web UI: [https://localhost:9200/](https://localhost:9200/). The Web UI will allow you to create indexes, add documents and perform searches.
 
 ## Steps to Set Up Elasticsearch on Windows:
 
