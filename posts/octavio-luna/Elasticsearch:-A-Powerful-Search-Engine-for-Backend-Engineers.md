@@ -17,13 +17,13 @@ In this article we will provide an introduction to Elasticsearch for backend eng
 
 By the end of this article you will have a basic understanding of Elasticsearch and how it can be used to improve the performance and scalability of your backend applications.
 
-### What is Elasticsearch?
+## What is Elasticsearch?
 
 Elasticsearch is a distributed, open-source search engine based on the Apache Lucene library. It is designed to be highly scalable and fault-tolerant, making it a good choice for large-scale applications.
 
 Elasticsearch is a RESTful API, which means that it can be accessed using HTTP requests. This makes it easy to integrate Elasticsearch with other applications.
 
-### Benefits of Using Elasticsearch for Backend Applications
+## Benefits of Using Elasticsearch for Backend Applications
 
 There are many benefits to using Elasticsearch for backend applications. Some of these benefits include:
 
@@ -32,20 +32,20 @@ There are many benefits to using Elasticsearch for backend applications. Some of
 - Ease of use: It is easy to use, making it a good choice for developers who are not familiar with search engines.
 - Flexibility: It is flexible, making it a good choice for a variety of applications.
 
-### Setting Up Elasticsearch
+## Setting Up Elasticsearch
 
 Setting it up is a relatively simple process. The first step is to download and install the Elasticsearch distribution for your platform. You can find the download links on the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
 
 Once you have installed it, you need to start the Elasticsearch service. On Linux and macOS, you can do this by running the following command:
 
-```
+```bash
 sudo service elasticsearch start
 ```
 
 
 On Windows, you can start Elasticsearch by running the following command from the Elasticsearch installation directory:
 
-```
+```bash
 elasticsearch.bat
 ```
 
@@ -57,8 +57,8 @@ Once it is started, you can access it using the Web UI: [https://localhost:9200/
 1. Download the Elasticsearch Windows zip file from the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
 2. Extract the zip file to a directory of your choice.
 3. Open a command prompt and navigate to the extracted directory.
-4. Start Elasticsearch by running the following command:
-```
+4. Start Elasticsearch by running the following command:   
+```bash
 elasticsearch.bat
 ```
 5. Open a web browser and navigate to [http://localhost:9200/](http://localhost:9200/).
@@ -73,7 +73,7 @@ In Elasticsearch, data is organized into indices, which are similar to databases
 
 Let's say we want to index information about books. We can create an index called "books" and define its mapping as follows:
 
-```
+```json
 PUT /books
 {
   "mappings": {
@@ -99,7 +99,7 @@ In this example, we've defined a mapping with four fields: "title," "author," "d
 
 To index a new book, you can use the following command:
 
-```
+```json
 POST /books/_doc/1
 {
   "title": "The Catcher in the Rye",
@@ -112,11 +112,13 @@ POST /books/_doc/1
 Here, we've indexed a book with the ID "1" into the "books" index. The JSON document contains the book's title, author, description, and publish date.
 
 ## Basic Queries in Elasticsearch
+
 Once data is indexed, you can perform various queries to search for specific information. Here are some basic query examples:
 
 ### Full-Text Search
+
 To perform a full-text search for books containing the word "novel" in the title:
-```
+```json
 GET /books/_search
 {
   "query": {
@@ -133,7 +135,7 @@ This query will return all books with the word "novel" in their title. Pretty st
 Elasticsearch uses analyzers and tokenizers to process text during indexing and searching. Analyzers are composed of one or more tokenizers and optional filters while tokenizers break the text into individual tokens (words or terms) and filters process the tokens before indexing.
 
 For instance, we can create a custom analyzer that uses the standard tokenizer and lowercase filter:
-```
+```json
 PUT /books
 {
   "settings": {
@@ -168,7 +170,7 @@ Elasticsearch offers several powerful advanced search features that allow you to
 ### Fuzzy Search
 
 Fuzzy search helps you find documents that contain words or phrases similar to your search term, even if there are minor spelling mistakes or variations. To perform a fuzzy search, you can use the tilde "~" symbol followed by an optional edit distance value. The edit distance represents the number of changes required to transform one word into another. For example:
-```
+```json
 GET /books/_search
 {
   "query": {
@@ -187,7 +189,7 @@ In this example, we're searching for documents with titles similar to "Elastisea
 ### Wildcard Queries
 
 Wildcard queries allow you to search for documents that match a specific pattern using wildcard characters (* and ?). The asterisk (*) represents any number of characters, while the question mark (?) represents a single character. For example:
-```
+```json
 GET /books/_search
 {
   "query": {
@@ -202,7 +204,7 @@ This query will find documents with titles that start with "Elast," followed by 
 ### Phrase Matching
 
 Phrase matching lets you search for documents that contain an exact phrase. To perform a phrase search, enclose the search phrase in double quotation marks. For example:
-```
+```json
 GET /books/_search
 {
   "query": {
@@ -217,7 +219,7 @@ This query will find documents where the phrase "Elasticsearch is a search engin
 ### Boosting
 
 Boosting allows you to control the relevance of specific terms in a search query. You can assign a higher or lower boost value to terms to influence their importance in the search results. For example:
-```
+```json
 GET /books/_search
 {
   "query": {
@@ -235,7 +237,7 @@ In this query, we're boosting the "title" field to have twice the importance of 
 ### Query DSL
 
 Query DSL allows you to craft complex search queries using a JSON-based syntax. You can combine various query types to create sophisticated searches. Here's an example combining fuzzy search and wildcard query using Query DSL:
-```
+```json
 GET /books/_search
 {
   "query": {
@@ -282,7 +284,7 @@ Aggregations can be extremely valuable for data analysis tasks. Here are some co
 
 Let's demonstrate some aggregations using a fictional "sales" index with documents representing different sales transactions:
     
-```
+```json
     GET /sales/_search
 {
   "size": 0,
@@ -306,6 +308,7 @@ Let's demonstrate some aggregations using a fictional "sales" index with documen
   }
 }
 ```
+
 In this example, we have three aggregations:
 
 1. "total_sales" calculates the sum of the "amount" field, providing the total sales value.
@@ -317,9 +320,11 @@ In this example, we have three aggregations:
 These are just a few examples of the wide range of aggregations Elasticsearch offers. By leveraging these capabilities, you can gain deep insights into your data, make informed decisions and extract valuable information to improve your applications and business processes. Elasticsearch's aggregations empower you to perform sophisticated data analysis tasks with ease.
 
 ## Scaling and Performance Optimization in Elasticsearch
+
 Scalability and performance optimization are critical aspects of using Elasticsearch effectively, especially when dealing with large amounts of data and high traffic. Elasticsearch can be resource-intensive, and if not used properly, it can lead to significant costs and inefficiencies. Let's explore strategies for scaling Elasticsearch clusters and techniques for optimizing queries, with a special focus on caching, to ensure smooth operation and cost-effectiveness.
 
 ### Scaling Elasticsearch Clusters
+
 To handle large amounts of data and increasing traffic, consider the following scaling strategies:
 
 1. Horizontal Scaling: Add more nodes to your Elasticsearch cluster to distribute the data and workload across multiple servers. Horizontal scaling improves performance and provides fault tolerance.
@@ -329,6 +334,7 @@ To handle large amounts of data and increasing traffic, consider the following s
 3. Index Lifecycle Management (ILM): Automate the management of indices, including data retention, optimization, and rollover. ILM policies ensure efficient storage and query performance.
 
 ### Query Optimization and Caching
+
 Optimizing queries is crucial for performance. Additionally, caching can significantly improve query response times and reduce the workload on Elasticsearch:
 
 1. Query Profiling: Regularly profile queries to identify slow or inefficient ones. Elasticsearch's "profile" API helps analyze query execution and identify bottlenecks. Use this information to optimize queries for better performance.
@@ -343,11 +349,12 @@ Optimizing queries is crucial for performance. Additionally, caching can signifi
 
 By implementing these caching techniques and following effective scaling and optimization strategies, you can harness the full potential of Elasticsearch, ensuring smooth performance, cost-effectiveness, and providing a seamless experience to your users.
 
-
 ## Monitoring, Backup, and Disaster Recovery in Elasticsearch
+
 Ensuring the health, performance, and data integrity of your Elasticsearch cluster is essential for the smooth and reliable operation of your applications. Monitoring allows you to proactively identify issues, while backup and disaster recovery practices protect your data against unexpected events. Let's delve into how to monitor your Elasticsearch cluster effectively and establish best practices for backup and disaster recovery.
 
 ### Monitoring Elasticsearch Cluster
+
 Monitoring your Elasticsearch cluster enables you to:
 
 1. Track performance metrics: Monitor key performance indicators such as CPU usage, memory utilization, disk space, indexing and search rates, and query latency. Tools like Elasticsearch's Monitoring feature or third-party solutions like Grafana and Kibana can help visualize these metrics effectively.
@@ -357,6 +364,7 @@ Monitoring your Elasticsearch cluster enables you to:
 3. Ensure cluster health: Monitor cluster status, node availability, and shard allocation to ensure your Elasticsearch cluster is functioning correctly.
 
 ### Backup and Disaster Recovery Best Practices
+
 Protecting your data against loss is paramount. Follow these best practices for backup and disaster recovery:
 
 1. Regular Backups: Schedule regular backups of your indices and snapshots. Elasticsearch supports built-in snapshot and restore features, allowing you to create snapshots of indices and store them in a separate repository, such as Amazon S3 or a shared filesystem.
