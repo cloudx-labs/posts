@@ -202,6 +202,7 @@ GET /books/_search
   }
 }
 ```
+
 This query will find documents with titles that start with "Elast," followed by any characters.
 
 ### Phrase Matching
