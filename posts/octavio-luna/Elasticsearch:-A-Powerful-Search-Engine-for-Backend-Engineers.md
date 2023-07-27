@@ -56,13 +56,13 @@ Once it is started, you can access it using the Web UI: [https://localhost:9200/
 - Extract the zip file to a directory of your choice.
 - Open a command prompt and navigate to the extracted directory.
 - Start Elasticsearch by running the following command:
-   
+
 ```bash
 elasticsearch.bat
 ```
 
 - Open a web browser and navigate to [http://localhost:9200/](http://localhost:9200/).
--  You should see the Elasticsearch Web UI.
+- You should see the Elasticsearch Web UI.
 
 ## Indexing and Searching Data in Elasticsearch
 
@@ -117,6 +117,7 @@ Once data is indexed, you can perform various queries to search for specific inf
 ### Full-Text Search
 
 To perform a full-text search for books containing the word "novel" in the title:
+
 ```json
 GET /books/_search
 {
@@ -127,6 +128,7 @@ GET /books/_search
   }
 }
 ```
+
 This query will return all books with the word "novel" in their title. Pretty standard, right?
 
 ### Introducing Analyzers and Tokenizers
@@ -216,6 +218,7 @@ GET /books/_search
   }
 }
 ```
+
 This query will find documents where the phrase "Elasticsearch is a search engine" appears exactly as it is in the "description" field.
 
 ### Boosting
