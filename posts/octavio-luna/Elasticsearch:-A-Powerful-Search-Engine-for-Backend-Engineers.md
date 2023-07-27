@@ -11,7 +11,7 @@ Elasticsearch is a powerful search engine that can be used for a variety of task
 
 As a backend engineer, you can use Elasticsearch to improve the performance and scalability of your applications. For example, you can use Elasticsearch to index and search large amounts of data, such as customer records or product catalogs. This can help your users find the information they need quickly and easily.
 
-# Elasticsearch Basics
+## Elasticsearch Basics
 
 In this article we will provide an introduction to Elasticsearch for backend engineers. We will cover the basics such as how to create indexes, add documents and perform searches. We will also discuss some of the benefits of using it for backend applications.
 
@@ -42,28 +42,27 @@ Once you have installed it, you need to start the Elasticsearch service. On Linu
 sudo service elasticsearch start
 ```
 
-
 On Windows, you can start Elasticsearch by running the following command from the Elasticsearch installation directory:
 
 ```bash
 elasticsearch.bat
 ```
 
-
 Once it is started, you can access it using the Web UI: [https://localhost:9200/](https://localhost:9200/). The Web UI will allow you to create indexes, add documents and perform searches.
 
 ### Steps to Set Up Elasticsearch on Windows:
 
-1. Download the Elasticsearch Windows zip file from the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
-2. Extract the zip file to a directory of your choice.
-3. Open a command prompt and navigate to the extracted directory.
-4. Start Elasticsearch by running the following command:   
+- Download the Elasticsearch Windows zip file from the [Elasticsearch website](https://www.elastic.co/downloads/elasticsearch).
+- Extract the zip file to a directory of your choice.
+- Open a command prompt and navigate to the extracted directory.
+- Start Elasticsearch by running the following command:
+   
 ```bash
 elasticsearch.bat
 ```
-5. Open a web browser and navigate to [http://localhost:9200/](http://localhost:9200/).
-6. You should see the Elasticsearch Web UI.
 
+- Open a web browser and navigate to [http://localhost:9200/](http://localhost:9200/).
+-  You should see the Elasticsearch Web UI.
 
 ## Indexing and Searching Data in Elasticsearch
 
@@ -135,6 +134,7 @@ This query will return all books with the word "novel" in their title. Pretty st
 Elasticsearch uses analyzers and tokenizers to process text during indexing and searching. Analyzers are composed of one or more tokenizers and optional filters while tokenizers break the text into individual tokens (words or terms) and filters process the tokens before indexing.
 
 For instance, we can create a custom analyzer that uses the standard tokenizer and lowercase filter:
+
 ```json
 PUT /books
 {
@@ -162,7 +162,6 @@ PUT /books
 
 In this example, we've defined a custom analyzer named "custom_analyzer" and applied it to the "title" field. The custom analyzer uses the standard tokenizer and a lowercase filter, which converts all text to lowercase before indexing. This allows for case-insensitive searches.
 
-
 ## Advanced Search Features in Elasticsearch
 
 Elasticsearch offers several powerful advanced search features that allow you to fine-tune your searches and get more accurate results. Let's explore how to use each of these features:
@@ -170,6 +169,7 @@ Elasticsearch offers several powerful advanced search features that allow you to
 ### Fuzzy Search
 
 Fuzzy search helps you find documents that contain words or phrases similar to your search term, even if there are minor spelling mistakes or variations. To perform a fuzzy search, you can use the tilde "~" symbol followed by an optional edit distance value. The edit distance represents the number of changes required to transform one word into another. For example:
+
 ```json
 GET /books/_search
 {
@@ -188,7 +188,8 @@ In this example, we're searching for documents with titles similar to "Elastisea
 
 ### Wildcard Queries
 
-Wildcard queries allow you to search for documents that match a specific pattern using wildcard characters (* and ?). The asterisk (*) represents any number of characters, while the question mark (?) represents a single character. For example:
+Wildcard queries allow you to search for documents that match a specific pattern using wildcard characters (\* and \?). The asterisk (\*) represents any number of characters, while the question mark (\?) represents a single character. For example:
+
 ```json
 GET /books/_search
 {
@@ -204,6 +205,7 @@ This query will find documents with titles that start with "Elast," followed by 
 ### Phrase Matching
 
 Phrase matching lets you search for documents that contain an exact phrase. To perform a phrase search, enclose the search phrase in double quotation marks. For example:
+
 ```json
 GET /books/_search
 {
@@ -219,6 +221,7 @@ This query will find documents where the phrase "Elasticsearch is a search engin
 ### Boosting
 
 Boosting allows you to control the relevance of specific terms in a search query. You can assign a higher or lower boost value to terms to influence their importance in the search results. For example:
+
 ```json
 GET /books/_search
 {
@@ -232,11 +235,13 @@ GET /books/_search
   }
 }
 ```
+
 In this query, we're boosting the "title" field to have twice the importance of the "description" field when searching for documents containing "Elasticsearch" and "search."
 
 ### Query DSL
 
 Query DSL allows you to craft complex search queries using a JSON-based syntax. You can combine various query types to create sophisticated searches. Here's an example combining fuzzy search and wildcard query using Query DSL:
+
 ```json
 GET /books/_search
 {
@@ -250,6 +255,7 @@ GET /books/_search
   }
 }
 ```
+
 This query looks for documents with titles similar to "Elastisearch" within an edit distance of 2 or containing words like "powerful" in the "description" field.
 
 ## Aggregations and Analytics in Elasticsearch
@@ -283,7 +289,7 @@ Aggregations can be extremely valuable for data analysis tasks. Here are some co
 ### Showcase of Aggregations
 
 Let's demonstrate some aggregations using a fictional "sales" index with documents representing different sales transactions:
-    
+
 ```json
     GET /sales/_search
 {
