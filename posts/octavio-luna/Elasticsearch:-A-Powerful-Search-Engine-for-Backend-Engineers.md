@@ -1,9 +1,9 @@
 ---
 title: 'Elasticsearch: A Powerful Search Engine for Backend Engineers'
-published: false
+published: true
 description: 'Elasticsearch is a powerful search engine that can be used to search for text in documents, but it can also be used to search for structured data in JSON format. In this article, we will explore how Elasticsearch works and how it can be used to search for structured data.'
 tags: 'elasticsearch, backend, search, optimization'
-cover_image: ./assets/Elasticsearch/Elasticsearch_logo.svg.png
+cover_image: ./assets/Elasticsearch/Elasticsearch_logo.png
 ---
 
 
