@@ -4,6 +4,8 @@ published: true
 description: 'Elasticsearch is a powerful search engine that can be used to search for text in documents, but it can also be used to search for structured data in JSON format. In this article, we will explore how Elasticsearch works and how it can be used to search for structured data.'
 tags: 'elasticsearch, backend, search, optimization'
 cover_image: ./assets/Elasticsearch/Elasticsearch_logo.png
+id: 1564788
+date: '2023-08-10T13:47:40Z'
 ---
 
 
