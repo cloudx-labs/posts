@@ -55,6 +55,7 @@ Grids organize and structure layouts, improving readability and navigation. Diff
 Responsiveness ensures your product adapts to different devices and screen sizes, providing users with a consistent and optimal experience. QA should test the application on various devices, browsers, and operating systems to ensure functionality and appearance across all platforms.
 /assets/responsivnesscloudxuxuiqa.png
 
+
 ## Useful Links
 
 - [UX Rules](https://lawsofux.com/)
