@@ -1,7 +1,7 @@
 title: 'A Guide to Enhancing QA's Understanding of UX/UI: Tips and Insights'
 published: true
 description: 'The Intersection of UX/UI Design and Quality Assurance (QA). User Experience (UX) and User Interface (UI) design are integral aspects of product development that profoundly influence user satisfaction and product success. As a Quality Assurance (QA) professional, understanding the principles of UX/UI design and how they impact your work is essential. In this article, we will delve into the key UX/UI laws and explore critical elements within system design. By gaining insights into these principles and elements, QAs can effectively identify inconsistencies, ensure user-friendly interfaces, and contribute to the overall success of the product. Join us on this journey through the world of UX/UI design, where form meets function, and usability reigns supreme.'
-tags: 'UX/UI design, quality assurance, user experience, design principles'
+tags: 'UXUIdesign, qualityassurance, userexperience, designprinciples'
 cover_image: ./assets/portada-blog-jose.png
 
 # A Guide to Enhancing QA's Understanding of UX/UI: Tips and Insights
