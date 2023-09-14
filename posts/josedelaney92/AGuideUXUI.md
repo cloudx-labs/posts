@@ -44,7 +44,7 @@ Icons enhance usability and provide quick visual cues. Use standard icon librari
 ### Illustrations and Images
 
 Visual elements convey information, evoke emotions, and improve usability. Ensure image quality, alignment, positioning, responsiveness across devices, and compatibility with different browsers.
-![Images](./assets/imagescloudxuxuiqa.png
+![Images](./assets/imagescloudxuxuiqa.png)
 ![Illustrations](./assets/illustration1scloudxuxuiqa.png)
 
 ### Grid
