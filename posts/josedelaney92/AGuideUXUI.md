@@ -1,14 +1,14 @@
 ---
 title: 'A Guide to Enhancing QA's Understanding of UX/UI: Tips and Insights'
 published: true
-description: 'The Intersection of UX/UI Design and Quality Assurance (QA). User Experience (UX) and User Interface (UI) design are integral aspects of product development that profoundly influence user satisfaction and product success. As a Quality Assurance (QA) professional, understanding the principles of UX/UI design and how they impact your work is essential. In this article, we will delve into the key UX/UI laws and explore critical elements within system design. By gaining insights into these principles and elements, QAs can effectively identify inconsistencies, ensure user-friendly interfaces, and contribute to the overall success of the product. Join us on this journey through the world of UX/UI design, where form meets function, and usability reigns supreme.'
+description: 'The Intersection of UX/UI Design and Quality Assurance (QA). User Experience (UX) and User Interface (UI) design are integral aspects of product development that deeply influence users satisfaction and products success. As a Quality Assurance (QA) professional, understanding the principles of UX/UI design and how they impact your work is essential. In this article, we will delve into the key UX/UI laws and explore critical elements within system design. By gaining insights into these principles and elements, QAs can effectively identify inconsistencies, ensure user-friendly interfaces, and contribute to the overall success of the product. Join us on this journey through the world of UX/UI design, where form meets functionality, and usability reigns supreme.'
 tags: 'UXUIdesign, qualityassurance, userexperience, designprinciples'
 cover_image: ./assets/portada-blog-jose.png
 ---
 
 # A Guide to Enhancing QA's Understanding of UX/UI: Tips and Insights
 
-UX/UI design is a critical aspect to consider when developing products, and as a Quality Assurance (QA) professional, having knowledge of this field and the right tools can greatly assist in your work. In this article, we'll explore the key principles of UX/UI design and essential elements within system design that are important for ensuring consistency, usability, and understandability.
+UX/UI design is a critical aspect to consider when developing products, and as a Quality Assurance (QA) professional, having knowledge of this field and the right tools can greatly assist you during your work. In this article, we'll explore the key principles of UX/UI design and essential elements within system design that are important for ensuring consistency, usability, and understandability.
 
 ## UX/UI Laws
 
@@ -28,35 +28,36 @@ UX/UI design is a critical aspect to consider when developing products, and as a
 
 ### Colors
 
-Colors evoke emotions, convey meaning, and establish visual hierarchy. Ensure that colors work well together, provide sufficient contrast for readability, and meet accessibility standards per Web Content Accessibility Guidelines (WCAG). QA plays a crucial role in testing colors for readability and accessibility.
-/assets/colorscloudxuxuiqa.png
+Colors evoke emotions, convey meaning and establish visual hierarchy. Ensure that colors work well together, provide sufficient contrast for readability and meet accessibility standards per Web Content Accessibility Guidelines (WCAG). QA plays a crucial role in testing colors for readability and accessibility.
+![Colors](./assets/colorscloudxuxuiqa.png)
 
 ### Typography
 
 Typography contributes to readability, aesthetics, and branding. Test fonts across different devices, browsers, and screen resolutions, checking font sizes, line heights, letter spacing, and font weights to ensure consistency and readability. Fonts should be responsive and align with brand guidelines.
-/assets/fontscloudxuxuiqa.png
+![Typography](./assets/fontscloudxuxuiqa.png)
 
 ### Icons
 
 Icons enhance usability and provide quick visual cues. Use standard icon libraries or design systems to maintain consistency. Icons can indicate different states or actions, reducing user confusion.
-/assets/iconscloudxuxuiqa.png
+![Icons](./assets/iconscloudxuxuiqa.png)
 
 ### Illustrations and Images
 
 Visual elements convey information, evoke emotions, and improve usability. Ensure image quality, alignment, positioning, responsiveness across devices, and compatibility with different browsers.
-/assets/imagescloudxuxuiqa.png
-/assets/illustration1scloudxuxuiqa.png
+![Images](./assets/imagescloudxuxuiqa.png
+![Illustrations](./assets/illustration1scloudxuxuiqa.png)
 
 ### Grid
 
 Grids organize and structure layouts, improving readability and navigation. Different types of grids (e.g., column grid, modular grid, hierarchical grid) provide flexible structures that adapt to various screen sizes.
-/assets/gridcloudxuxuiqa.png
+![Grid](./assets/gridcloudxuxuiqa.png)
 
 ### Responsiveness
 
 Responsiveness ensures your product adapts to different devices and screen sizes, providing users with a consistent and optimal experience. QA should test the application on various devices, browsers, and operating systems to ensure functionality and appearance across all platforms.
-/assets/responsivnesscloudxuxuiqa.png
+![Responsivness](./assets/responsivnesscloudxuxuiqa.png)
 
+In conclusion, the intersection of QA and UX/UI is a crucial nexus for delivering exceptional products that resonate with users. By embracing the principles, tools, and methodologies discussed in this guide, QA professionals can play a pivotal role in shaping remarkable user experiences and driving the success of their projects. Embrace these next steps, and you'll be well on your way to becoming an indispensable asset in the pursuit of excellence in software development.
 
 ## Useful Links
 
@@ -80,5 +81,3 @@ Responsiveness ensures your product adapts to different devices and screen sizes
 - [Illustrations](https://www.freepik.com/vectors/illustrations)
 - [Icons8 Illustrations](https://icons8.com/illustrations)
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
-
-
