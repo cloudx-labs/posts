@@ -87,7 +87,7 @@ Once you have verified the behavior under load or spikes, it's time to let the s
 
 ## Real-life config
 
-Now, all of this is fine, but WHAT are we testing?? Well, that, of course, is something really specific to your project, but let's start by testing one endpoint, shall we?
+Now, all of this is fine, but WHAT are we testing?? This, of course, varies according to your project. Let's begin by testing a specific endpoint, shall we?
 To test an endpoint is basically configuring the given tool to perform a GET/POST/PUT. In this case, I'm going to show how to run a GET to a specific API endpoint.
 
 Let's use, for this purpose, jMeter.
