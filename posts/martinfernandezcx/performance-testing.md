@@ -133,7 +133,7 @@ This is calculating the average time based on the number of VUs. As you can see 
 ### 200 responses and threads
 
 ![Results 2](./assets/ART00-Performance/07-200AndThreads.png)
-Here you see two things: how the constant throughput worked and what's the variance of 200 responses we had.
+Here, you'll notice two key points: the performance under constant throughput and the variance in 200 responses.
 If you add to this the following image:
 
 ### Errors and threads
