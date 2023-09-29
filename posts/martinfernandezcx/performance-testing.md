@@ -20,7 +20,7 @@ We perform performance testing for two main reasons, among others: verification 
 ## The WHEN
 
 We perform performance testing once we know the expected usage of the app at the point of going into production. We run it before going into production and during production.
-We DON'T run it with every release. Do we?? Well, that depends on the environment, your needs, the team you have to perform these tests, the criticality of the affected areas of that release, and the application itself.
+However, we do not run it with every release, do we? This decision depends on various factors: the environment, your needs, the team you have to perform these tests, the criticality of the affected areas of that release, and the application itself.
 
 ## The WHAT
 
