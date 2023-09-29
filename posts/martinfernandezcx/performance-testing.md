@@ -98,7 +98,7 @@ Start by installing the custom threads group that contains the Ultimate thread g
 Second, add some graph generators of your choice.
 
 Once you have done this, create a test plan and add an Ultimate thread group.
-The thread group should be minimally composed of:
+The thread group should consist of the following components at a minimum:
 
 - The HTTP Request
   - Then here, I'm adding input data from a CSV to send query parameters, a Header manager to send a basic auth token, and a throughput timer.
