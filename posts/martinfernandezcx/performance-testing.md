@@ -1,8 +1,8 @@
 ---
 title: 'Performance Testing: Why, When, and What'
 published: true
-description: When you have an application, regardless of whether it's in production or not, there comes a point when you need to perform performance testing. Let's review that in detail.
-tags: 'perf-testing'
+description: "When you have an application, regardless of whether it's in production or not, there comes a point when you need to perform performance testing. Let's review that in detail."
+tags: 'performance, testing'
 cover_image: ./assets/ART00-Performance/cover.png
 ---
 
