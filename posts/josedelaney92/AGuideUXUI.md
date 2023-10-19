@@ -6,8 +6,6 @@ tags: 'UXUIdesign, qualityassurance, userexperience, designprinciples'
 cover_image: ./assets/portada-blog-jose.png
 ---
 
-# A Guide to Enhancing QA's Understanding of UX/UI: Tips and Insights
-
 UX/UI design is a critical aspect to consider when developing products, and as a Quality Assurance (QA) professional, having knowledge of this field and the right tools can greatly assist you during your work. In this article, we'll explore the key principles of UX/UI design and essential elements within system design that are important for ensuring consistency, usability, and understandability.
 
 ## UX/UI Laws
