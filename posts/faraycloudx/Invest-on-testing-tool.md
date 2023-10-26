@@ -7,12 +7,12 @@ cover_image: ./assets/testing-tool/coverTestingTool.webp
 
 ## Overview
 
-A common discuss on software development process is the budget for testing tools. Nowadays is still common see multiple
+A common topic on software development process is the budget for testing tools. Nowadays is still common see multiple
 excel sheets for test cases, emails with bug reports or documents with regressions suites reports. Because of this he market offers a large number of testing tools, but not every tool can be right for you
 and is sometimes part of our job explain why the client or the team should invest part o the budget on a testing plugin
 or a testing management tool. In the article below I will try to explain some of the main reasons of include this powerfull complements on your project.
 
-## How much it cost a testing plugin or complements?
+## How much do a testing plugin or complements cost?
 
 There are multiple management tools on the market like Jira, Azure Devops that are used around the world but the testing plugins are not all free and sometimes the free options do not meet the needs of the team.
 Let's see some prices of the most common plugins available on the market:
