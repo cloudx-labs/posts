@@ -28,7 +28,7 @@ Let's see some prices of the most common plugins available on the market:
 
 ## What should you consider to make a choose?
 
-First you need to know what types of testing are you going to do and make sure the plugin or complements you want to buy have the set that enables you to perform all the tasks. Consider that this tool is going to make your work easier but also needs to be useful for your partners on your team. For example: reports, real-time test results, management of test cases, test executions, regressions suites, option to create and store scripts, integration with automated testing frameworks, continuous integration are some of the main features you need to consider. 
+First you need to know what types of testing are you going to do and make sure the plugin or complements you want to buy have the set that enables you to perform all the tasks. Consider that this tool is going to make your work easier but also needs to be useful for your partners on your team. For example: reports, real-time test results, management of test cases, test executions, regressions suites, option to create and store scripts, integration with automated testing frameworks, continuous integration are some of the main features you need to consider.
 Second, consider also the documentation or support that the tool has, because it's important also have a good support just in case you will have issues on installation or use.
 Third, make sure that the tool should help you and your team with the development work. The tool should adapt to your processes not the opposite.
 
