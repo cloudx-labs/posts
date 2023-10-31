@@ -31,23 +31,17 @@ There are multiple management tools on the market like Jira, Azure Devops that a
 
 ### For Jira  
 
-**Zephyr Squad or Scale**: Up to 10 users. USD 229. per year.
-Available on: https://marketplace.atlassian.com/apps/1014681/zephyr-for-jira-test-management?hosting=server&tab=pricing
+**[Zephyr Squad or Scale](https://marketplace.atlassian.com/apps/1014681/zephyr-for-jira-test-management?hosting=server&tab=pricing):** Up to 10 users. USD 229. per year.
 
-**Tricentis qTest**: starts at USD $1,200 per user, per year.
-Available on: https://www.tricentis.com/products/unified-test-management-qtest/pricing
+**[Tricentis qTest](https://www.tricentis.com/products/unified-test-management-qtest/pricing)**: starts at USD $1,200 per user, per year.
 
-**Xray**: Up to 10 users. USD 10. per year.
-Available on: https://marketplace.atlassian.com/apps/1211769/xray-test-management-for-jira?tab=pricing&hosting=cloud
+**[Xray](https://marketplace.atlassian.com/apps/1211769/xray-test-management-for-jira?tab=pricing&hosting=cloud)**: Up to 10 users. USD 10. per year.
 
-**Ones Test case**: USD $7.99 per user, per month 1-100 users.
-Available on: https://ones.com/pricing
+**[Ones Test case](https://ones.com/pricing)**: USD $7.99 per user, per month 1-100 users.
 
-**Testrail Professional Cloud**: USD $408 per user, per year.
-Available on: https://www.testrail.com/pricing/
+**[Testrail Professional Cloud](https://www.testrail.com/pricing/)**: USD $408 per user, per year.
 
-**Testrail Professional Server**: USD $8140 Up to 10 users, per year.
-Available on: https://www.testrail.com/pricing/
+**[Testrail Professional Server](https://www.testrail.com/pricing/)**: USD $8140 Up to 10 users, per year.
 
 ## What should you consider to make a choice?
 
@@ -61,3 +55,4 @@ Search if there exists a live demo of the tool: some of the tools have a live de
 ## Conclusion
 
 Remember that all tools are good but not all are good for all teams or projects. Before choosing, do research and evaluate the needs and the budget available. Not always the more expensive is the most useful.
+
