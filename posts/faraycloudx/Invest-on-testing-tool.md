@@ -55,4 +55,3 @@ Search if there exists a live demo of the tool: some of the tools have a live de
 ## Conclusion
 
 Remember that all tools are good but not all are good for all teams or projects. Before choosing, do research and evaluate the needs and the budget available. Not always the more expensive is the most useful.
-
