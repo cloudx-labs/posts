@@ -1,6 +1,6 @@
 ---
 title: 'Why you should invest on a testing plugin or complements for your project' 
-published: false
+published: true
 tags: 'qa, management, testing, testingtools'
 cover_image: ./assets/testing-tool/coverTestingTool3.jpg
 ---
