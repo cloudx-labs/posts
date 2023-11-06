@@ -4,6 +4,7 @@ published: true
 tags: 'qa, management, testing, testingtools'
 cover_image: ./assets/testing-tool/coverTestingTool3.jpg
 id: 1658683
+date: '2023-11-06T20:32:45Z'
 ---
 
 ## Overview
