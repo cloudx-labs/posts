@@ -176,7 +176,7 @@ Ready to get started? This section provides a step-by-step guide on setting up k
 ### Integrating k3d into Development Workflows
 
 - **Local Development Workflow:** k3d can be integrated into your local development workflow, allowing you to test your application in a Kubernetes environment before deploying it to production.
-  - Create a k3d Cluster: ``k3d cluster create mycluster`` 
+  - Create a k3d Cluster: ``k3d cluster create mycluster``
   - Deploy Your Application: ``kubectl apply -f app-deployment.yaml``
   - Test Your Application: ``curl http://localhost:<port>``
   - Make Changes to Your Application: ``nano app-deployment.yaml``
