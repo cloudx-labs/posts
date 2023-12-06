@@ -1,5 +1,5 @@
 ---
-title: Why You Should Use k3d for Local Development: A Developer's Guide
+title: Why You Should Use k3d for Local Development. A Developer's Guide
 published: false
 description: A guide to using k3d for local development
 tags: k3d, kubernetes, docker, development
