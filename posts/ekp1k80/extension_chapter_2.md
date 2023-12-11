@@ -3,7 +3,7 @@ title: Building a Chrome Extension with React, TypeScript, and Sockets - A Compr
 published: false
 description: Learn how to create a powerful Chrome extension with React, TypeScript, and Sockets for seamless web interactions
 tags: 'chrome_extensions, react, typescript'
-cover_image: ./assets/extension_chapter_1_img2.png
+cover_image: ./assets/extension_chapter_2_img2.png
 ---
 
 # Create an chrome extension with React, Typescript and Sockets
