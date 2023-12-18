@@ -4,7 +4,6 @@ published: true
 description: A guide to using k3d for local development
 tags: k3d, kubernetes, docker, development
 cover_image: ./assets/cover.jpg
-canonical_url:
 ---
 
 ## TL;DR
