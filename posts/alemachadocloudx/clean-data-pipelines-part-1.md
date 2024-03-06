@@ -1,10 +1,11 @@
 ---
 title: Introduction to Clean Code in Python
 published: false
-description: 'Clean Code practices applied to data engineering in Python'
+description: Clean Code practices applied to data engineering in Python
 tags: 'python, softwareengineering, datangineering, cleancode'
 cover_image: ./assets/cover1.png
-series: 'Clean Data Pipelines in Python'
+series: Clean Data Pipelines in Python
+id: 1782367
 ---
 
 ## Introduction
