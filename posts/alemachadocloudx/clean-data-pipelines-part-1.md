@@ -6,6 +6,7 @@ tags: 'python, softwareengineering, datangineering, cleancode'
 cover_image: ./assets/cover1.png
 series: Clean Data Pipelines in Python
 id: 1782367
+date: '2024-03-06T17:47:37Z'
 ---
 
 ## Introduction
