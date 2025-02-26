@@ -1,0 +1,103 @@
+
+---
+title: 'Graphs are not data structures'
+published: false
+description: A rethink option on graphs applications
+tags: 'graphs, optimization, documentation'
+cover_image: ./assets/graphs-are-not-cover.jpg
+---
+
+In programmers life time, you have to deal with thousands of structures. That is saying, you are always deciding how to organize your data. There are many options out there, from single variables to complex matrices of custom defined structs. But one of those common approach are graphs.
+
+**But graphs are not data structures: they are mathematical structures.**
+
+Of course, you can apply them as data structures; so many pieces of software depend on them. Even if you don't realize it, you are dealing with graphs all the time. For example, a linked list is just a special case of a directed graph.
+
+But when thinking of graphs as math struct instead of just data, graphs become in a much more powerful tool. Here I present two more applications of graphs in software development: as a processing design and as codebase representation.
+
+*Note: despite this a general programming post, I'm using Go for code examples.*
+
+## Process by graphs
+
+Lets deal with this problem:
+
+We have to process every days min temperature of a city (X), doing X^3 and then the result square root or its opposite natural logarithm. Then, store values into a map with key the result and value its certificate.
+
+But we have to take care of:
+- Numbers are signed 8bit long [-128; 127] (go: int8)
+- Working in real numbers group
+- If `x < 0`, doing `sqrt(x³)` will result in a math conflict. Those values are not discarded, but instead of square root, we will log for its `logn(-x)`
+- If `x³` overflows `int8` max value, will look for `logn(-x³)`
+- When looking for logn, we will ask to a remote service for a error signature
+
+*Is it a realist problem? Of course not. But the abstract idea is present here.*
+
+Lets think in a traditional approach:
+
+    func process(input []int8, certs map[float64]string) {
+    	for i := 0; i < len(input); i++ {
+    		var result float64
+    		var needCert bool
+    		var cert = "no_need"
+    
+    		x := input[i]
+    		switch {
+    			case x > 0 && x*x*x < 0:
+    				x = x * x * x
+    				fallthrough
+    			case x < 0:
+    				needCert = true
+    				result = math.Log(float64(-x))
+    			default:
+    				x = x * x * x
+    				result = math.Sqrt(float64(x))
+    		}
+    
+    		if needCert {
+    			cert = askCert(x)
+    		}
+    
+    		certs[result] = cert
+    	}
+    }
+
+Now we have problems: we are processing inputs one by one, we are trying to do all in the same place, processing in batch, and waiting for `askCert(x)` response before processing another input. In summary, we are not being efficient and not applying clean code good practices.
+
+**So, for cleaning this mess we can take a different approach: graphs.** 
+
+Lets assume we use a process as vertex and its communication as edges. Process will be our atomic operations: `x³`, `x < 0`, `sqrt(x)` and `log(x)`. Then communication will be done via channels.
+
+![graph](./assets/graphs-are-not-ex1.jpg)
+
+To code this, lets create each function assuming will be running forever (nodes). Then, we will pass them input and output channels (edges). The cleanest way to declare edges is by creating the `adjacency matrix`, then apply the channel types with another matrix on same positions adjacency says we need a channel, and finally another matrix with edge weight (buffer size, for Go). Of course, doing this way is not strictly necessary; in the example of the full implementation below I'm declaring each channel manually, expecting to be clearer in the intentions:
+
+https://go.dev/play/p/K4tpZ-flF5a
+
+But, why would we want to create this mess? Two main factors: control and performance. That is because our example is just a base to start thinking. Processes are as flexible as we can imagine. One of the most important scenarios to apply is when you have a lot of I/O operations; you can use a vertex process to start background calls to your i/o op and send its response to some other vertex where you know it will be used. That would reduce the awaiting time without compromising the remote resource, by avoiding an overload of calls (*an abstraction of "just in time" inventory system*).
+
+In **Cloud(x)** we took this approach to improve our customer's data processing: we managed to improve it 16x combined in time and resources.
+
+## Code as Graph
+
+Another couple of benefits are the study and maintenance of the software. You can apply complete graph theory to understand your software; and then you can insert modifications and study how will it behave even before write any code.
+
+Studying code by itself is something that as programmers we usually don't do. **But we should.** That topic has been studied by `German Cárdenas` in his publication "*Evaluating the Graph-based Visualization Technique: A Controlled Experiment*".
+
+And apply graphs to study codebases is not a new idea. Back in 2002, `Eva Van Emden` and `Leon Moonen` published "*Java Quality Assurance by Detecting Code Smells*". On that research, they represented "*entities*" of the software using graphs: packages, classes, methods, etc.
+
+To have graphs at a design stage is relatively common, but how much time do we actually invest on study and maintaining those graphs? In my experience, almost no one will ever update a graph that was created in early stages of the project. Plus, the graph will only serve as visual reference, but not as an active tool for developing.
+
+Imagine the case we have a fully updated graph that represents our restfull API: functions, calls, models. We will be able to quickly realize the effort of a change. You can apply `Deep First Search` or `Breadth First Search` to find out how many parts of your code will be affected. Then, take your `Dominators Tree` to evaluate the risks of your plan. And of course, if after the changes your graph is no longer connected (*your connectivity is greater than 1*), you will realize you have death code to deal with.
+
+Lets also add weight to edges; representing a measure of time we expect a function will take to give us a return. Then we can measure how much time an endpoint will take before answer to the client, by applying `Dijkstra algorithm`. We would be able to calculate how many resources we need to serve the expected amount of concurrent users, and what parts of our software require more optimizations.
+
+This topic is as extensive as graph theory itself. Out there is tons of studies and documentation. Is up to you, as developer, to adopt this knowledge and apply to daily work.
+
+## Conclusion
+
+As software developers we know that exists too many tools out there. Almost every year, every month, a new technology or a new update with some amazing feature is released into the market. And so many people expect us to be up to date with them, and apply them as fast as possible to be at the vanguard of tech industry. That's why we are developing every time farther away from principles.
+Talking about computer science basics time to time makes us rediscover tools, tricks and good practices. That remember us we still need to meditate about our implementations, and study its behavior instead of just apply the same formula over and over.
+This time, graphs have been put into discussion. Their advantages are huge. We should take all their potential instead of just simply use them to structure our data. Remember:
+
+**Graphs are not data structures.**
+
