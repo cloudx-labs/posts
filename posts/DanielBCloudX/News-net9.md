@@ -1,4 +1,4 @@
-# What's New in .NET 9: A Personal Take
+# What's New in .NET 9
 
 ## Introduction
 
