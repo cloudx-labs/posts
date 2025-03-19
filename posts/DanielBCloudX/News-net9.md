@@ -1,7 +1,9 @@
 # What's New in .NET 9: A Personal Take
 
 ## Introduction
+
 .NET 9 is a Short-Term Support (STS) release, setting the stage for the highly anticipated Long-Term Support (LTS) version 10. Despite its short-term nature, .NET 9 introduces several exciting new features and enhancements that provide a glimpse into the future direction of the .NET ecosystem. In this article, I will showcase the latest updates in .NET 9.
+
 ## Improved Performance and Scalability
 
 ### Key Performance Enhancements
