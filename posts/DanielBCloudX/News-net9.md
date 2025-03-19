@@ -70,6 +70,7 @@ V7: 01917bbe-d973-7751-b8ba-bb73afab4a5d
 V7: 01917bbe-d973-7d36-9be0-2e6317919153
 
 ```
+
 Version 7 GUIDs are sequential, making them more suitable for use in relational databases. You can also pass a `DateTimeOffset` when creating a new Guid to control the timestamp.
 V4: 52dc44f7-76e0-4689-a5e6-1a0f1c5f37a3
 
