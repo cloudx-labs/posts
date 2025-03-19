@@ -115,6 +115,7 @@ C# 13 introduces features that make the language more expressive and reduce boil
 **params Collections:** Writing methods that accept a variable number of arguments becomes more elegant with params collections. This improvement allows developers to pass arrays or lists directly to variadic methods, enhancing readability and reducing intermediate steps when working with collections.
 
 These updates help C# developers focus on implementing functionality without getting bogged down by verbose syntax or unnecessary complexity.
+
 ## .NET Libraries and Framework Updates
 .NET 9 introduces significant updates to its libraries and frameworks, focusing on enhancing data handling, security, and database integration. These improvements help developers create efficient and secure applications with minimal overhead, positioning .NET 9 as a powerful tool for modern development in 2025.
 
