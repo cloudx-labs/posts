@@ -86,13 +86,13 @@ These runtime improvements not only enhance performance but also provide develop
 
 ## Cloud-Native Development with .NET Aspire
 
-.NET 9 takes cloud-native development to the next level with the introduction of .NET Aspire, an all-in-one toolkit designed to simplify the creation of production-ready, observable cloud-native applications. 
+.NET 9 takes cloud-native development to the next level with the introduction of .NET Aspire, an all-in-one toolkit designed to simplify the creation of production-ready, observable cloud-native applications.
 
-With .NET Aspire, developers gain access to pre-configured templates and tools that accelerate the setup of cloud-native architectures. Whether deploying to Kubernetes, leveraging containerized services, or setting up observability pipelines, .NET Aspire ensures a smooth and efficient workflow. 
+With .NET Aspire, developers gain access to pre-configured templates and tools that accelerate the setup of cloud-native architectures. Whether deploying to Kubernetes, leveraging containerized services, or setting up observability pipelines, .NET Aspire ensures a smooth and efficient workflow.
 
-The platform supports microservices, seamlessly integrating with Azure Functions to create lightweight, modular components that are easy to deploy, maintain, and scale. 
+The platform supports microservices, seamlessly integrating with Azure Functions to create lightweight, modular components that are easy to deploy, maintain, and scale.
 
-Additionally, .NET Aspire simplifies serverless computing, allowing developers to focus on writing business logic while the platform handles scalability and availability automatically. 
+Additionally, .NET Aspire simplifies serverless computing, allowing developers to focus on writing business logic while the platform handles scalability and availability automatically.
 
 As cloud-native solutions continue to dominate the software development landscape in 2025, .NET Aspire positions .NET 9 as a powerful choice for developers looking to deliver scalable, resilient, and efficient applications.
 
