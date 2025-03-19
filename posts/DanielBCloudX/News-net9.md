@@ -55,8 +55,6 @@ V4: 21a98165-af1e-477e-9dee-7eb9c79e6c77
 V4: 7dbbf973-c55a-4917-87a5-95c16f356262
 V4: b13892f2-334f-409a-b9de-d90dea21eed4**Output:**
 
-```markdown
-```csharp
 for (int i = 0; i < 5; i++)
 {
     var guid = Guid.CreateVersion7();
