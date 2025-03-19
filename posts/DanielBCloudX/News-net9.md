@@ -93,7 +93,7 @@ With .NET Aspire, developers gain access to pre-configured templates and tools t
 
 The platform supports microservices, seamlessly integrating with Azure Functions to create lightweight, modular components that are easy to deploy, maintain, and scale.
 
-Additionally, .NET Aspire simplifies serverless computing, allowing developers to focus on writing business logic while the platform handles scalability and availability automatically. 
+Additionally, .NET Aspire simplifies serverless computing, allowing developers to focus on writing business logic while the platform handles scalability and availability automatically.
 
 As cloud-native solutions continue to dominate the software development landscape in 2025, .NET Aspire positions .NET 9 as a powerful choice for developers looking to deliver scalable, resilient, and efficient applications.
 
