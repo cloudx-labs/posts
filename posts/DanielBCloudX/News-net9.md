@@ -1,3 +1,11 @@
+---
+title: What's New in .NET 9
+published: false
+description: this article will showcase the latest updates in .NET 9.
+tags: 'one-tag, another-tag'
+cover_image: ./assets/upgrade-Net9.png
+---
+
 # What's New in .NET 9
 
 ## Introduction
