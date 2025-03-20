@@ -33,7 +33,7 @@ cover_image: ./assets/upgrade-Net9.png
      - **.NET 9.0:** 1.2 GB
      - **Improvement:** 20% reduction in memory footprint.
 
-## OpenAPI Support ans Swagger
+## OpenAPI Support and Swagger
 
 Starting with .NET 9, Swagger is no longer included by default. Instead, developers are encouraged to use `Microsoft.AspNetCore.OpenApi` for API documentation. This change aims to provide a more streamlined and integrated experience for documenting APIs.
 
