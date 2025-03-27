@@ -18,15 +18,15 @@ For AI to work well, it needs **context** and **clarity**. Vague instructions le
   <em>Caption: Writing detailed prompts manually can be slow.</em>
 </p>
 
-The bottleneck _is_ our keyboard. Typing is slow compared to speaking. It limits the amount of detail we can easily include in a prompt before getting tired or losing our train of thought.
+The bottleneck _is_ our keyboard. Typing is slow compared to speaking. It limits the amount of detail that can be easily included in a prompt before fatigue sets in or the train of thought is lost.
 
 ## The Solution: Dictate with Whisper
 
-Here's the trick: I use **Whisper** to dictate my prompts directly into Cursor. Speaking is ~5x faster than typing. This allows me to:
+Here's the trick: use **Whisper** to dictate prompts directly into Cursor. Speaking is ~5x faster than typing. This enables:
 
-1.  **Create Very Long Prompts:** I can easily dictate 50 lines of detailed instructions, explaining _exactly_ what I need, which files to consider, what logic to follow, what to avoid. Typing that would be torture.
-2.  **Increase Detail Exponentially:** When speaking, it's natural to add more context and examples. I can "think out loud," rambling a bit. The AI is good at filtering noise and extracting the crucial info from the monologue.
-3.  **Reduce Friction:** The process is almost instantaneous. I use an app like **WisprFlow** (https://wisprflow.ai/) which maps dictation to a key (I use `Fn`). I press `Fn`, speak, release `Fn`. The text _magically_ appears in Cursor's Composer. Then just hit `Enter`.
+1.  **Creating Very Long Prompts:** It's easy to dictate 50 lines of detailed instructions, explaining _exactly_ what's needed, which files to consider, what logic to follow, and what to avoid. Typing that amount would be torture.
+2.  **Increasing Detail Exponentially:** When speaking, it's natural to add more context and examples. It's possible to "think out loud," rambling a bit. The AI is often good at filtering noise and extracting the crucial info from the monologue.
+3.  **Reducing Friction:** The process is almost instantaneous. Using an app like **WisprFlow** (https://wisprflow.ai/) allows mapping dictation to a key (e.g., `Fn`). Press the key, speak, release the key. The text _magically_ appears in Cursor's Composer. Then just hit `Enter`.
 
 <p align="center">
   <img src="./assets/wisprflow-demo.gif" alt="WisprFlow Demo" width="600" />
@@ -36,14 +36,14 @@ Here's the trick: I use **Whisper** to dictate my prompts directly into Cursor. 
 
 ## The Biggest Mistake: Lack of Information
 
-In AI-assisted programming, the biggest mistake is **lack of information in the prompt**. Cursor isn't a mind reader. If you tell it "fix this bug," it will probably fail. If you _dictate_ a detailed monologue explaining:
+In AI-assisted programming, the biggest mistake is **lack of information in the prompt**. Cursor isn't a mind reader. Telling it "fix this bug" will probably lead to failure. However, if you _dictate_ a detailed monologue explaining:
 
 - What the code should do.
 - What it's doing wrong now.
 - Which file(s) contain the problem.
 - What approach might work.
-- What libraries or patterns you're using.
-- ...and any other relevant detail you can think of...
+- What libraries or patterns are being used.
+- ...and any other relevant detail that comes to mind...
 
 ...the chances of getting a useful solution skyrocket.
 
@@ -58,7 +58,7 @@ In AI-assisted programming, the biggest mistake is **lack of information in the 
 
   <div style="background-color: #2a2a2a; padding: 15px; border-radius: 8px;">
     <strong>Dictated Prompt (Detailed):</strong>
-    <pre style="background-color: #1e1e1e; padding: 10px; border-radius: 4px; margin: 10px 0; overflow: auto;">Okay, I need to add a name filter to the user list in UserList.tsx. It gets data from /api/users. I want a simple text input above the table. On typing, debounce for 300ms and call /api/users?search=term. Make sure the backend in server.ts (Prisma) modifies the query with WHERE name ILIKE '%term%'. Don't filter on the frontend, it's inefficient. Update the users state with the response. Placeholder: 'Search by name...'.</pre>
+    <pre style="background-color: #1e1e1e; padding: 10px; border-radius: 4px; margin: 10px 0; overflow: auto;">Okay, need to add a name filter to the user list in UserList.tsx. It gets data from /api/users. Want a simple text input above the table. On typing, debounce for 300ms and call /api/users?search=term. Make sure the backend in server.ts (Prisma) modifies the query with WHERE name ILIKE '%term%'. Don't filter on the frontend, it's inefficient. Update the users state with the response. Placeholder: 'Search by name...'.</pre>
     <em style="color: #99ff99;">Result: Much more likely to be what you need.</em>
   </div>
 </div>
@@ -69,15 +69,15 @@ _Dictating the second prompt takes seconds. Typing it, much longer._
 
 Some talk about "Vibe Coding" with AI, just going with the flow. This approach is similar in fluency – dictation keeps the _momentum_ – but insists on **absolute clarity**. You flow, yes, but explaining _everything_ with surgical detail as you flow.
 
-To explain something clearly, you need to understand it (at least broadly). Dictating "forces" you to verbalize your plan, which often clarifies your own thoughts.
+To explain something clearly, one needs to understand it (at least broadly). Dictating "forces" verbalization of the plan, which often clarifies one's own thoughts.
 
 ## Give It a Try
 
-If you use Cursor (or similar), try this:
+If you use Cursor (or similar), try this technique:
 
 1.  Set up a dictation app like WisprFlow with a convenient shortcut.
 2.  Next time you're about to type a prompt, _stop_.
-3.  Take a breath, press your dictation key, and _explain_ to the AI what you need, with all the details you can think of. Don't worry if it's not perfect, just talk.
+3.  Take a breath, press the dictation key, and _explain_ to the AI what's needed, with all the details that come to mind. Don't worry if it's not perfect, just talk.
 4.  Release the key, quickly review the text, and hit `Enter`.
 
-For me, it made a **significant difference**. Richer prompts and better results when coding with AI.
+This approach can make a **significant difference**, leading to richer prompts and better results when coding with AI.
