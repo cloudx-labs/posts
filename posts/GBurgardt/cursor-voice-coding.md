@@ -1,0 +1,83 @@
+---
+title: Code Faster in Cursor: A Pragmatic Guide to Voice Prompting
+published: false
+description: Learn a pragmatic technique using Whisper and WisprFlow to dictate detailed prompts in Cursor AI, boosting productivity by overcoming the keyboard bottleneck.
+tags: 'ai, programming, cursorai, whisper, productivity, devtools, coding, voicecoding'
+cover_image: ./assets/cover_cursor_voice.png
+---
+
+# Code Faster in Cursor: A Pragmatic Guide to Voice Prompting
+
+## The Problem: The Keyboard Bottleneck
+
+For AI to work well, it needs **context** and **clarity**. Vague instructions lead to mediocre or wrong results. But writing _really_ detailed and long prompts is tedious.
+
+<p align="center">
+  <img src="./assets/typing-slow.png" alt="Typing slowly" width="400" />
+  <br>
+  <em>Caption: Writing detailed prompts manually can be slow.</em>
+</p>
+
+The bottleneck _is_ our keyboard. Typing is slow compared to speaking. It limits the amount of detail we can easily include in a prompt before getting tired or losing our train of thought.
+
+## The Solution: Dictate with Whisper
+
+Here's the trick: I use **Whisper** to dictate my prompts directly into Cursor. Speaking is ~5x faster than typing. This allows me to:
+
+1.  **Create Very Long Prompts:** I can easily dictate 50 lines of detailed instructions, explaining _exactly_ what I need, which files to consider, what logic to follow, what to avoid. Typing that would be torture.
+2.  **Increase Detail Exponentially:** When speaking, it's natural to add more context and examples. I can "think out loud," rambling a bit. The AI is good at filtering noise and extracting the crucial info from the monologue.
+3.  **Reduce Friction:** The process is almost instantaneous. I use an app like **WisprFlow** (https://wisprflow.ai/) which maps dictation to a key (I use `Fn`). I press `Fn`, speak, release `Fn`. The text _magically_ appears in Cursor's Composer. Then just hit `Enter`.
+
+<p align="center">
+  <img src="./assets/wisprflow-demo.gif" alt="WisprFlow Demo" width="600" />
+  <br>
+  <em>Caption: Dictating a prompt quickly using WisprFlow and Cursor.</em>
+</p>
+
+## The Biggest Mistake: Lack of Information
+
+In AI-assisted programming, the biggest mistake is **lack of information in the prompt**. Cursor isn't a mind reader. If you tell it "fix this bug," it will probably fail. If you _dictate_ a detailed monologue explaining:
+
+- What the code should do.
+- What it's doing wrong now.
+- Which file(s) contain the problem.
+- What approach might work.
+- What libraries or patterns you're using.
+- ...and any other relevant detail you can think of...
+
+...the chances of getting a useful solution skyrocket.
+
+### Example Comparison:
+
+<div style="margin: 20px 0;">
+  <div style="background-color: #2a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+    <strong>Typical Prompt (Vague):</strong>
+    <pre style="background-color: #1e1e1e; padding: 10px; border-radius: 4px; margin: 10px 0; overflow: auto;">Add a search filter to the user list.</pre>
+    <em style="color: #ff9999;">Result: Might do it frontend-only, or inefficiently.</em>
+  </div>
+
+  <div style="background-color: #2a2a2a; padding: 15px; border-radius: 8px;">
+    <strong>Dictated Prompt (Detailed):</strong>
+    <pre style="background-color: #1e1e1e; padding: 10px; border-radius: 4px; margin: 10px 0; overflow: auto;">Okay, I need to add a name filter to the user list in UserList.tsx. It gets data from /api/users. I want a simple text input above the table. On typing, debounce for 300ms and call /api/users?search=term. Make sure the backend in server.ts (Prisma) modifies the query with WHERE name ILIKE '%term%'. Don't filter on the frontend, it's inefficient. Update the users state with the response. Placeholder: 'Search by name...'.</pre>
+    <em style="color: #99ff99;">Result: Much more likely to be what you need.</em>
+  </div>
+</div>
+
+_Dictating the second prompt takes seconds. Typing it, much longer._
+
+## Precise Vibe Coding?
+
+Some talk about "Vibe Coding" with AI, just going with the flow. This approach is similar in fluency – dictation keeps the _momentum_ – but insists on **absolute clarity**. You flow, yes, but explaining _everything_ with surgical detail as you flow.
+
+To explain something clearly, you need to understand it (at least broadly). Dictating "forces" you to verbalize your plan, which often clarifies your own thoughts.
+
+## Give It a Try
+
+If you use Cursor (or similar), try this:
+
+1.  Set up a dictation app like WisprFlow with a convenient shortcut.
+2.  Next time you're about to type a prompt, _stop_.
+3.  Take a breath, press your dictation key, and _explain_ to the AI what you need, with all the details you can think of. Don't worry if it's not perfect, just talk.
+4.  Release the key, quickly review the text, and hit `Enter`.
+
+For me, it made a **significant difference**. Richer prompts and better results when coding with AI.
