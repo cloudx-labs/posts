@@ -1,12 +1,10 @@
 ---
-title: Code Faster in Cursor: A Pragmatic Guide to Voice Prompting
+title: "Code Faster in Cursor: A Pragmatic Guide to Voice Prompting"
 published: false
-description: Learn a pragmatic technique using Whisper and WisprFlow to dictate detailed prompts in Cursor AI, boosting productivity by overcoming the keyboard bottleneck.
-tags: 'ai, programming, cursorai, whisper, productivity, devtools, coding, voicecoding'
+description: Learn a pragmatic technique using Whisper to dictate detailed prompts in Cursor AI, boosting productivity by overcoming the keyboard bottleneck.
+tags: "ai, programming, cursorai, whisper, productivity, devtools, coding, voicecoding"
 cover_image: ./assets/cover_cursor_voice.png
 ---
-
-# Code Faster in Cursor: A Pragmatic Guide to Voice Prompting
 
 ## The Problem: The Keyboard Bottleneck
 
@@ -24,9 +22,9 @@ The bottleneck _is_ our keyboard. Typing is slow compared to speaking. It limits
 
 Here's the trick: use **Whisper** to dictate prompts directly into Cursor. Speaking is ~5x faster than typing. This enables:
 
-1.  **Creating Very Long Prompts:** It's easy to dictate 50 lines of detailed instructions, explaining _exactly_ what's needed, which files to consider, what logic to follow, and what to avoid. Typing that amount would be torture.
-2.  **Increasing Detail Exponentially:** When speaking, it's natural to add more context and examples. It's possible to "think out loud," rambling a bit. The AI is often good at filtering noise and extracting the crucial info from the monologue.
-3.  **Reducing Friction:** The process is almost instantaneous. Using an app like **WisprFlow** (https://wisprflow.ai/) allows mapping dictation to a key (e.g., `Fn`). Press the key, speak, release the key. The text _magically_ appears in Cursor's Composer. Then just hit `Enter`.
+1. **Creating Very Long Prompts:** It's easy to dictate 50 lines of detailed instructions, explaining _exactly_ what's needed, which files to consider, what logic to follow, and what to avoid. Typing that amount would be torture.
+2. **Increasing Detail Exponentially:** When speaking, it's natural to add more context and examples. It's possible to "think out loud," rambling a bit. The AI is often good at filtering noise and extracting the crucial info from the monologue.
+3. **Reducing Friction:** The process is almost instantaneous. Using an app like **WisprFlow** ([https://wisprflow.ai/](https://wisprflow.ai/)) allows mapping dictation to a key (e.g., `Fn`). Press the key, speak, release the key. The text _magically_ appears in Cursor's Composer. Then just hit `Enter`.
 
 <p align="center">
   <img src="./assets/wisprflow-demo.gif" alt="WisprFlow Demo" width="600" />
@@ -75,9 +73,9 @@ To explain something clearly, one needs to understand it (at least broadly). Dic
 
 If you use Cursor (or similar), try this technique:
 
-1.  Set up a dictation app like WisprFlow with a convenient shortcut.
-2.  Next time you're about to type a prompt, _stop_.
-3.  Take a breath, press the dictation key, and _explain_ to the AI what's needed, with all the details that come to mind. Don't worry if it's not perfect, just talk.
-4.  Release the key, quickly review the text, and hit `Enter`.
+1. Set up a dictation app like WisprFlow with a convenient shortcut.
+2. Next time you're about to type a prompt, _stop_.
+3. Take a breath, press the dictation key, and _explain_ to the AI what's needed, with all the details that come to mind. Don't worry if it's not perfect, just talk.
+4. Release the key, quickly review the text, and hit `Enter`.
 
 This approach can make a **significant difference**, leading to richer prompts and better results when coding with AI.
