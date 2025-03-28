@@ -45,7 +45,7 @@ In AI-assisted programming, the biggest mistake is **lack of information in the 
 
 ...the chances of getting a useful solution skyrocket.
 
-### Example Comparison:
+### Example Comparison
 
 <div style="margin: 20px 0;">
   <div style="background-color: #2a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
