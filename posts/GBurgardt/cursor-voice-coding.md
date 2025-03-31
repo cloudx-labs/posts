@@ -45,7 +45,7 @@ In AI-assisted programming, the biggest mistake is **lack of information in the 
 
 **Typical Prompt (Vague):**
 
-```
+```plaintext
 Add a search filter to the user list.
 ```
 
@@ -53,7 +53,7 @@ _Result: Might do it frontend-only, or inefficiently._
 
 **Dictated Prompt (Detailed):**
 
-```
+```plaintext
 Okay, need to add a name filter to the user list in UserList.tsx. It gets data from /api/users. Want a simple text input above the table. On typing, debounce for 300ms and call /api/users?search=term. Make sure the backend in server.ts (Prisma) modifies the query with WHERE name ILIKE '%term%'. Don't filter on the frontend, it's inefficient. Update the users state with the response. Placeholder: 'Search by name...'.
 ```
 
