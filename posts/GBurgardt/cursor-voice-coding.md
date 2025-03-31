@@ -5,6 +5,7 @@ description: Learn a pragmatic technique using Whisper to dictate detailed promp
 tags: "ai, programming, cursor, whisper"
 cover_image: ./assets/cover_cursor_voice.png
 id: 2368989
+series: Practical Cursor Techniques for Developers
 ---
 
 ## The Problem: The Keyboard Bottleneck
