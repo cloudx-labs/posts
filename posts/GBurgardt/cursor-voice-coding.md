@@ -1,11 +1,12 @@
 ---
-title: "Code Faster in Cursor: A Pragmatic Guide to Voice Prompting"
+title: 'Code Faster in Cursor: A Pragmatic Guide to Voice Prompting'
 published: true
-description: "Learn a pragmatic technique using Whisper to dictate detailed prompts in Cursor AI, boosting productivity by overcoming the keyboard bottleneck."
-tags: "ai, programming, cursor, whisper"
+description: 'Learn a pragmatic technique using Whisper to dictate detailed prompts in Cursor AI, boosting productivity by overcoming the keyboard bottleneck.'
+tags: 'ai, programming, cursor, whisper'
 cover_image: ./assets/cover_cursor_voice.png
 id: 2368989
 series: Practical Cursor Techniques for Developers
+date: '2025-04-03T21:10:37Z'
 ---
 
 ## The Problem: The Keyboard Bottleneck
