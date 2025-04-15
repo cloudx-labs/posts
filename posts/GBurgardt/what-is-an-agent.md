@@ -11,15 +11,15 @@ id: [generate a unique ID, e.g., 2368991]
 
 "AI Agent" sounds complex, but it's often simpler than you think. At its core, an **AI Agent usually runs a Large Language Model (LLM) inside a loop.**
 
-Think of a basic loop – that's the engine for many agents. This pseudocode shows the main idea:
+Think of a basic `while True:` loop – that's the engine for many agents. This pseudocode shows the main idea:
 
 ```python
 # Environment holds the current state/context
 env = Environment()
 # Tools available to the agent (defined with parameters)
 tools = Tools(env)
-# Instructions for the LLM: goals, rules, tools list, strategy
-system_prompt = "Your goals, constraints, available tools, and how to act..."
+# Instructions for the LLM: main mission, goals, rules, tools list, strategy
+system_prompt = "Your main mission, goals, constraints, available tools, and how to act..."
 
 # The main agent loop
 while True:
@@ -79,12 +79,41 @@ _A Tool is defined by its Name, Description, and the specific Parameters it need
 
 **2. System Prompt (Usage Context):**
 
-The **main System Prompt** (`system_prompt` in the code) guides the LLM's strategy. It lists available tools and explains _when_ to use them.
-_Example instruction:_ _"If you need a file but don't know the path, use `findFile` first..."_
+The **main System Prompt** (`system_prompt` in the code) defines the **agent's core mission and overall behavior.** It also guides the LLM's strategy, lists available tools, and explains _when_ to use them.
+_Example instruction within the prompt:_ _"If you need a file but don't know the path, use `findFile` first..."_
 
-### Real-World Example: The Cursor Editor Agent
+## Simple Example: Debugging Agent Revisited
 
-Many developers use **Cursor**. When you give it a task, it acts as an Agent using this loop model.
+Let's apply this to the debugging idea first, as it's simpler:
+
+- **System Prompt (`system_prompt`):**
+  ```
+  You are an AI debugging assistant. Your main mission is to fix bugs in Python scripts when given an error message.
+  Available Tools:
+  - edit_file(path: string, changes: list): Modifies a file. Use this to apply code corrections.
+  - run_tests(path: string): Executes tests for the specified file. Use this after applying a fix to verify it.
+  Strategy: Analyze the error message and code context. Use edit_file to correct the code. After editing, use run_tests to confirm the fix. Report success when tests pass.
+  ```
+- **Initial Task / State (`env.state`):**
+  ```
+  User Request: Fix this error!
+  Error in script.py, line 25: TypeError: unsupported operand type(s) for +: 'int' and 'str'.
+  File path: script.py
+  ```
+- **Cycle 1:**
+  - The LLM receives the system prompt (its general instructions) and the initial state (the specific user request with the error).
+  - Based on its strategy ("Analyze error... use edit_file"), it analyzes the `TypeError` and decides to fix the code.
+  - **LLM Output:** It generates a request to use the `edit_file` tool, specifying the file path and the needed code changes: `{ "tool_name": "edit_file", "parameters": { "path": "script.py", "changes": [...] } }`.
+  - **System Action:** The `tools.run` function executes the actual code for `edit_file`. The environment state is updated with the result, maybe: `"Success: File script.py updated."`.
+- **Cycle 2:**
+  - The LLM receives the system prompt and the _updated_ state ("Success...").
+  - Its strategy says "After editing, use run_tests". Seeing the success message, it decides to follow this step.
+  - **LLM Output:** It generates a request for the `run_tests` tool: `{ "tool_name": "run_tests", "parameters": { "path": "script.py" } }`.
+  - **System Action:** `tools.run` executes the code that runs the tests. The environment state is updated with the test results. The loop continues based on these results.
+
+## Real-World Example: The Cursor Editor Agent
+
+Now, let's look at a more complex tool like **Cursor**. When you give it a task, it acts as an Agent using the same loop model, but often with more sophisticated tools and strategies defined in its system prompt.
 
 _Agents like Cursor use an LLM brain connected to various tools._
 
@@ -101,40 +130,13 @@ Cursor likely has tools like these (each with code behind it):
 
 The agent might work like this (using its internal `system_prompt` which defines its general coding/refactoring strategy):
 
-1.  **Loop 1:** LLM gets your request (now part of `env.state`) + its system prompt. Strategy: Understand current code first. Requests `readFile(path="UserProfile.jsx")`. System runs it, updates state.
+1.  **Loop 1:** LLM gets your request (now part of the state) + its system prompt. Strategy: Understand current code first. Requests `readFile(path="UserProfile.jsx")`. System runs it, updates state.
 2.  **Loop 2:** LLM analyzes code. Needs styles. Path unknown? Strategy: find it. Requests `findFile(pattern="styles.css")`. System runs it, updates state.
 3.  **Loop 3:** LLM has path. Strategy: read before edit. Requests `readFile(path="styles.css")`. System runs it, updates state.
 4.  **Loop 4-N (...):** Based on the file contents and its strategy, the LLM plans changes and requests `editFile` for JSX, then `editFile` for CSS. Maybe requests `runCommand` to lint. System executes each, updating state.
 5.  **Final Loop:** LLM reviews state (changes applied, linter OK). Task complete per system prompt rules. Loop stops/waits.
 
 This shows the **LLM + Loop + Tools** pattern: LLM plans using instructions and tool definitions, System executes the actual tool code.
-
-## Simple Example: Debugging Agent Revisited
-
-Let's revisit the debugging idea with a clearer separation of instructions and the specific task:
-
-- **System Prompt (`system_prompt`):**
-  ```
-  You are an AI debugging assistant. Your goal is to fix bugs in Python scripts.
-  Available Tools:
-  - edit_file(path: string, changes: list): Modifies a file. Use this to apply code corrections.
-  - run_tests(path: string): Executes tests for the specified file. Use this after applying a fix to verify it.
-  Strategy: Analyze the error message and code context. Use edit_file to correct the code. After editing, use run_tests to confirm the fix.
-  ```
-- **Initial Task / State (`env.state`):**
-  ```
-  User Request: Fix this error!
-  Error in script.py, line 25: TypeError: unsupported operand type(s) for +: 'int' and 'str'.
-  File path: script.py
-  ```
-- **Loop Cycle 1:**
-  - **Think:** `llm.run(system_prompt + env.state)` -\> LLM analyzes the `TypeError` in `script.py` (from state) using its debugging strategy (from prompt). It decides to use the `edit_file` tool.
-  - **Act:** LLM outputs action: `{ "tool_name": "edit_file", "parameters": { "path": "script.py", "changes": [{ "line": 25, "new_code": "..." }] } }`.
-  - System executes the `edit_file` code. `env.state` updates to: `"Success: File script.py updated. Last error: TypeError..."`.
-- **Loop Cycle 2:**
-  - **Think:** `llm.run(system_prompt + env.state)` -\> LLM sees "Success..." (from state). Its strategy (from prompt) says to run tests after editing. It decides to use `run_tests`.
-  - **Act:** LLM outputs action: `{ "tool_name": "run_tests", "parameters": { "path": "script.py" } }`.
-  - System executes the `run_tests` code. `env.state` updates with test results... Loop continues.
 
 ## The Pragmatic Takeaway: LLM + Loop + Tools
 
@@ -144,4 +146,4 @@ So, next time you hear "AI Agent," forget the fancy talk. Just picture that simp
 2.  **System Acts (running actual code for requested Tools)**
 3.  **Repeat**
 
-They work well because the LLM follows instructions and uses tools correctly inside the loop. It's a simple pattern that gets the job done. That's how it really works.
+They work well because the LLM follows instructions and uses tools correctly inside the loop. It's a simple pattern that gets the job done.
