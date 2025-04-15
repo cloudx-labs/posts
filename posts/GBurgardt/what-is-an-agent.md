@@ -147,3 +147,5 @@ So, next time you hear "AI Agent," forget the fancy talk. Just picture that simp
 3.  **Repeat**
 
 They work well because the LLM follows instructions and uses tools correctly inside the loop. It's a simple pattern that gets the job done.
+
+To see: https://www.youtube.com/watch?v=D7_ipDqhtwk&ab_channel=AIEngineer
