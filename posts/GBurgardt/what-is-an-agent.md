@@ -1,151 +1,257 @@
----
-title: "AI Agents: It's Simpler Than You Think (Just a Loop)"
-published: true
-description: "Forget the hype. AI Agents are basically LLMs running inside a loop with access to tools. Let's break down the code and see how tools like Cursor use this."
-tags: "ai, programming, agents, llm, function-calling, pragmatic, cursor"
-cover_image: ./assets/cover_agent_loop_cursor.png
-id: [generate a unique ID, e.g., 2368991]
----
+# Forget the Hype: Agents are Loops (The Practical Cut)
 
-## Forget the Hype: Agents are Loops
+"AI Agent" sounds complex, but often, the core is simpler than you think. An **AI Agent typically runs a Large Language Model (LLM) inside a loop.**
 
-"AI Agent" sounds complex, but it's often simpler than you think. At its core, an **AI Agent usually runs a Large Language Model (LLM) inside a loop.**
+This pseudocode captures the essence in JavaScript:
 
-Think of a basic `while True:` loop – that's the engine for many agents. This pseudocode shows the main idea:
+```javascript
+// Environment holds state/context
+const env = { state: initialState }; // Simple object state
+// Tools available to the agent
+const tools = new Tools(env);
+// Instructions for the LLM
+const system_prompt = `Your main mission, goals, constraints...`;
 
-```python
-# Environment holds the current state/context
-env = Environment()
-# Tools available to the agent (defined with parameters)
-tools = Tools(env)
-# Instructions for the LLM: main mission, goals, rules, tools list, strategy
-system_prompt = "Your main mission, goals, constraints, available tools, and how to act..."
+// The main agent loop
+while (true) {
+  // (Needs a real break condition!)
+  // 1. LLM Brain: Decide action based on prompt + state
+  const action = llm.run(`${system_prompt} ${env.state}`);
 
-# The main agent loop
-while True:
-    # 1. LLM Brain: Decides next action based on prompt + state
-    action = llm.run(system_prompt + env.state)
-
-    # 2. System Hands: Runs the *actual code* for the requested action/tool
-    env.state = tools.run(action) # This calls the actual code for the tool
+  // 2. System Hands: Run the actual code for the requested tool
+  env.state = tools.run(action); // Update state with result
+}
 ```
 
 _This simple loop is the heart of an Agent._
 
-_A simplified view of the Agent's cycle: Think -\> Act -\> Update State -\> Repeat._
+![Diagram illustrating the AI Agent loop](./assets/ai_agent_loop.png)
 
-Let's break down the loop:
+_Simplified cycle: Think -> Act -> Update State -> Repeat._
 
-1.  **`llm.run(...)`**: The "brain". It gets instructions (`system_prompt`) and the current situation (`env.state`), then decides the next `action` (text or a tool request).
-2.  **`tools.run(action)`**: The "hands". If `action` requests a tool, this executes the _real code_ for that tool and updates the `env.state` with the result.
+## Quick Breakdown
 
-The loop repeats: LLM sees the new state, decides the next action, the system runs it. (Real agents need a condition to `break` the loop).
+1.  **`llm.run(...)`**: The "brain". Uses instructions (`system_prompt`) + current situation (`env.state`) to decide the next `action`.
+2.  **`tools.run(action)`**: The "hands". If `action` requests a tool, this executes the **real code** for that tool and updates `env.state`.
+
+The loop repeats, feeding the new state back to the LLM.
 
 ## Why Tools? Because LLMs Just Talk
 
-The LLM itself only outputs text or structured data. **It can't directly interact with the outside world** – no Browse, no file editing, no API calls. It's like a brain without hands.
+The `LLM` only outputs text. **It can't _do_ things directly** – no browsing, no file editing, no running commands. It needs "hands".
 
-Think about a human developer: they use their brain to solve problems, but need tools to _do_ things – read files, edit code, search the web, run commands.
+**Tools** are those hands. They are functions the system executes _for_ the `LLM` when asked, allowing it to interact with the world.
 
-**Tools** bridge this gap for the Agent. They are functions the `tools.run()` part executes when the LLM asks, giving the LLM ways to interact with the world.
+## Defining and Using a Tool
 
-## Defining a Tool: What it is vs. When to Use It
+How does the `LLM` know about tools and when to use them?
 
-How does the LLM know _which_ tool to request and _when_? It uses two key things:
+### 1. What it is: The Tool Definition
 
-**1. Tool Definition (Name, Description & Parameters):**
+Each tool needs a clear definition passed to the `LLM`, detailing:
 
-Each tool needs a clear definition, including:
+- **Name:** Unique ID (e.g., `runLinter`).
+- **Description:** What the tool _is_ and _does_ (e.g., "Runs ESLint on JS code/file...").
+- **Input Parameters:** The _exact_ inputs needed (name, type, description for each).
 
-- **Name:** Unique ID (e.g., `readFile`).
-- **Description:** What the tool _is_ and _does_ (e.g., "Reads a file's content").
-- **Input Parameters:** The _exact_ inputs needed (name, type, description for each). These are fixed.
+This definition tells the `LLM` the tool's capabilities and how to structure a request for it.
 
-This definition tells the LLM the tool's capability and required inputs.
-
-```pseudocode
-// Example Tool Definition
-Tool {
-  name: "findFile",
-  description: "Searches workspace for files matching a pattern.",
-  parameters: [
-    { name: "pattern", type: "string", description: "Search pattern (e.g., '*.css'). Required." },
-    { name: "recursive", type: "boolean", description: "Search subdirs? Default: true." }
-  ]
+```javascript
+// Example Tool Definition passed to the LLM API
+{
+  type: "function",
+  function: {
+    name: "runLinter", // Unique Name
+    description: "Runs ESLint on JS code/file, returns JSON errors or success message.", // Description
+    parameters: { /* Input Parameters Schema */ }
+  }
 }
 ```
 
-_A Tool is defined by its Name, Description, and the specific Parameters it needs._
+![Diagram showing a Tool definition](./assets/ai_agent_tool.png)
 
-**2. System Prompt (Usage Context):**
+_A Tool is defined for the `LLM` by its Name, Description, and Parameters._
 
-The **main System Prompt** (`system_prompt` in the code) defines the **agent's core mission and overall behavior.** It also guides the LLM's strategy, lists available tools, and explains _when_ to use them.
-_Example instruction within the prompt:_ _"If you need a file but don't know the path, use `findFile` first..."_
+### 2. When to Use It: The System Prompt
 
-## Simple Example: Debugging Agent Revisited
+The main `system_prompt` gives the agent its core instructions and strategy.
 
-Let's apply this to the debugging idea first, as it's simpler:
+Crucially, it tells the `LLM` **when** and **how** to use its tools. It lists available tools and sets the rules for using them.
 
-- **System Prompt (`system_prompt`):**
-  ```
-  You are an AI debugging assistant. Your main mission is to fix bugs in Python scripts when given an error message.
-  Available Tools:
-  - edit_file(path: string, changes: list): Modifies a file. Use this to apply code corrections.
-  - run_tests(path: string): Executes tests for the specified file. Use this after applying a fix to verify it.
-  Strategy: Analyze the error message and code context. Use edit_file to correct the code. After editing, use run_tests to confirm the fix. Report success when tests pass.
-  ```
-- **Initial Task / State (`env.state`):**
-  ```
-  User Request: Fix this error!
-  Error in script.py, line 25: TypeError: unsupported operand type(s) for +: 'int' and 'str'.
-  File path: script.py
-  ```
-- **Cycle 1:**
-  - The LLM receives the system prompt (its general instructions) and the initial state (the specific user request with the error).
-  - Based on its strategy ("Analyze error... use edit_file"), it analyzes the `TypeError` and decides to fix the code.
-  - **LLM Output:** It generates a request to use the `edit_file` tool, specifying the file path and the needed code changes: `{ "tool_name": "edit_file", "parameters": { "path": "script.py", "changes": [...] } }`.
-  - **System Action:** The `tools.run` function executes the actual code for `edit_file`. The environment state is updated with the result, maybe: `"Success: File script.py updated."`.
-- **Cycle 2:**
-  - The LLM receives the system prompt and the _updated_ state ("Success...").
-  - Its strategy says "After editing, use run_tests". Seeing the success message, it decides to follow this step.
-  - **LLM Output:** It generates a request for the `run_tests` tool: `{ "tool_name": "run_tests", "parameters": { "path": "script.py" } }`.
-  - **System Action:** `tools.run` executes the code that runs the tests. The environment state is updated with the test results. The loop continues based on these results.
+> _Example:_ "You have the `runLinter` tool. _Always_ run it first. If it finds errors, fix the code, then run `runLinter` _again_ to verify before finishing."
 
-## Real-World Example: The Cursor Editor Agent
+This ensures the `LLM` uses tools effectively within the loop.
 
-Now, let's look at a more complex tool like **Cursor**. When you give it a task, it acts as an Agent using the same loop model, but often with more sophisticated tools and strategies defined in its system prompt.
+## Hands-On: Building a Simple Linter Agent
 
-_Agents like Cursor use an LLM brain connected to various tools._
+Let's see it in action. We'll walk through the key parts of a simple, working Node.js agent that fixes JavaScript linting errors using **one single tool**.
 
-Cursor likely has tools like these (each with code behind it):
+You can find the _complete, runnable code_ (including the full System Prompt) for this example here:
+**https://github.com/cloudx-labs/simple-linter-agent**
 
-- `readFile(path: string)`
-- `editFile(path: string, changes: list)`
-- `findFile(pattern: string, recursive?: boolean)`
-- `runCommand(command: string, workingDir?: string)`
-- `webSearch(query: string)`
-- etc...
+Here are the crucial pieces:
 
-**Tracing a simple Cursor task:** You ask: "Refactor `UserProfile.jsx` to fetch data instead of using props, and update `styles.css`."
+### 1. The System Prompt (`src/config.js` - Abbreviated)
 
-The agent might work like this (using its internal `system_prompt` which defines its general coding/refactoring strategy):
+This snippet shows the structure and key instructions of the agent's programming.
 
-1.  **Loop 1:** LLM gets your request (now part of the state) + its system prompt. Strategy: Understand current code first. Requests `readFile(path="UserProfile.jsx")`. System runs it, updates state.
-2.  **Loop 2:** LLM analyzes code. Needs styles. Path unknown? Strategy: find it. Requests `findFile(pattern="styles.css")`. System runs it, updates state.
-3.  **Loop 3:** LLM has path. Strategy: read before edit. Requests `readFile(path="styles.css")`. System runs it, updates state.
-4.  **Loop 4-N (...):** Based on the file contents and its strategy, the LLM plans changes and requests `editFile` for JSX, then `editFile` for CSS. Maybe requests `runCommand` to lint. System executes each, updating state.
-5.  **Final Loop:** LLM reviews state (changes applied, linter OK). Task complete per system prompt rules. Loop stops/waits.
+```javascript
+// src/config.js - System Prompt (Abbreviated)
+const config = {
+  model: "gpt-4o",
+  systemPrompt: `
+You are an expert JavaScript assistant that helps fix linting errors...
 
-This shows the **LLM + Loop + Tools** pattern: LLM plans using instructions and tool definitions, System executes the actual tool code.
+AVAILABLE TOOLS:
+- runLinter({ codeContent?: string, filePath?: string }): Executes ESLint...
 
-## The Pragmatic Takeaway: LLM + Loop + Tools
+PROCESS TO FOLLOW:
+1. Receive code/path.
+2. **ALWAYS** use 'runLinter' first...
+3. Analyze errors...
+4. If no errors, return code...
+5. If errors:
+    a. Modify code...
+    b. **IMPORTANT:** Call 'runLinter' AGAIN to verify...
+    c. If verified, return corrected code...
+    d. If still errors after retry, return best effort...
 
-So, next time you hear "AI Agent," forget the fancy talk. Just picture that simple loop, running with good instructions:
+FINAL RESPONSE:
+Your final response MUST contain only the complete corrected code... strictly wrapped between <final_code>...</final_code>...
 
-1.  **LLM Thinks (using System Prompt + Tool definitions + Current State)**
-2.  **System Acts (running actual code for requested Tools)**
+// (Full details including TOOL CALL and FINAL RESPONSE examples in the repository code)
+`,
+};
+
+export default config;
+```
+
+### 2. The Tool (`src/tools/linter.js` - Function Snippet)
+
+This shows the core logic of the _actual_ `runLinter` function executed by the system, omitting some boilerplate for clarity.
+
+```javascript
+// src/tools/linter.js - Core Tool Function (Simplified)
+import { ESLint } from "eslint";
+import fs from "fs"; // Still needed for context
+
+const runLinter = async ({ codeContent, filePath }) => {
+  // --- Determine code source and handle temporary file logic ---
+  // ... code to get codeToLint and manage useFilePath ...
+  // ... includes fs.readFileSync/writeFileSync logic ...
+
+  try {
+    // --- Core ESLint Execution ---
+    const eslint = new ESLint({ fix: false, useEslintrc: true });
+    const results = await eslint.lintFiles([
+      /* determined file path */
+    ]);
+
+    // --- Process Results ---
+    const errors = results.flatMap(/* ... map results to error objects ... */);
+
+    // --- Cleanup & Return ---
+    // ... unlink temporary file if used ...
+    return errors.length === 0
+      ? { result: "No linting errors found!" }
+      : { errors: JSON.stringify(errors) };
+  } catch (err) {
+    // --- Error Handling & Cleanup ---
+    // ... unlink temporary file ...
+    console.error("Error running ESLint:", err);
+    return { error: `ESLint execution error: ${err.message}` };
+  }
+};
+
+// --- The Definition Exported for the Agent/LLM ---
+export default {
+  name: "runLinter",
+  description: "Runs ESLint on JS code/file...",
+  parameters: {
+    /* ... parameter schema ... */
+  },
+  function: runLinter, // Link to the actual function above
+};
+```
+
+### 3. The Loop (`src/agent/agentInvoker.js` - Core Logic Snippet)
+
+This snippet highlights the agent's execution flow: calling the `LLM`, handling tool calls, and updating the state.
+
+```javascript
+// Inside src/agent/agentInvoker.js (Simplified Core Loop)
+import linterTool from "../tools/linter.js";
+import config from "../config.js";
+import memory from "./memory.js";
+// ... other functions: callLLM(messages), handleToolCall(toolCall) ...
+
+const tools = [/* ... tool definition structure using linterTool ... */];
+
+const invokeAgent = async (conversationId, inputs) => {
+  // ... setup initial user message in memory ...
+
+  const MAX_ITERATIONS = 3;
+  let finalCode = null;
+
+  // === THE AGENT LOOP ===
+  for (let i = 0; i < MAX_ITERATIONS; i++) {
+    const messages = memory.getMessages(conversationId); // Get state
+
+    // --- 1. LLM Brain: Decide action ---
+    const llmResponse = await callLLM(messages);
+    const assistantMessage = llmResponse.choices[0].message;
+    memory.addMessage(conversationId, assistantMessage); // Store thought
+
+    if (assistantMessage.tool_calls) {
+      // --- 2. System Hands: Execute Tool ---
+      for (const toolCall of assistantMessage.tool_calls) {
+        if (toolCall.function.name === linterTool.name) {
+           const toolResult = await handleToolCall(toolCall); // Run runLinter
+           const toolResultContent = /* ... format result ... */ ;
+           // --- 3. Update State ---
+           memory.addMessage(conversationId, { role: "tool", /*...*/ content: toolResultContent });
+        }
+      }
+    } else if (assistantMessage.content) {
+      // --- LLM provided final answer ---
+      const match = /* ... check for <final_code> ... */ ;
+      if (match) { finalCode = match[0]; break; } // Goal achieved!
+    } else { /* ... handle error ... */ break; }
+  } // === END LOOP ===
+
+  // ... handle loop finish ...
+  return finalCode;
+};
+```
+
+This structure demonstrates the **`LLM` (planning) + Loop (repetition) + Tool (action)** pattern.
+
+## Connecting to More Complex Agents (like Cursor)
+
+Our simple linter agent uses just one tool, but it shows the fundamental pattern. Real-world agents like the **Cursor** operate on the exact same principle, just scaled up.
+
+Imagine asking Cursor to "Refactor `ComponentA.jsx` to use the new `useDataFetching` hook and update its tests in `ComponentA.test.js`." Cursor's `LLM` brain, guided by its own complex system prompt, might orchestrate a sequence like this within its loop:
+
+1.  **Loop 1:** `LLM` thinks: "Need `ComponentA.jsx`." -> **Action:** Calls `readFile(path="...")`. System runs it.
+2.  **Loop 2:** `LLM` thinks: "Need `ComponentA.test.js`." -> **Action:** Calls `readFile(path="...")`. System runs it.
+3.  **Loop 3:** `LLM` thinks: "Plan JSX changes." -> **Action:** Calls `editFile(path="...", changes=[...])`. System runs it.
+4.  **Loop 4:** `LLM` thinks: "Plan test changes." -> **Action:** Calls `editFile(path="...", changes=[...])`. System runs it.
+5.  **Loop 5:** `LLM` thinks: "Verify changes." -> **Action:** Calls `runTests(path="...")`. System runs it.
+6.  **Loop N:** (Continues...)
+
+It's the same **Think -> Act (Tool) -> Update State -> Repeat** cycle, just with more tools (`readFile`, `editFile`, `runTests`, etc.) and a more complex strategy. The core **`LLM` + Loop + Tools** architecture remains the same.
+
+## The Pragmatic Takeaway
+
+Forget the complex hype around "AI Agents." The core is usually that straightforward **`LLM` + Loop + Tools** pattern:
+
+1.  **`LLM` Thinks** (using System Prompt + Tool definitions + Current State)
+2.  **System Acts** (running actual code for requested Tools)
 3.  **Repeat**
 
-They work well because the LLM follows instructions and uses tools correctly inside the loop. It's a simple pattern that gets the job done.
+It's a simple, yet powerful, way to make `LLM`s accomplish real-world tasks.
 
-To see: https://www.youtube.com/watch?v=D7_ipDqhtwk&ab_channel=AIEngineer
+---
+
+_Check out this related video for more perspective:_
+[AI Agents = LLM + Loop + Tools? (YouTube)](https://www.youtube.com/watch?v=D7_ipDqhtwk&ab_channel=AIEngineer)
