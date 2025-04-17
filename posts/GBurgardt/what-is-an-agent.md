@@ -7,6 +7,8 @@ cover_image: ./assets/cover_agent_loop.png
 date: "2025-04-17T19:13:21Z"
 ---
 
+## What's an Agent?
+
 "AI Agent" sounds complex, but often, the core is simpler than you think. An **AI Agent typically runs a Large Language Model (LLM) inside a loop.**
 
 This pseudocode captures the essence in JavaScript:
