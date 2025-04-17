@@ -7,8 +7,6 @@ cover_image: ./assets/cover_agent_loop.png
 date: "2025-04-17T19:13:21Z"
 ---
 
-# Forget the Hype: Agents are Loops
-
 "AI Agent" sounds complex, but often, the core is simpler than you think. An **AI Agent typically runs a Large Language Model (LLM) inside a loop.**
 
 This pseudocode captures the essence in JavaScript:
@@ -40,8 +38,8 @@ _Simplified cycle: Think -> Act -> Update State -> Repeat._
 
 ## Quick Breakdown
 
-1.  **`llm.run(...)`**: The "brain". Uses instructions (`system_prompt`) + current situation (`env.state`) to decide the next `action`.
-2.  **`tools.run(action)`**: The "hands". If `action` requests a tool, this executes the **real code** for that tool and updates `env.state`.
+1. **`llm.run(...)`**: The "brain". Uses instructions (`system_prompt`) + current situation (`env.state`) to decide the next `action`.
+2. **`tools.run(action)`**: The "hands". If `action` requests a tool, this executes the **real code** for that tool and updates `env.state`.
 
 The loop repeats, feeding the new state back to the LLM.
 
@@ -96,7 +94,7 @@ This ensures the `LLM` uses tools effectively within the loop.
 Let's see it in action. We'll walk through the key parts of a simple, working Node.js agent that fixes JavaScript linting errors using **one single tool**.
 
 You can find the _complete, runnable code_ (including the full System Prompt) for this example here:
-**https://github.com/cloudx-labs/simple-linter-agent**
+**[simple-linter-agent](https://github.com/cloudx-labs/simple-linter-agent)**
 
 Here are the crucial pieces:
 
@@ -241,12 +239,12 @@ Our simple linter agent uses just one tool, but it shows the fundamental pattern
 
 Imagine asking Cursor to "Refactor `ComponentA.jsx` to use the new `useDataFetching` hook and update its tests in `ComponentA.test.js`." Cursor's `LLM` brain, guided by its own complex system prompt, might orchestrate a sequence like this within its loop:
 
-1.  **Loop 1:** `LLM` thinks: "Need `ComponentA.jsx`." -> **Action:** Calls `readFile(path="...")`. System runs it.
-2.  **Loop 2:** `LLM` thinks: "Need `ComponentA.test.js`." -> **Action:** Calls `readFile(path="...")`. System runs it.
-3.  **Loop 3:** `LLM` thinks: "Plan JSX changes." -> **Action:** Calls `editFile(path="...", changes=[...])`. System runs it.
-4.  **Loop 4:** `LLM` thinks: "Plan test changes." -> **Action:** Calls `editFile(path="...", changes=[...])`. System runs it.
-5.  **Loop 5:** `LLM` thinks: "Verify changes." -> **Action:** Calls `runTests(path="...")`. System runs it.
-6.  **Loop N:** (Continues...)
+1. **Loop 1:** `LLM` thinks: "Need `ComponentA.jsx`." -> **Action:** Calls `readFile(path="...")`. System runs it.
+2. **Loop 2:** `LLM` thinks: "Need `ComponentA.test.js`." -> **Action:** Calls `readFile(path="...")`. System runs it.
+3. **Loop 3:** `LLM` thinks: "Plan JSX changes." -> **Action:** Calls `editFile(path="...", changes=[...])`. System runs it.
+4. **Loop 4:** `LLM` thinks: "Plan test changes." -> **Action:** Calls `editFile(path="...", changes=[...])`. System runs it.
+5. **Loop 5:** `LLM` thinks: "Verify changes." -> **Action:** Calls `runTests(path="...")`. System runs it.
+6. **Loop N:** (Continues...)
 
 It's the same **Think -> Act (Tool) -> Update State -> Repeat** cycle, just with more tools (`readFile`, `editFile`, `runTests`, etc.) and a more complex strategy. The core **`LLM` + Loop + Tools** architecture remains the same.
 
@@ -254,9 +252,9 @@ It's the same **Think -> Act (Tool) -> Update State -> Repeat** cycle, just with
 
 Forget the complex hype around "AI Agents." The core is usually that straightforward **`LLM` + Loop + Tools** pattern:
 
-1.  **`LLM` Thinks** (using System Prompt + Tool definitions + Current State)
-2.  **System Acts** (running actual code for requested Tools)
-3.  **Repeat**
+1. **`LLM` Thinks** (using System Prompt + Tool definitions + Current State)
+2. **System Acts** (running actual code for requested Tools)
+3. **Repeat**
 
 It's a simple, yet powerful, way to make `LLM`s accomplish real-world tasks.
 
