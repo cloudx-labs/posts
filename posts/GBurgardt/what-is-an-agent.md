@@ -1,6 +1,6 @@
 ---
 title: "Forget the Hype: Agents are Loops"
-published: true
+published: false
 description: "Understand the core concept of AI Agents: simple loops combining LLMs and tools to perform tasks. A practical breakdown with code examples."
 tags: "ai, llm, agents, gpt"
 cover_image: ./assets/cover_agent_loop.png
