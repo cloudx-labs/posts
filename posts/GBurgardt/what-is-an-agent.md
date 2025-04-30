@@ -4,8 +4,6 @@ published: true
 description: "Understand the core concept of AI Agents: simple loops combining LLMs and tools to perform tasks. A practical breakdown with code examples."
 tags: "ai, llm, agents, gpt"
 cover_image: ./assets/cover_agent_loop.png
-date: "2025-04-17T19:13:21Z"
-id: 2442378
 ---
 
 ## What's an Agent?
