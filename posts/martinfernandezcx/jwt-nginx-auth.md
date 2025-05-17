@@ -6,7 +6,6 @@ tags: 'authentication, nginx, jwt, microservices, security'
 cover_image: ./assets/jwt-nginx-auth/cover.png
 ---
 
-# Securing Microservices with JWT Validation at the Nginx Proxy Layer
 
 In a microservices architecture, separating concerns is critical for maintainability, scalability, and security. One key decision when building APIs is how and where to handle authentication. A common pattern is to delegate authentication to a dedicated **authentication microservice**, which issues tokens (e.g., JWTs), and use those tokens to access protected resources on **independent backend APIs**. When working in an infrastructure change we faced the callenge of iether integrating the authentication on the node backend (withouth the proper libraries) or keep a single backend just for authorization.
 
@@ -80,7 +79,9 @@ Some of these concerns  were left out of this POC but we would like to mention f
    - Maintain a refresh token family tree
 
 3. **Expiration Implementation**
-   ```lua
+
+   ```
+   lua
    -- Example of expiration check in Lua
    local jwt = require "resty.jwt"
    local validators = require "resty.jwt-validators"
@@ -138,7 +139,8 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
 1. **Prerequisites**
    - Install [Postman](https://www.postman.com/downloads/)
    - Start the application:
-     ```bash
+     ```
+     bash
      docker-compose up --build
      ```
 
@@ -164,7 +166,8 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
 ### Test Cases break down
 
 1. **Login Test**
-   ```javascript
+   ```
+   javascript
    pm.test("Status code is 200", function () {
        pm.response.to.have.status(200);
    });
@@ -175,7 +178,8 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
    ```
 
 2. **Protected Route Test**
-   ```javascript
+   ```
+   javascript
    pm.test("Status code is 200", function () {
        pm.response.to.have.status(200);
    });
@@ -199,9 +203,14 @@ The Postman collection can be integrated into CI/CD pipelines using:
 - Custom test runners
 
 Example Newman command:
-```bash
+```
+bash
 newman run postman/jwt-nginx-auth-tests.json -e postman/environment.json
 ```
+
+### Running the tests:
+
+To run the tests you can use npm run test:postman:cli, or import both files on postman and run it there as mentioned above.
 
 ## Conclusion
 
@@ -211,7 +220,6 @@ In contrast, validating tokens in the Node.js API itself might allow greater con
 
 OpenResty strikes a solid balance between **performance**, **flexibility**, and **maintainability** in JWT-based authentication.
 
-
 ## Apendix-A: Problems Found and Solutions
 
 During the implementation of this JWT authentication system, we encountered several issues that required specific solutions:
@@ -219,28 +227,32 @@ During the implementation of this JWT authentication system, we encountered seve
 1. **OpenResty Dependencies**
    - Problem: Missing Perl and curl in the OpenResty Alpine image
    - Solution: Added required packages in Dockerfile:
-     ```dockerfile
+     ```
+     dockerfile
      RUN apk add --no-cache perl curl
      ```
 
 2. **Nginx User Configuration**
    - Problem: Missing nginx user in the container
    - Solution: Created nginx user and group:
-     ```dockerfile
+     ```
+     dockerfile
      RUN addgroup -S nginx && adduser -S -G nginx nginx
      ```
 
 3. **MIME Types Configuration**
    - Problem: Missing mime.types file in OpenResty Alpine image
    - Solution: Created custom mime.types file and copied it to the correct location:
-     ```dockerfile
+     ```
+     dockerfile
      COPY mime.types /etc/nginx/mime.types
      ```
 
 4. **Lua Package Path**
    - Problem: Lua package path directive in wrong context
    - Solution: Moved lua_package_path to http context in nginx.conf:
-     ```nginx
+     ```
+     nginx
      http {
          lua_package_path "/usr/local/openresty/lualib/?.lua;;";
          lua_package_cpath "/usr/local/openresty/lualib/?.so;;";
@@ -254,5 +266,9 @@ During the implementation of this JWT authentication system, we encountered seve
      RUN mkdir -p /var/log/nginx && \
          chown -R nginx:nginx /var/log/nginx
      ```
+
+6. **Unit tests and routes issues**
+   - Problem: Postman tests were failing with 404 on /protected
+   - Solution: Changed auth-api/index.js /login route and node-api/index.js /protected to /user
 
 These solutions ensure proper functionality of the JWT authentication system while maintaining security and following best practices for containerized applications.
