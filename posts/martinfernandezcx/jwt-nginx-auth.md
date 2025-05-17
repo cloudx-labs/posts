@@ -80,8 +80,7 @@ Some of these concerns  were left out of this POC but we would like to mention f
 
 3. **Expiration Implementation**
 
-   ```
-   lua
+   ```lua
    -- Example of expiration check in Lua
    local jwt = require "resty.jwt"
    local validators = require "resty.jwt-validators"
@@ -139,8 +138,8 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
 1. **Prerequisites**
    - Install [Postman](https://www.postman.com/downloads/)
    - Start the application:
-     ```
-     bash
+     
+     ```bash
      docker-compose up --build
      ```
 
@@ -166,8 +165,7 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
 ### Test Cases break down
 
 1. **Login Test**
-   ```
-   javascript
+   ```javascript
    pm.test("Status code is 200", function () {
        pm.response.to.have.status(200);
    });
@@ -178,8 +176,7 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
    ```
 
 2. **Protected Route Test**
-   ```
-   javascript
+   ```javascript
    pm.test("Status code is 200", function () {
        pm.response.to.have.status(200);
    });
