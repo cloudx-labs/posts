@@ -256,36 +256,3 @@ During the implementation of this JWT authentication system, we encountered seve
      ```
 
 These solutions ensure proper functionality of the JWT authentication system while maintaining security and following best practices for containerized applications.
-
-# Authentication in Microservices Architecture
-
-## The Challenge
-
-In a microservices architecture, authentication and authorization present unique challenges. When designing our system, we faced a critical architectural decision:
-
-1. **Option 1**: Integrate authentication directly into the Node.js backend
-   - Pros: Simpler deployment, fewer services to manage
-   - Cons: Requires additional authentication libraries, increases backend complexity
-   - Risk: Potential security vulnerabilities due to improper implementation
-
-2. **Option 2**: Create a dedicated authentication service
-   - Pros: Separation of concerns, focused security implementation
-   - Cons: Additional service to maintain
-   - Benefit: Cleaner architecture, better security isolation
-
-## Our Solution
-
-We chose to implement a dedicated authentication service because:
-- It follows the Single Responsibility Principle
-- Provides better security through isolation
-- Makes the system more maintainable and scalable
-- Allows for independent scaling of authentication and business logic
-- Simplifies security audits and compliance
-
-The authentication service:
-- Issues JWT tokens
-- Handles user authentication
-- Manages token lifecycle
-- Operates independently from the main backend API
-
-This separation allows our main backend to focus on business logic while delegating all authentication concerns to a specialized service.
