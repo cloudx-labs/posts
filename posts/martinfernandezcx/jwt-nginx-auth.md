@@ -10,6 +10,7 @@ cover_image: ./assets/jwt-nginx-auth/cover.png
 In a microservices architecture, separating concerns is critical for maintainability, scalability, and security. One key decision when building APIs is how and where to handle authentication. A common pattern is to delegate authentication to a dedicated **authentication microservice**, which issues tokens (e.g., JWTs), and use those tokens to access protected resources on **independent backend APIs**. When working on an infrastructure change, we faced the challenge of either integrating authentication in the Node.js backend (without the proper libraries) or maintaining a single backend solely for authorization.
 
 The options we considered were:
+
 1. Having the Go backend validate the token and proxy to the Node.js backend over authenticated routes. (We tried this, but the Go proxy became messy and difficult to maintain.)
 2. Performing authentication in Node.js (infrastructure restrictions led us to abandon this approach.)
 3. Implementing a different authentication method using the existing infrastructure
@@ -138,7 +139,7 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
 1. **Prerequisites**
    - Install [Postman](https://www.postman.com/downloads/)
    - Start the application:
-     
+
      ```bash
      docker-compose up --build
      ```
@@ -165,7 +166,7 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
 ### Test Cases break down
 
 1. **Login Test**
-   
+
    ```javascript
    pm.test("Status code is 200", function () {
        pm.response.to.have.status(200);
@@ -177,7 +178,7 @@ The Postman collection (`postman/jwt-nginx-auth-tests.json`) includes:
    ```
 
 2. **Protected Route Test**
-   
+
    ```javascript
    pm.test("Status code is 200", function () {
        pm.response.to.have.status(200);
@@ -236,7 +237,7 @@ During the implementation of this JWT authentication system, we encountered seve
 2. **Nginx User Configuration**
    - Problem: Missing nginx user in the container
    - Solution: Created nginx user and group:
-     
+
      ```dockerfile
      RUN addgroup -S nginx && adduser -S -G nginx nginx
      ```
@@ -244,7 +245,7 @@ During the implementation of this JWT authentication system, we encountered seve
 3. **MIME Types Configuration**
    - Problem: Missing mime.types file in OpenResty Alpine image
    - Solution: Created custom mime.types file and copied it to the correct location:
-     
+
      ```dockerfile
      COPY mime.types /etc/nginx/mime.types
      ```
@@ -252,7 +253,7 @@ During the implementation of this JWT authentication system, we encountered seve
 4. **Lua Package Path**
    - Problem: Lua package path directive in wrong context
    - Solution: Moved lua_package_path to http context in nginx.conf:
-     
+
      ```nginx
      http {
          lua_package_path "/usr/local/openresty/lualib/?.lua;;";
@@ -263,7 +264,7 @@ During the implementation of this JWT authentication system, we encountered seve
 5. **Log Directory Permissions**
    - Problem: Nginx couldn't write to log directory
    - Solution: Created log directory and set proper permissions:
-     
+
      ```dockerfile
      RUN mkdir -p /var/log/nginx && \
          chown -R nginx:nginx /var/log/nginx
