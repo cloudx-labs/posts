@@ -67,10 +67,10 @@ MCP (Model Context Protocol) is an open protocol designed to streamline the way 
 Here's the breakdown:
 
 * **Host**: The application that embeds the language model (e.g., Claude Desktop or a code editor)
-* **Client**: A component inside the host that manages the connection to one MCP server by: invoking tools, querying for resources and interpolating prompts.
+* **Client**: A component inside the host that manages the connection to one MCP server by invoking tools, querying for resources and interpolating prompts.
 * **Server**: Provides context to the LLM via three primitives:
 
-    > **Tools** – functions that can be invoked by the client. These tools allow for retrieving, searching, sending messages, updating database records are are usually meant for data that might require something like a Post request or some kind of modification.
+    > **Tools** – functions that can be invoked by the client. These tools allow for retrieving, searching, sending messages, updating database records are usually meant for data that might require something like a Post request or some kind of modification.
     > **Resources** – similar to a Get request. They are read-only data or context that's exposed by the server.similar to a Get request. They are read-only data or context that's exposed by the server.
     > **Prompt templates** – predefined templates that live on the server to remove the burden of prompt engineering from users by providing optimized prompts for common tasks.
 
@@ -190,7 +190,7 @@ def generate_search_prompt(topic: str, num_papers: int = 5) -> str:
 
 ### Testing our server
 
-There's a great way to test our server using the **Model Context Protocol Inspector**, a handy tool built to explore MCP servers. As it's written in Type Script we need to use `npx`:
+There's a great way to test our server using the **Model Context Protocol Inspector**, a handy tool built to explore MCP servers. As it's written in Type Script, we need to use `npx`:
 
 The fisrt step is to install the last npm version:
 
@@ -204,7 +204,7 @@ Then, run in the command line:
 npx @modelcontextprotocol/inspector python3 research_server.py
 ```
 
-Once the server is up and running, the URI is displayed in the console. By clicking it the browser will show you this:
+Once the server is up and running, the URI is displayed in the console. By clicking it, the browser will show you this:
 ![MCP Inspector Interface](./assets/mcp-bases/mcp-inspector.png)
 
 Click the "Connect" button to start interacting with the server. You can then test the available tools, resources and prompts through the inspector interface.
@@ -222,7 +222,7 @@ Both MCP servers have been developed by Anthropic and are used from their [offic
 
 For our _host_ to create the MCP clients and connect to these servers, we need to create the ```server_config.json``` file.
 
-In this file we'll define the three servers we want to connect to. For each one, we must specify how they should be run. This information can be found in each server's documentation. In our case, our _.json_ would look like this:
+In this file, we'll define the three servers we want to connect to. For each one, we must specify how they should be run. This information can be found in each server's documentation. In our case, our _.json_ would look like this:
 
 ```json
 {
@@ -267,9 +267,9 @@ The `connect_to_servers()` method will load the server configurations and establ
 
 Additionally, it will contain several methods:
 
-* `chat_loop(...)`: manages the command-line UI and allows users to enter their prompts
-* `process_query(...)`: processes prompts using Anthropic's Sonnet as the LLM
-* `cleanup(...)`: function that closes all client connections to servers when the user ends the chat
+* `chat_loop(...)` manages the command-line UI and allows users to enter their prompts
+* `process_query(...)` processes prompts using Anthropic's Sonnet as the LLM
+* `cleanup(...)` closes all client connections to servers when the user ends the chat
 
 Our host `mcp_chatbot.py` therefore has the following structure:
 
@@ -348,7 +348,7 @@ if __name__ == "__main__":
 
 ```
 
-This way our _host_ (mcp_chatbot.py):
+This way, our _host_ (mcp_chatbot.py):
 
 1. Creates as many clients as servers are defined in the ```servers_config.json``` file
 2. Stores each of these connections
