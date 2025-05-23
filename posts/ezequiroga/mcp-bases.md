@@ -423,7 +423,7 @@ Finally, the five calls for extracting information are made:
 The final response of this try would look like this:
 
 ```text
-Based on my research of DeepLearning.ai and the articles I've found, I'd like to present a comprehensive overview of Retrieval-Augmented Generation (RAG) as a key concept...
+Based on my research of DeepLearning.ai...
 
 # Retrieval-Augmented Generation (RAG) in Modern AI
 
@@ -445,7 +445,7 @@ The `.json` created by running thhis prompt looks similar to previous one but co
 ```json
 {
   "2409.01666v1": {
-    "title": "In Defense of RAG in the Era of Long-Context Language Models",
+    "title": "In Defense of RAG...",
     "authors": ["Tan Yu", "Anbang Xu", "Rama Akkiraju"],
     "summary": "...",
     "pdf_url": "http://arxiv.org/pdf/2409.01666v1",
