@@ -1,6 +1,6 @@
 ---
 title: MCP - Understanding the Basics and Building a Research Paper Management Chatbot
-published: false
+published: true
 description: 'A comprehensive guide to building an AI-powered research paper management system using the Model Context Protocol (MCP), including server implementation, third-party integration, and practical examples.'
 tags: 'mcp, ai, chatbot, anthropic'
 cover_image: ./assets/mcp-bases-cover.png
@@ -43,9 +43,9 @@ _Important note: Only the most relevant function signatures and docstrings are s
 
 ## 🛠️ Local environment
 
-🐍 Python ```3.12.8```
+🐍 Python `3.12.8`
 
-⬢ Node ```v22.13.0```
+⬢ Node `v22.13.0`
 
 Run the following command to install the required Python packages:
 
@@ -108,7 +108,7 @@ mcp = FastMCP("research")
 
 ### Tools
 
-Once the server is defined, we can start defining primitives. Let's start by defining two tools using ```@mcp.tool()```:
+Once the server is defined, we can start defining primitives. Let's start by defining two tools using `@mcp.tool()`:
 
 1- `search_papers`: Searches arXiv for articles on a specific topic:
 
@@ -147,7 +147,7 @@ def extract_info(paper_id: str) -> str:
 
 ### Resources
 
-Next, we need to define how users can access all available research topics and retrieve articles for a specific topic. For this, we expose two resources using ```@mcp.resource(...)```:
+Next, we need to define how users can access all available research topics and retrieve articles for a specific topic. For this, we expose two resources using `@mcp.resource(...)`:
 
 1- A list of available research topics:
 
@@ -180,7 +180,7 @@ def get_topic_papers(topic: str) -> str:
 
 To reduce the need for manual prompt engineering, we can define prompt templates. These are listed by the MCP client, interpolated with user input, and then sent to the LLM.
 
-To expose prompt templates, we must use ```@mcp.prompt()```. In our case, we will create just one prompt template, which will perform the search for articles in arXiv:
+To expose prompt templates, we must use `@mcp.prompt()`. In our case, we will create just one prompt template, which will perform the search for articles in arXiv:
 
 ```python
 @mcp.prompt()
@@ -221,7 +221,7 @@ In this case, we'll use the following two servers provided by Anthropic:
 
 Both MCP servers have been developed by Anthropic and are used from their [official GitHub](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file).
 
-For our _host_ to create the MCP clients and connect to these servers, we need to create the ```server_config.json``` file.
+For our _host_ to create the MCP clients and connect to these servers, we need to create the `server_config.json` file.
 
 In this file, we'll define the three servers we want to connect to. For each one, we must specify how they should be run. This information can be found in each server's documentation. In our case, our _.json_ would look like this:
 
@@ -351,7 +351,7 @@ if __name__ == "__main__":
 
 This way, our _host_ (mcp_chatbot.py):
 
-1. Creates as many clients as servers are defined in the ```servers_config.json``` file
+1. Creates as many clients as servers are defined in the `servers_config.json` file
 2. Stores each of these connections
 3. Lists the available tools in each server and stores them
 4. Processes user queries
