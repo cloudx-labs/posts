@@ -380,7 +380,26 @@ Behind the scenes, it will:
 
 * Call `tool extract_info with args {'paper_id': '1805.08355v1'}` and `tool extract_info with args {'paper_id': '1806.01756v1'}`
 
-The `.json` created by running this prompt looks like [this](./assets/mcp-bases/papers/deep_learning/papers_info.json).
+The `.json` created by running this prompt looks like:
+
+```json
+{
+  "1805.08355v1": {
+    "title": "Opening the black box of deep learning",
+    "authors": ["Dian Lei", "Xiaoxiao Chen", "Jianfei Zhao"],
+    "summary": "The great success of deep learning ...",
+    "pdf_url": "http://arxiv.org/pdf/1805.08355v1",
+    "published": "2018-05-22"
+  },
+  "1806.01756v1": {
+    "title": "Concept-Oriented Deep Learning",
+    "authors": ["Daniel T Chang"],
+    "summary": "Concepts are the foundation of human deep learning...",
+    "pdf_url": "http://arxiv.org/pdf/1806.01756v1",
+    "published": "2018-06-05"
+  }
+}
+```
 
 The second try fetches information from a particular URI: _look into <https://deeplearning.ai>, extract one relevant concept and research articles about it_
 ![Running the chatbot](./assets/mcp-bases/query_2.png)
@@ -401,9 +420,43 @@ Finally, the five calls for extracting information are made:
 * `Calling tool extract_info with args {'paper_id': '2501.05249v1'}`
 * `Calling tool extract_info with args {'paper_id': '2504.08758v1'}`
 
-The final response of this try can be seen at [query_2_response.txt](./assets/mcp-bases/query_2_response.txt)
+The final response of this try would look like this:
 
-The `.json` created by running these prompts looks like [this](./assets/mcp-bases/papers/retrieval-augmented_generation_rag_llm/papers_info.json).
+```text
+Based on my research of DeepLearning.ai...
+
+# Retrieval-Augmented Generation (RAG) in Modern AI
+
+## What is RAG?
+Retrieval-Augmented Generation (RAG)...
+
+## Why RAG Matters
+According to recent research...
+
+## Applications of RAG
+RAG has proven particularly valuable in:...
+
+## Future Directions
+The modular approach to RAG systems suggests...
+```
+
+The `.json` created by running this prompt looks similar to the previous one but contains five documents:
+
+```json
+{
+  "2409.01666v1": {
+    "title": "In Defense of RAG...",
+    "authors": ["Tan Yu", "Anbang Xu", "Rama Akkiraju"],
+    "summary": "...",
+    "pdf_url": "http://arxiv.org/pdf/2409.01666v1",
+    "published": "2024-09-03"
+  },
+  "2501.00353v1": {...},
+  "2407.21059v1": {...},
+  "2501.05249v1": {...},
+  "2504.08758v1": {...}
+}
+```
 
 For finishig the chatbot, just type `quit`.
 
