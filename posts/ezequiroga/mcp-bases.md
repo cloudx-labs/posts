@@ -5,6 +5,7 @@ description: 'A comprehensive guide to building an AI-powered research paper man
 tags: 'mcp, ai, chatbot, anthropic'
 cover_image: ./assets/mcp-bases-cover.png
 id: 2519512
+date: '2025-05-23T18:01:52Z'
 ---
 ## 🌟 Introduction
 
