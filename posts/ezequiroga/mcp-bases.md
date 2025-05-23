@@ -2,7 +2,7 @@
 title: MCP - Understanding the Basics and Building a Research Paper Management Chatbot
 published: false
 description: A comprehensive guide to building an AI-powered research paper management system using the Model Context Protocol (MCP), including server implementation, third-party integration, and practical examples.
-tags: 'mcp, ai, python, research, chatbot, anthropic'
+tags: 'mcp, ai, chatbot, anthropic'
 cover_image: ./assets/mcp-bases-cover.png
 ---
 ## 🌟 Introduction
@@ -378,7 +378,7 @@ Behind the scenes, it will:
 
 * Call `tool extract_info with args {'paper_id': '1805.08355v1'}` and `tool extract_info with args {'paper_id': '1806.01756v1'}`
 
-The `.json` created by running this prompts looks like [this](./assets/mcp-bases/papers/deep_learning/papers_info.json).
+The `.json` created by running this prompt looks like [this](./assets/mcp-bases/papers/deep_learning/papers_info.json).
 
 The second try fetches information from a particular URI: _look into <https://deeplearning.ai>, extract one relevant concept and research articles about it_
 ![Running the chatbot](./assets/mcp-bases/query_2.png)
