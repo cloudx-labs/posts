@@ -1,9 +1,10 @@
 ---
 title: MCP - Understanding the Basics and Building a Research Paper Management Chatbot
 published: false
-description: A comprehensive guide to building an AI-powered research paper management system using the Model Context Protocol (MCP), including server implementation, third-party integration, and practical examples.
+description: 'A comprehensive guide to building an AI-powered research paper management system using the Model Context Protocol (MCP), including server implementation, third-party integration, and practical examples.'
 tags: 'mcp, ai, chatbot, anthropic'
 cover_image: ./assets/mcp-bases-cover.png
+id: 2519512
 ---
 ## 🌟 Introduction
 
