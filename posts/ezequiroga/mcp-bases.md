@@ -440,7 +440,7 @@ RAG has proven particularly valuable in:...
 The modular approach to RAG systems suggests...
 ```
 
-The `.json` created by running thhis prompt looks similar to previous one but contains five documents:
+The `.json` created by running this prompt looks similar to previous one but contains five documents:
 
 ```json
 {
