@@ -1,6 +1,6 @@
 ---
 title: 'Securing Microservices with JWT Validation at the Nginx Proxy Layer'
-published: false
+published: true
 description: 'Learn how to implement JWT validation at the Nginx proxy layer to secure your microservices architecture, with detailed implementation steps and security considerations.'
 tags: 'authentication, nginx, jwt, microservices, security'
 cover_image: ./assets/jwt-nginx-auth/cover.png
@@ -210,7 +210,7 @@ Example Newman command:
 newman run postman/jwt-nginx-auth-tests.json -e postman/environment.json
 ```
 
-### Running the tests:
+### Running the tests
 
 To run the tests you can use npm run test:postman:cli, or import both files on postman and run it there as mentioned above.
 
