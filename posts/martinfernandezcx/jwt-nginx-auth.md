@@ -2,7 +2,7 @@
 title: 'Securing Microservices with JWT Validation at the Nginx Proxy Layer'
 published: true
 description: 'Learn how to implement JWT validation at the Nginx proxy layer to secure your microservices architecture, with detailed implementation steps and security considerations.'
-tags: 'authentication, nginx, jwt, microservices, security'
+tags: 'authentication, nginx, microservices, security'
 cover_image: ./assets/jwt-nginx-auth/cover.png
 ---
 
