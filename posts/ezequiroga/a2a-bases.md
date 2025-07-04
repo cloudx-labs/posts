@@ -57,6 +57,8 @@ These three agents will be called through the chatbot, which uses a `ReAct Agent
 
 Each agent uses a different communication method with our chatbot, so our chatbot needs to adapt to each of them.
 
+![Article Architecture](./assets/a2a-bases/article-architecture.png)
+
 ## 🛠️ Local environment
 
 🐍 Python `3.13.5`
