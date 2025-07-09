@@ -4,6 +4,7 @@ published: false
 description: 'A comprehensive guide to building AI agent communication systems using the A2A (Agent-to-Agent) protocol, including a command line chat, three A2A agents, LangChain React agents and practical examples.'
 tags: 'a2a, ai, chatbot, agents'
 cover_image: ./assets/a2a-bases-cover.png
+id: 2670120
 ---
 ## 🌟 Introduction
 
