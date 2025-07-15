@@ -6,9 +6,7 @@ tags: ai, javascript, productivity, tutorial
 cover_image: ./assets/cover_mcp_monologue.png
 ---
 
-# I Built an MCP Server to Stop Typing the Same Thing Every Day
-
-**The Problem: Repetitive Detailed Prompting**
+## The Problem: Repetitive Detailed Prompting
 
 Every time I start a new task in Claude Code / Cursor, I type a detailed prompt to guide the AI through an internal monologue before proceeding. For example:
 
@@ -16,11 +14,11 @@ Every time I start a new task in Claude Code / Cursor, I type a detailed prompt 
 
 Typing this repeatedly 20+ times a day wastes time and disrupts focus. As someone researching practical AI applications, we can fix that.
 
-**Enter MCPs: The Missing Link**
+## Enter MCPs: The Missing Link
 
 Model Context Protocols (MCPs) allow extending AI agents with custom tools. While common examples include fetching data, web browsing, or integrating with Slack, I used it in a novel way to automate my repetitive prompt.
 
-**From Repetition to Automation**
+## From Repetition to Automation
 
 I built an MCP server in my Remix app (essentially the same as plain Node.js) that generates these monologues on demand. Now, Claude detects the trigger and handles it automatically.
 
@@ -28,21 +26,20 @@ I built an MCP server in my Remix app (essentially the same as plain Node.js) th
 
 The difference:
 
-**Before:** Type the full detailed prompt each time, then describe the task.
+- **Before:** Type the full detailed prompt each time, then describe the task.
+- **After:** Simply say "internal monologue 200 lines about X - [task]", and Claude generates the monologue via the tool, then proceeds.
 
-**After:** Simply say "internal monologue 200 lines about X - [task]", and Claude generates the monologue via the tool, then proceeds.
-
-**Building Your Own Monologue MCP**
+## Building Your Own Monologue MCP
 
 Here's how to implement it in a Node.js server (adaptable from my Remix example).
 
-**Step 1: Install Dependencies**
+### Step 1: Install Dependencies
 
 ```bash
 npm install @modelcontextprotocol/sdk zod @anthropic-ai/sdk
 ```
 
-**Step 2: Create the MCP Server Handler**
+### Step 2: Create the MCP Server Handler
 
 Create `app/lib/mcp-server.ts`:
 
@@ -178,7 +175,7 @@ Generate an internal monologue of EXACTLY ${lines} numbered lines where the two 
 }
 ```
 
-**Step 3: Create the API Route**
+### Step 3: Create the API Route
 
 Create `app/routes/api.mcp.ts`:
 
@@ -241,7 +238,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 ```
 
-**Step 4: Configure Environment Variables**
+### Step 4: Configure Environment Variables
 
 Add to your `.env`:
 
@@ -250,7 +247,7 @@ ANTHROPIC_API_KEY=your-anthropic-api-key
 MCP_API_KEY=a-secret-key-for-your-mcp
 ```
 
-**Step 5: Deploy and Connect**
+### Step 5: Deploy and Connect
 
 Deploy your changes (I use Vercel, but any platform works):
 
@@ -266,11 +263,11 @@ Then connect from Claude:
 claude mcp add --transport sse monologue https://yourdomain.com/api/mcp --header "Authorization: Bearer your-secret-key"
 ```
 
-**How It Works in Practice**
+## How It Works in Practice
 
 Now, when working in Claude:
 
-```
+```text
 > internal monologue 150 lines - design user experience for login flow
 ```
 
@@ -278,7 +275,7 @@ Claude detects the phrase, calls the MCP tool, generates the detailed monologue 
 
 A sample monologue excerpt:
 
-```
+```text
 1. [Creative] Login flow should be innovative and seamless – perhaps biometric integration for delight?
 2. [Pragmatic] Biometrics add complexity; focus on reliable password handling in auth.js first.
 3. [Creative] But user experience suffers with forms – question if we can animate transitions smoothly.
@@ -288,15 +285,15 @@ A sample monologue excerpt:
 
 ![Monologue Generation Screen Illustration](./assets/monologue_screen.png)
 
-**Why This Matters**
+## Why This Matters
 
 This MCP setup boosts programming efficiency by leveraging AI tools for consistent planning and productivity gains, while experimenting with a non-typical application to explore MCPs more creatively and deeply.
 
-**What's Next?**
+## What's Next?
 
 One could build other creative tools, such as one that fetches and analyzes server logs directly, or another that integrates with external APIs for real-time data checks.
 
-**Your Turn**
+## Your Turn
 
 What repetitive tasks do you deal with in your daily work? Maybe you can create an MCP. The code is ready to adapt—build something that streamlines your everyday tasks.
 
