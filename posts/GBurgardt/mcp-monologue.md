@@ -288,7 +288,7 @@ A sample monologue excerpt:
 
 ![Monologue Generation Screen Illustration](./assets/monologue_screen.png)
 
-**Why This Matters (Briefly)**
+**Why This Matters**
 
 This MCP setup boosts programming efficiency by leveraging AI tools for consistent planning and productivity gains, while experimenting with a non-typical application to explore MCPs more creatively and deeply.
 
@@ -302,4 +302,4 @@ What repetitive tasks do you deal with in your daily work? Maybe you can create 
 
 ---
 
-\_Questions? Leave a comment below and I'll be happy to help!
+Questions? Leave a comment below and I'll be happy to help!
