@@ -6,13 +6,33 @@ tags: ai, javascript, productivity, tutorial
 cover_image: ./assets/cover_mcp_monologue.png
 ---
 
+20+ times a day. That's how often I type the same 200-word prompt.
+
 ## The Problem: Repetitive Detailed Prompting
 
 Every time I start a new task in Claude Code / Cursor, I type a detailed prompt to guide the AI through an internal monologue before proceeding. For example:
 
-"You will generate an internal monologue of 200 numbered lines where two thinkers debate the approach: Pragmatic focuses on functionality and efficiency, Creative on innovation and elegance. Follow these rules: exactly 200 lines, each starting with [Pragmatic] or [Creative], be specific about code without abstractions... reflect and question without solutions, mention files/functions/variables, consider edge cases/performance/maintainability/user experience, debate simplicity vs functionality, question decisions, no repeats, end without conclusion. Then address the task: [actual task here]."
+"You will generate an internal monologue of 200 numbered lines where two thinkers debate the approach:
 
-Typing this repeatedly 20+ times a day wastes time and disrupts focus. As someone researching practical AI applications, we can fix that.
+- Pragmatic focuses on functionality and efficiency
+- Creative on innovation and elegance
+- Follow these rules: exactly 200 lines, each starting with [Pragmatic] or [Creative]
+- Be specific about code without abstractions
+- Reflect and question without solutions
+- Mention files/functions/variables
+- Consider edge cases/performance/maintainability/user experience
+- Debate simplicity vs functionality
+- Question decisions, no repeats, end without conclusion
+- Then address the task: [actual task here]."
+
+Typing this repeatedly 20+ times a day wastes time and disrupts focus.
+
+As someone researching practical AI applications, we can fix that.
+
+```javascript
+// Before: 200+ word prompt every time
+// After: "internal monologue 200 lines - implement auth system"
+```
 
 ## Enter MCPs: The Missing Link
 
@@ -22,12 +42,26 @@ Model Context Protocols (MCPs) allow extending AI agents with custom tools. Whil
 
 I built an MCP server in my Remix app (essentially the same as plain Node.js) that generates these monologues on demand. Now, Claude detects the trigger and handles it automatically.
 
+Here's a glimpse of what it generates:
+
+```text
+1. [Pragmatic] We need to implement auth - start with basic JWT in middleware.js
+2. [Creative] But what about OAuth? Users expect social login nowadays...
+3. [Pragmatic] OAuth adds complexity - first nail down password flow, then extend
+...
+```
+
 ![Before and After MCP Automation Flowchart](./assets/before_after_flowchart.png)
 
 The difference:
 
 - **Before:** Type the full detailed prompt each time, then describe the task.
 - **After:** Simply say "internal monologue 200 lines about X - [task]", and Claude generates the monologue via the tool, then proceeds.
+
+**Time saved:** ~2 minutes per task  
+**Characters typed:** 300+ → 40
+
+---
 
 ## Building Your Own Monologue MCP
 
@@ -179,10 +213,15 @@ Generate an internal monologue of EXACTLY ${lines} numbered lines where the two 
 
 Create `app/routes/api.mcp.ts`:
 
+The MCP server needs to be exposed as an HTTP endpoint. We use Bearer authentication to secure it. Only Claude (or other authorized clients) with the correct API key can access your server. This prevents random people from using your tools.
+
 ```typescript
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { createMCPServer } from "~/lib/mcp-server";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
+
+// SSE (Server Sent Events) keeps an open connection between Claude and your server
+// This allows Claude to call your tools in real time without polling
 
 // Simple auth check
 function verifyAuth(request: Request): boolean {
@@ -217,7 +256,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       try {
         await server.connect(transport);
 
-        // Keep connection alive
+        // Keep connection alive (SSE connections timeout after 30 seconds of silence)
         const keepAlive = setInterval(() => {
           controller.enqueue(new TextEncoder().encode(": keepalive\n\n"));
         }, 30000);
@@ -247,6 +286,8 @@ ANTHROPIC_API_KEY=your-anthropic-api-key
 MCP_API_KEY=a-secret-key-for-your-mcp
 ```
 
+The `ANTHROPIC_API_KEY` lets your server call Claude's API to generate monologues. The `MCP_API_KEY` is your own secret, it's what Claude will use to authenticate with your server.
+
 ### Step 5: Deploy and Connect
 
 Deploy your changes (I use Vercel, but any platform works):
@@ -262,6 +303,10 @@ Then connect from Claude:
 ```bash
 claude mcp add --transport sse monologue https://yourdomain.com/api/mcp --header "Authorization: Bearer your-secret-key"
 ```
+
+The `sse` transport tells Claude to use Server Sent Events (the streaming connection type we set up). Replace `your-secret-key` with the same MCP_API_KEY from your `.env` file.
+
+---
 
 ## How It Works in Practice
 
@@ -285,6 +330,8 @@ A sample monologue excerpt:
 
 ![Monologue Generation Screen Illustration](./assets/monologue_screen.png)
 
+---
+
 ## Why This Matters
 
 This MCP setup boosts programming efficiency by leveraging AI tools for consistent planning and productivity gains, while experimenting with a non-typical application to explore MCPs more creatively and deeply.
@@ -295,7 +342,7 @@ One could build other creative tools, such as one that fetches and analyzes serv
 
 ## Your Turn
 
-What repetitive tasks do you deal with in your daily work? Maybe you can create an MCP. The code is ready to adapt—build something that streamlines your everyday tasks.
+What repetitive tasks do you deal with in your daily work? Maybe you can create an MCP. The code is ready to adapt and build something that streamlines your everyday tasks.
 
 ---
 
