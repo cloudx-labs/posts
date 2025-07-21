@@ -6,8 +6,6 @@ tags: ai, mcp, javascript, tutorial
 cover_image: ./assets/cover_mcp_monologue.png
 ---
 
-20+ times a day. That's how often I type the same 200-word prompt.
-
 ## The Problem: Repetitive Detailed Prompting
 
 Every time I start a new task in Claude Code / Cursor, I type a detailed prompt to guide the AI through an internal monologue before proceeding. For example:
