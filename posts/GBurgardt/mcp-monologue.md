@@ -131,15 +131,13 @@ export function createMCPServer() {
   // The actual tool implementation
   server.setRequestHandler("tools/call", async (request) => {
     if (request.params.name === "generate-monologue") {
-      const {
-        lines = 100,
-        context = "",
-        task,
-      } = request.params.arguments as {
-        lines?: number;
-        context?: string;
-        task: string;
-      };
+      const ArgsSchema = z.object({
+        lines: z.number().int().min(1).max(500).default(100),
+        context: z.string().max(2000).optional().default(""),
+        task: z.string().min(1).max(1000),
+      });
+
+      const { lines, context, task } = ArgsSchema.parse(request.params.arguments);
 
       try {
         const systemPrompt = `You are two thinkers having an internal dialogue about programming.
