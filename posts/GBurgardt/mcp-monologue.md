@@ -332,15 +332,15 @@ A sample monologue excerpt:
 
 ## Why This Matters
 
-This MCP setup boosts programming efficiency by leveraging AI tools for consistent planning and productivity gains, while experimenting with a non-typical application to explore MCPs more creatively and deeply.
+This MCP setup boosts programming efficiency by leveraging AI tools for consistent planning and productivity gains, while experimenting with a non typical application to explore MCPs more creatively and deeply.
 
 ## What's Next?
 
-One could build other creative tools, such as one that fetches and analyzes server logs directly, or another that integrates with external APIs for real-time data checks.
+One could build other creative tools, such as one that fetches and analyzes server logs directly, or another that integrates with external APIs for real time data checks.
 
 ## Your Turn
 
-What repetitive tasks do you deal with in your daily work? Maybe you can create an MCP. The code is ready to adapt and build something that streamlines your everyday tasks.
+What repetitive tasks do you deal with in your daily work? Maybe you can create an MCP. The code is ready to adapt and build something.
 
 ---
 
