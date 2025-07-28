@@ -1,8 +1,8 @@
 ---
 title: Automate Any Repetitive Task with MCP
-published: false
+published: true
 description: Learn how to automate repetitive AI tasks by building a Model Context Protocol (MCP) server. Save time and improve workflow with practical code examples.
-tags: 'ai, mcp, javascript, tutorial'
+tags: "ai, mcp, javascript, tutorial"
 cover_image: ./assets/cover_mcp_monologue.png
 id: 2723086
 ---
@@ -138,7 +138,9 @@ export function createMCPServer() {
         task: z.string().min(1).max(1000),
       });
 
-      const { lines, context, task } = ArgsSchema.parse(request.params.arguments);
+      const { lines, context, task } = ArgsSchema.parse(
+        request.params.arguments
+      );
 
       try {
         const systemPrompt = `You are two thinkers having an internal dialogue about programming.
