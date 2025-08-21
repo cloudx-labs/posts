@@ -3,7 +3,8 @@ title: "How to Use AI for Programming: A Clarity First Approach"
 published: false
 description: "Learn why clear communication beats 'magic prompts' when coding with AI. Discover how treating AI as a literal collaborator improves your programming skills."
 tags: ai, programming, productivity, tutorial
-cover_image: ./assets/cover_placeholder.png
+cover_image: ./assets/cover_how_use_ai_to_programming.png
+series: "AI Programming Best Practices"
 ---
 
 # How to Use AI for Programming
@@ -35,6 +36,10 @@ You'd probably:
 
 That's the best way to interact with an AI model.
 
+![Communicating with AI requires the same clarity as working with a remote programmer](./assets/how_use_ai_to_programming_1.png)
+
+_Clear communication is key when working with AI assistants._
+
 ## AI As a Mirror
 
 The model isn't just a task executor. It's also a mirror of your clarity when communicating a problem.
@@ -47,11 +52,15 @@ Most of the time when the model "doesn't understand" the problem isn't the model
 
 The real skill isn't "writing good prompts". It's thinking clearly about problems and communicating that clarity. This is a fundamental skill for any programmer.
 
-### Example
+![Vague thinking leads to vague results, while clear communication produces precise outcomes](./assets/how_use_ai_to_programming_2.png)
+
+_The difference between unclear and structured thinking when working with AI._
+
+## Example
 
 **What we usually do:**
 
-```
+```plaintext
 Optimize this function
 ```
 
@@ -59,7 +68,7 @@ Optimize this function
 
 **What we should do:**
 
-```
+```javascript
 The processOrders() function in orders.js takes 5 seconds with 1000 orders.
 I need it to take less than 1 second.
 Orders come from the database already sorted by date.
@@ -84,13 +93,13 @@ One of the skills that improves working with AI is problem decomposition.
 
 Instead of:
 
-```
+```plaintext
 Implement a complete authentication system
 ```
 
 You learn to think:
 
-```
+```plaintext
 Step 1: Define the User model with minimum required fields: <fields>
 Step 2: Create the registration endpoint with basic validation (validation type, etc)
 [etc...]
@@ -118,11 +127,11 @@ With AI don't expect perfection on the first try. Like with a human collaborator
 3. Refinement
 4. Repeat
 
-### The Importance of Context
+## The Importance of Context
 
 AI needs all the context possible, don't skimp.
 
-```
+```javascript
 CONTEXT: Users report the checkout page hangs
 SYMPTOM: The "Pay" button stays in "Processing..." state indefinitely
 FILE: checkout.js, handlePayment() function
@@ -130,7 +139,7 @@ SUSPICION: Probably missing a catch to handle API errors
 TASK: Add robust error handling and visual feedback to the user
 ```
 
-### The Value of Programming with AI
+## The Value of Programming with AI
 
 Programming with AI trains you in thinking clearly and communicating precisely. It forces you to decompose problems into manageable pieces and be explicit with your requirements while constantly verifying results.
 
