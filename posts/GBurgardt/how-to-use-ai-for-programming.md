@@ -68,7 +68,7 @@ Optimize this function
 
 **What we should do:**
 
-```javascript
+```plaintext
 The processOrders() function in orders.js takes 5 seconds with 1000 orders.
 I need it to take less than 1 second.
 Orders come from the database already sorted by date.
@@ -109,12 +109,7 @@ Step 2: Create the registration endpoint with basic validation (validation type,
 
 AI can only handle 3-4 files well at a time. It's a limitation but with its bright side:
 
-It forces you to:
-
-- Keep responsibilities separated
-- Create clear interfaces
-- Avoid coupling
-- Think in small modules
+It forces you to keep responsibilities separated and create clear interfaces. You need to avoid coupling and think in small modules.
 
 It incentivizes you to follow good architecture practices.
 
@@ -131,7 +126,7 @@ With AI don't expect perfection on the first try. Like with a human collaborator
 
 AI needs all the context possible, don't skimp.
 
-```javascript
+```plaintext
 CONTEXT: Users report the checkout page hangs
 SYMPTOM: The "Pay" button stays in "Processing..." state indefinitely
 FILE: checkout.js, handlePayment() function
