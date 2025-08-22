@@ -7,8 +7,6 @@ cover_image: ./assets/cover_how_use_ai_to_programming.png
 series: "AI Programming Best Practices"
 ---
 
-# How to Use AI for Programming
-
 When we code using AI we ask ourselves: "what's the best prompt?" or "what magic prompt should I use?".
 
 We'd be better off asking: "what kind of interaction is this?". Trying to understand the nature of the interaction between us and the model.
