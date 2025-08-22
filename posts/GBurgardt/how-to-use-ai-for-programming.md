@@ -1,5 +1,5 @@
 ---
-title: "How to Use AI for Programming: A Clarity First Approach"
+title: "How AI Reflects Your Thinking"
 published: false
 description: "Learn why clear communication beats 'magic prompts' when coding with AI. Discover how treating AI as a literal collaborator improves your programming skills."
 tags: ai, programming, productivity, tutorial
@@ -110,15 +110,6 @@ AI can only handle 3-4 files well at a time. It's a limitation but with its brig
 It forces you to keep responsibilities separated and create clear interfaces. You need to avoid coupling and think in small modules.
 
 It incentivizes you to follow good architecture practices.
-
-## Iteration vs Perfection
-
-With AI don't expect perfection on the first try. Like with a human collaborator, the process is:
-
-1. First approximation
-2. Specific feedback
-3. Refinement
-4. Repeat
 
 ## The Importance of Context
 
