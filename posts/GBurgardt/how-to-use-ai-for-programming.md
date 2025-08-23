@@ -36,8 +36,6 @@ That's the best way to interact with an AI model.
 
 ![Communicating with AI requires the same clarity as working with a remote programmer](./assets/how_use_ai_to_programming_1.png)
 
-_Clear communication is key when working with AI assistants._
-
 ## AI As a Mirror
 
 The model isn't just a task executor. It's also a mirror of your clarity when communicating a problem.
@@ -51,8 +49,6 @@ Most of the time when the model "doesn't understand" the problem isn't the model
 The real skill isn't "writing good prompts". It's thinking clearly about problems and communicating that clarity. This is a fundamental skill for any programmer.
 
 ![Vague thinking leads to vague results, while clear communication produces precise outcomes](./assets/how_use_ai_to_programming_2.png)
-
-_The difference between unclear and structured thinking when working with AI._
 
 ## Example
 
@@ -81,13 +77,9 @@ This is much clearer and less abstract. It describes:
 - Constraints (already sorted)
 - Assumptions (no duplicates)
 
-## The Work It Doesn't Save You
-
-AI won't save you the work of thinking, to communicate effectively you first need to clearly understand what you're going to communicate. The clarification process is valuable work in programming.
-
 ## Problem Decomposition
 
-One of the skills that improves working with AI is problem decomposition.
+One of the skills that improves working with AI is problem decomposition. AI won't save you the work of thinking - the clarification process itself is valuable work in programming.
 
 Instead of:
 
