@@ -1,8 +1,8 @@
 ---
 title: How AI Reflects Your Thinking
-published: false
+published: true
 description: Learn why clear communication beats 'magic prompts' when coding with AI. Discover how treating AI as a literal collaborator improves your programming skills.
-tags: 'ai, programming, productivity, tutorial'
+tags: "ai, programming, productivity, tutorial"
 cover_image: ./assets/cover_how_use_ai_to_programming.png
 series: AI Programming Best Practices
 id: 2799000
@@ -14,7 +14,7 @@ We'd be better off asking: "what kind of interaction is this?". Trying to unders
 
 Maybe the problem isn't the technology, but us.
 
-## A Thought Experiment
+## An Analogy
 
 Imagine you hire a remote programmer. Brilliant, but with some quirks:
 
@@ -78,9 +78,9 @@ This is much clearer and less abstract. It describes:
 - Constraints (already sorted)
 - Assumptions (no duplicates)
 
-## Problem Decomposition
+## Breaking Down Problems
 
-One of the skills that improves working with AI is problem decomposition. AI won't save you the work of thinking. The clarification process itself is valuable work in programming.
+One of the skills that improves working with AI is breaking problems down into smaller pieces. AI won't save you the work of thinking. The clarification process itself is valuable work in programming.
 
 Instead of:
 
@@ -118,7 +118,7 @@ TASK: Add robust error handling and visual feedback to the user
 
 ## The Value of Programming with AI
 
-Programming with AI trains you in thinking clearly and communicating precisely. It forces you to decompose problems into manageable pieces and be explicit with your requirements while constantly verifying results.
+Programming with AI trains you in thinking clearly and communicating precisely. It forces you to break problems into manageable pieces and be explicit with your requirements while constantly verifying results.
 
 These seem like fundamental skills for any dev regardless of language.
 
@@ -129,6 +129,6 @@ AI doesn't save you from thinking, or at least you shouldn't use it that way. It
 Next time you use AI and don't get the expected result, before blaming the model, ask yourself:
 
 - Did I really have clarity on what I wanted?
-- Did I decompose the problem into manageable parts?
+- Did I break down the problem into manageable parts?
 
 These models are honest, literal collaborators. They give you exactly what you ask for, but they demand clarity. Learning to be clear is learning to think well. AI used properly makes you a better programmer.
