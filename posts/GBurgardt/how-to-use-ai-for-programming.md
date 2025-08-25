@@ -79,7 +79,7 @@ This is much clearer and less abstract. It describes:
 
 ## Problem Decomposition
 
-One of the skills that improves working with AI is problem decomposition. AI won't save you the work of thinking - the clarification process itself is valuable work in programming.
+One of the skills that improves working with AI is problem decomposition. AI won't save you the work of thinking. The clarification process itself is valuable work in programming.
 
 Instead of:
 
