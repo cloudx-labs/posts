@@ -2,10 +2,11 @@
 title: How AI Reflects Your Thinking
 published: true
 description: Learn why clear communication beats 'magic prompts' when coding with AI. Discover how treating AI as a literal collaborator improves your programming skills.
-tags: "ai, programming, productivity, tutorial"
+tags: 'ai, programming, productivity, tutorial'
 cover_image: ./assets/cover_how_use_ai_to_programming.png
 series: AI Programming Best Practices
 id: 2799000
+date: '2025-08-26T13:36:38Z'
 ---
 
 When we code using AI we ask ourselves: "what's the best prompt?" or "what magic prompt should I use?".
