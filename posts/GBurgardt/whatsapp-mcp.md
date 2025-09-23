@@ -6,7 +6,7 @@ tags: "mcp, ai, whisper, automation"
 cover_image: ./assets/cover_mcp_whatsapp.png
 ---
 
-# WhatsApp + MCP: automatic audio transcription
+## Introduction
 
 MCP (Model Context Protocol) can look complicated until you ship something real with it. Let's use it on something practical: expose your WhatsApp voice notes with your own MCP server and turn them into transcripts.
 
