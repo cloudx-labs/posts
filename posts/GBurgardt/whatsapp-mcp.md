@@ -19,13 +19,9 @@ _Quick comparison of stdio and SSE transports in MCP._
 
 - Host: Claude Desktop / Cursor / any AI agent. It coordinates the LLM, spins up MCP clients, and shows results.
 - MCP Client: an implementation embedded in the host that connects to your server. It speaks the protocol, opens/manages the connection, and sends/receives requests.
-- MCP Server: your program that exposes tools/resources. It runs actions and returns data/events to the client.
+- MCP Server: your program that exposes tools. It runs actions and returns data/events to the client.
 
-The server exposes three things:
-
-- **Tools**: actions it can execute (transcribe audio, search files)
-- **Resources**: data it can provide (contact list, recent files)
-- **Prompts**: interaction templates (we skip them in this example)
+An MCP server can expose different capabilities, but in this project we stick to **tools** (actions like transcribing audio). MCP also supports resources or prompts; we skip them here to keep the flow simple.
 
 ![MCP architecture: Host -> MCP Client -> MCP Server](./assets/mcp_whatsapp_1.png)
 
@@ -67,39 +63,21 @@ this.server = new Server(
   },
   {
     capabilities: {
-      resources: {}, // We will expose data
       tools: {}, // We will expose actions
     },
   }
 );
 ```
 
-### Resources: the data we expose
+### Designing the tools that matter
 
-```typescript
-this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
-  return {
-    resources: [
-      {
-        uri: "whatsapp://contacts",
-        name: "WhatsApp Contacts",
-        description: "List of WhatsApp contacts with audio messages",
-        mimeType: "application/json",
-      },
-      {
-        uri: "whatsapp://recent/all",
-        name: "Recent Audios",
-        description: "Recent audio messages from all contacts",
-        mimeType: "application/json",
-      },
-    ],
-  };
-});
-```
+The MCP server lives or dies on its tools, así que definimos sólo las tres operaciones que cubren el flujo completo:
 
-Each resource has a unique URI. When Cursor asks for `whatsapp://contacts`, our server knows what to return.
+- `getRecentAudio(contactName, count?)`: devuelve las rutas más recientes de un contacto. Nos evita navegar carpetas a mano y sirve como primer paso para elegir qué transcribir.
+- `searchAudios(query, date?)`: permite buscar por nombre o acotar por fecha. Con esto filtramos cuando el historial es grande sin tener que tocar la base SQLite directamente.
+- `transcribeAudio(audioPath)`: toma una ruta concreta y devuelve el texto via Whisper. Es la acción final que genera el valor.
 
-### Tools: the actions available
+El objetivo fue mantener un catálogo mínimo pero suficiente: localizar audios, refinar la búsqueda y transcribir. Ninguna otra herramienta aportaba más sin complicar la interfaz.
 
 ```typescript
 {
