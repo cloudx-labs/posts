@@ -1,3 +1,11 @@
+---
+title: "WhatsApp + MCP: automatic audio transcription"
+published: true
+description: "Build a local MCP server that surfaces WhatsApp voice notes and transcribes them with Whisper."
+tags: "mcp, ai, whisper, automation"
+cover_image: ./assets/cover_mcp_whatsapp.png
+---
+
 # WhatsApp + MCP: automatic audio transcription
 
 MCP (Model Context Protocol) can look complicated until you ship something real with it. Let's use it on something practical: expose your WhatsApp voice notes with your own MCP server and turn them into transcripts.
@@ -98,7 +106,7 @@ The goal was a minimal set: find, refine, transcribe. Every tool maps to that pa
 
 The schema follows JSON Schema. With it, Cursor knows which parameters to send.
 
-## The engine: accessing WhatsApp
+## Accessing WhatsApp
 
 WhatsApp Desktop keeps everything under predictable paths:
 
@@ -148,7 +156,7 @@ async function scanDirectory(dir: string): Promise<void> {
 }
 ```
 
-## The transcription: FFmpeg + OpenAI Whisper (SDK)
+## The transcription: FFmpeg + Whisper
 
 WhatsApp ships audio in Opus, but OpenAI Whisper prefers MP3. We use FFmpeg:
 
