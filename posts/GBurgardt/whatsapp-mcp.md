@@ -69,15 +69,15 @@ this.server = new Server(
 );
 ```
 
-### Designing the tools that matter
+### Designing the tools
 
-The MCP server lives or dies on its tools, así que definimos sólo las tres operaciones que cubren el flujo completo:
+The server lives on three tools each with a specific role:
 
-- `getRecentAudio(contactName, count?)`: devuelve las rutas más recientes de un contacto. Nos evita navegar carpetas a mano y sirve como primer paso para elegir qué transcribir.
-- `searchAudios(query, date?)`: permite buscar por nombre o acotar por fecha. Con esto filtramos cuando el historial es grande sin tener que tocar la base SQLite directamente.
-- `transcribeAudio(audioPath)`: toma una ruta concreta y devuelve el texto via Whisper. Es la acción final que genera el valor.
+- `getRecentAudio(contactName, count?)`: pulls the latest audio paths for a contact.
+- `searchAudios(query, date?)`: narrows the list by name or date when the history is large. We get filtering without touching SQLite directly.
+- `transcribeAudio(audioPath)`: turns a path into text with Whisper. It finishes the loop by delivering the result we care about.
 
-El objetivo fue mantener un catálogo mínimo pero suficiente: localizar audios, refinar la búsqueda y transcribir. Ninguna otra herramienta aportaba más sin complicar la interfaz.
+The goal was a minimal set: find, refine, transcribe. Every tool maps to that path.
 
 ```typescript
 {
@@ -96,7 +96,7 @@ El objetivo fue mantener un catálogo mínimo pero suficiente: localizar audios,
 }
 ```
 
-The schema follows JSON Schema. With it, Claude knows which parameters to send.
+The schema follows JSON Schema. With it, Cursor knows which parameters to send.
 
 ## The engine: accessing WhatsApp
 
