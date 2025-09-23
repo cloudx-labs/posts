@@ -1,17 +1,19 @@
 # WhatsApp + MCP: automatic audio transcription
 
-MCP (Model Context Protocol) can look complicated until you ship something real with it. So let's take it for a spin with something useful: expose your WhatsApp voice notes with your own MCP server and turn them into transcripts.
+MCP (Model Context Protocol) can look complicated until you ship something real with it. Let's use it on something practical: expose your WhatsApp voice notes with your own MCP server and turn them into transcripts.
 
 ## What is MCP?
 
-MCP is a connection standard that links AI agents with external systems.
+MCP is a connection standard that connects AI agents with external systems.
 
 It has a server and a client, and they have two different ways to talk to each other:
 
-- stdio (stdin/stdout): the standard Unix mechanism for a process to receive or hand off data to the environment or another process.
+- stdio (stdin/stdout): the standard Unix mechanism for a process to receive or send data to the environment or another process.
 - Server-Sent Events (SSE): an HTTP mechanism where the server keeps the connection open and streams events to the client (one-way).
 
 ![STDIN/STDOUT vs SSE in MCP](./assets/mcp_whatsapp_2.png)
+
+_Quick comparison of stdio and SSE transports in MCP._
 
 ## MCP architecture
 
@@ -27,6 +29,8 @@ The server exposes three things:
 
 ![MCP architecture: Host -> MCP Client -> MCP Server](./assets/mcp_whatsapp_1.png)
 
+_Diagram of the Host → MCP Client → MCP Server flow._
+
 ## Building the WhatsApp MCP
 
 WhatsApp Desktop on macOS stores everything locally: an SQLite database with chats and folders containing the media files.
@@ -35,10 +39,10 @@ Our MCP server will:
 
 1. Read the WhatsApp database
 2. Find audio files per contact
-3. Transcribe them with OpenAI Whisper (SDK)
-4. Send the text back to Claude
+3. Transcribe them with Whisper
+4. Send the text back to the Client (Cursor in this case)
 
-The working code lives in the repository: [pending link](REPO_URL_PENDING). Let's walk through the key pieces.
+The working code lives in the repository: [mcp-whatsapp-whisper](https://github.com/GBurgardt/mcp-whatsapp-whisper). Let's walk through the key pieces.
 
 ### The STDIN/STDOUT connection
 
@@ -93,7 +97,7 @@ this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
 });
 ```
 
-Each resource ships with a unique URI. When Claude asks for `whatsapp://contacts`, our server knows what to return.
+Each resource has a unique URI. When Cursor asks for `whatsapp://contacts`, our server knows what to return.
 
 ### Tools: the actions available
 
@@ -168,7 +172,7 @@ async function scanDirectory(dir: string): Promise<void> {
 
 ## The transcription: FFmpeg + OpenAI Whisper (SDK)
 
-WhatsApp ships audio in Opus, but OpenAI Whisper prefers MP3. We lean on FFmpeg:
+WhatsApp ships audio in Opus, but OpenAI Whisper prefers MP3. We use FFmpeg:
 
 ```typescript
 const ffmpeg = spawn("ffmpeg", [
@@ -198,40 +202,45 @@ const transcription = await openai.audio.transcriptions.create({
 const transcriptionText = transcription.text;
 ```
 
-## Configuring Claude (the client)
+## Configuring Cursor (the client)
 
-In the Claude Desktop config we add:
+In the Cursor config (`~/.cursor/mcp.json`) we add:
 
 ```json
 {
   "mcpServers": {
     "whatsapp": {
       "command": "node",
-      "args": ["/path/to/mcp-whatsapp-whisper/dist/server.js"]
+      "args": ["/path/to/mcp-whatsapp-whisper/dist/server.js"],
+      "env": {
+        "OPENAI_API_KEY": "YOUR_OPENAI_KEY"
+      }
     }
   }
 }
 ```
 
-Claude can now invoke our server whenever it needs to.
+Cursor can now invoke our server whenever it needs to.
 
 ## MCP in action
 
-The user asks Claude:
+The user asks Cursor:
 
-> "What did Lucas say in the last voice note he sent me?"
+> "Send me the transcript of Elian's last audio."
 
-Claude automatically:
+Cursor automatically:
 
-1. Calls `getRecentAudio(contactName: "lucas")`
+1. Calls `getRecentAudio(contactName: "elian")`
 2. Receives the audio file path
 3. Calls `transcribeAudio(audioPath: "/path/to/audio.opus")`
 4. Receives the transcription
 5. Summarizes or shows the full text
 
-The transcription flows through the OpenAI API; the temporary MP3 is sent to get the text back. Claude orchestrates; your server prepares the file and makes the call.
+The transcription flows through the OpenAI API; the temporary MP3 is sent to get the text back. Cursor orchestrates; your server prepares the file and makes the call.
 
-![Claude + MCP WhatsApp: transcription example](./assets/mcp_whatsapp_3.png)
+![Cursor + MCP WhatsApp: transcription example](./assets/mcp_whatsapp_3.png)
+
+_Cursor showing the transcription returned by the WhatsApp MCP server._
 
 ## Limitations: macOS only
 
@@ -246,23 +255,16 @@ It depends on:
 
 We also skip Prompts and Resource Templates.
 
-Security depends on the host. Claude can ask for approval before it runs tools.
+Security depends on the host. Cursor can ask for approval before it runs tools.
 
-## Build your own MCP server
+## Keep it running with PM2
 
-The pattern is simple:
-
-1. **Identify valuable local data** (email, documents, databases)
-2. **Define which actions make sense** (search, analyze, transform)
-3. **Implement the MCP server**
-4. **Hook it into your favorite host** (Claude, Cursor, your own app)
-
-MCP is just a protocol that connects AI with the real world.
+Build the project once (`npm run build`) and keep the server alive with `pm2 start ecosystem.config.cjs`. The provided config watches the compiled `dist/server.js` and restarts it if it crashes.
 
 ## Conclusion
 
-Your AI assistant can now reach YOUR data, use YOUR tools, work in YOUR context.
+Your AI agent can now reach your data, use your tools, work in your context.
 
-The WhatsApp server is just one illustrative idea. Once you realize any program that speaks STDIN/STDOUT can be an MCP server, the possibilities get wild.
+The WhatsApp server is just one idea. Once you realize any program that speaks STDIN/STDOUT can be an MCP server, the possibilities get wild.
 
-Next time you think "I wish Claude could access...", remember: it probably can. You just need to build the bridge.
+Next time you think "I wish Cursor could access...", remember: it probably can. You just need to build the bridge.
