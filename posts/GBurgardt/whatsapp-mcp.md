@@ -1,51 +1,46 @@
-# WhatsApp + MCP: transcripción automática de audios
+# WhatsApp + MCP: automatic audio transcription
 
-MCP (Model Context Protocol) puede parecer complejo hasta que construyes algo real con él. Por eso vamos a llevarlo a la práctica con algo util: exponer tus audios de WhatsApp con tu propio servidor MCP para transcribir audios.
+MCP (Model Context Protocol) can look complicated until you ship something real with it. So let's take it for a spin with something useful: expose your WhatsApp voice notes with your own MCP server and turn them into transcripts.
 
-## Que es MCP?
+## What is MCP?
 
-MCP es un estándar de conexión que conecta agentes de IA con sistemas externos.
+MCP is a connection standard that links AI agents with external systems.
 
-Tiene un servidor y un cliente y tienen dos formas distintas de comunicarse entre si:
+It has a server and a client, and they have two different ways to talk to each other:
 
-- stdio (stdin/stdout): es el mecanismo estándar de Unix por el que un proceso recibe/entrega datos del entorno o de otro proceso (entrada).
-- Server-Sent Events (SSE): mecanismo sobre HTTP donde el servidor mantiene la conexión abierta y envía eventos al cliente de forma continua (unidireccional).
+- stdio (stdin/stdout): the standard Unix mechanism for a process to receive or hand off data to the environment or another process.
+- Server-Sent Events (SSE): an HTTP mechanism where the server keeps the connection open and streams events to the client (one-way).
 
-![STDIN/STDOUT vs SSE en MCP](./assets/mcp_whatsapp_2.png)
+![STDIN/STDOUT vs SSE in MCP](./assets/mcp_whatsapp_2.png)
 
-## Arquitectura de un MCP
+## MCP architecture
 
-- Host: Claude Desktop / Cursor / Cualquier agente IA. Coordina el LLM, arranca clientes MCP y muestra resultados.
-- Cliente MCP: implementación embebida en el host que se conecta a tu servidor. habla el protocolo, abre/gestiona la conexión y envía/recibe requests.
-- Servidor MCP: tu programa que expone tools/resources. ejecuta acciones y devuelve datos/eventos al cliente.
+- Host: Claude Desktop / Cursor / any AI agent. It coordinates the LLM, spins up MCP clients, and shows results.
+- MCP Client: an implementation embedded in the host that connects to your server. It speaks the protocol, opens/manages the connection, and sends/receives requests.
+- MCP Server: your program that exposes tools/resources. It runs actions and returns data/events to the client.
 
-El servidor expone tres cosas:
+The server exposes three things:
 
-- **Tools**: Acciones que puede ejecutar (transcribir audio, buscar archivos)
+- **Tools**: actions it can execute (transcribe audio, search files)
+- **Resources**: data it can provide (contact list, recent files)
+- **Prompts**: interaction templates (we skip them in this example)
 
-- **Resources**: Datos que puede proveer (lista de contactos, archivos recientes)
+![MCP architecture: Host -> MCP Client -> MCP Server](./assets/mcp_whatsapp_1.png)
 
-- **Prompts**: Plantillas de interacción (no las usamos en este ejemplo)
+## Building the WhatsApp MCP
 
-![Arquitectura MCP: Host → Cliente MCP → Servidor MCP](./assets/mcp_whatsapp_1.png)
+WhatsApp Desktop on macOS stores everything locally: an SQLite database with chats and folders containing the media files.
 
-## Creando el MCP de WhatsApp
+Our MCP server will:
 
-WhatsApp Desktop en macOS guarda todo localmente. Base de datos SQLite con los chats, carpetas con los archivos multimedia.
+1. Read the WhatsApp database
+2. Find audio files per contact
+3. Transcribe them with OpenAI Whisper (SDK)
+4. Send the text back to Claude
 
-Nuestro servidor MCP va a:
+The working code lives in the repository: [pending link](REPO_URL_PENDING). Let's walk through the key pieces.
 
-1. Leer la base de datos de WhatsApp
-
-2. Buscar archivos de audio por contacto
-
-3. Transcribirlos usando OpenAI Whisper (SDK)
-
-4. Devolver el texto a Claude
-
-El código funcional está en el repositorio: [link pendiente](REPO_URL_PENDIENTE). Vamos a explicar las partes clave.
-
-### La conexión STDIN/STDOUT
+### The STDIN/STDOUT connection
 
 ```typescript
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -54,11 +49,11 @@ const transport = new StdioServerTransport();
 await this.server.connect(transport);
 ```
 
-Con eso el servidor escucha toda request de un cliente en STDIN y le responde por STDOUT.
+With that the server listens to every client request on STDIN and replies through STDOUT.
 
-Elegimos stdio porque este MCP Server corre localmente. Es el transporte más simple y estable en desktop/CLI: no abre puertos ni depende de HTTP, evita CORS/firewalls y los hosts (Claude Desktop/Cursor) lo soportan nativamente. SSE tiene sentido cuando el servidor vive remoto detrás de HTTP.
+We pick stdio because this MCP server runs locally. It's the simplest and most stable transport on desktop/CLI: no open ports, no HTTP dependency, avoids CORS/firewalls, and hosts (Claude Desktop/Cursor) support it natively. SSE makes sense when the server lives remotely behind HTTP.
 
-### Exponiendo capacidades
+### Exposing capabilities
 
 ```typescript
 this.server = new Server(
@@ -68,14 +63,14 @@ this.server = new Server(
   },
   {
     capabilities: {
-      resources: {}, // Vamos a exponer datos
-      tools: {}, // Vamos a exponer acciones
+      resources: {}, // We will expose data
+      tools: {}, // We will expose actions
     },
   }
 );
 ```
 
-### Resources: Los datos que exponemos
+### Resources: the data we expose
 
 ```typescript
 this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
@@ -98,9 +93,9 @@ this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
 });
 ```
 
-Cada resource tiene una URI única. Cuando Claude pide `whatsapp://contacts`, nuestro servidor sabe qué devolver.
+Each resource ships with a unique URI. When Claude asks for `whatsapp://contacts`, our server knows what to return.
 
-### Tools: Las acciones disponibles
+### Tools: the actions available
 
 ```typescript
 {
@@ -119,11 +114,11 @@ Cada resource tiene una URI única. Cuando Claude pide `whatsapp://contacts`, nu
 }
 ```
 
-El schema es JSON Schema estándar. Con esto Claude sabe qué parámetros enviar.
+The schema follows JSON Schema. With it, Claude knows which parameters to send.
 
-## El motor: Accediendo a WhatsApp
+## The engine: accessing WhatsApp
 
-WhatsApp Desktop guarda todo en rutas predecibles:
+WhatsApp Desktop keeps everything under predictable paths:
 
 ```typescript
 this.dbPath = path.join(
@@ -136,7 +131,7 @@ this.mediaPath = path.join(
 );
 ```
 
-La base de datos es SQLite:
+The database is SQLite:
 
 ```typescript
 const query = `
@@ -146,11 +141,11 @@ const query = `
     ZLASTMESSAGEDATE as lastMessageDate
   FROM ZWACHATSESSION
   WHERE ZPARTNERNAME IS NOT NULL
-  AND ZCONTACTJID NOT LIKE '%@g.us'  -- Excluir grupos
+  AND ZCONTACTJID NOT LIKE '%@g.us'  -- Exclude groups
 `;
 ```
 
-Los archivos de audio están organizados por contacto. Escaneamos recursivamente:
+Audio files are organized per contact. We scan recursively:
 
 ```typescript
 const audioExtensions = [".opus", ".m4a", ".mp3", ".aac", ".wav"];
@@ -160,7 +155,7 @@ async function scanDirectory(dir: string): Promise<void> {
 
   for (const entry of entries) {
     if (audioExtensions.some((ext) => entry.name.endsWith(ext))) {
-      // Encontramos un audio
+      // Found an audio file
       audioFiles.push({
         path: fullPath,
         filename: entry.name,
@@ -171,23 +166,23 @@ async function scanDirectory(dir: string): Promise<void> {
 }
 ```
 
-## La transcripción: FFmpeg + OpenAI Whisper (SDK)
+## The transcription: FFmpeg + OpenAI Whisper (SDK)
 
-WhatsApp usa formato Opus, pero OpenAI Whisper prefiere MP3. Usamos FFmpeg:
+WhatsApp ships audio in Opus, but OpenAI Whisper prefers MP3. We lean on FFmpeg:
 
 ```typescript
 const ffmpeg = spawn("ffmpeg", [
   "-i",
-  inputPath, // Audio Opus de WhatsApp
+  inputPath, // WhatsApp Opus audio
   "-acodec",
   "mp3",
   "-b:a",
   "128k",
-  outputPath, // MP3 temporal
+  outputPath, // Temporary MP3
 ]);
 ```
 
-Luego transcribimos con OpenAI Whisper (SDK):
+Then we transcribe with OpenAI Whisper (SDK):
 
 ```typescript
 import OpenAI from "openai";
@@ -196,16 +191,16 @@ import fs from "node:fs";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const transcription = await openai.audio.transcriptions.create({
-  file: fs.createReadStream(outputPath), // MP3 temporal
+  file: fs.createReadStream(outputPath), // Temporary MP3
   model: "whisper-1",
 });
 
 const transcriptionText = transcription.text;
 ```
 
-## Configurando Claude (el cliente)
+## Configuring Claude (the client)
 
-En la configuración de Claude Desktop agregamos:
+In the Claude Desktop config we add:
 
 ```json
 {
@@ -218,68 +213,56 @@ En la configuración de Claude Desktop agregamos:
 }
 ```
 
-Claude ahora puede invocar nuestro servidor cuando lo necesite.
+Claude can now invoke our server whenever it needs to.
 
-## El MCP en acción
+## MCP in action
 
-Usuario pregunta a Claude:
+The user asks Claude:
 
->
+> "What did Lucas say in the last voice note he sent me?"
 
-"¿Qué me dijo Lucas en el último audio que me mandó?"
+Claude automatically:
 
-Claude automáticamente:
+1. Calls `getRecentAudio(contactName: "lucas")`
+2. Receives the audio file path
+3. Calls `transcribeAudio(audioPath: "/path/to/audio.opus")`
+4. Receives the transcription
+5. Summarizes or shows the full text
 
-1. Invoca `getRecentAudio(contactName: "lucas")`
+The transcription flows through the OpenAI API; the temporary MP3 is sent to get the text back. Claude orchestrates; your server prepares the file and makes the call.
 
-2. Recibe la ruta del archivo de audio
+![Claude + MCP WhatsApp: transcription example](./assets/mcp_whatsapp_3.png)
 
-3. Invoca `transcribeAudio(audioPath: "/path/to/audio.opus")`
+## Limitations: macOS only
 
-4. Recibe la transcripción
+This server is macOS only. The WhatsApp paths are specific to Mac.
 
-5. Resume o muestra el texto completo
+It depends on:
 
-La transcripción se realiza en OpenAI vía API, el MP3 temporal se envía para obtener el texto. Claude orquesta; tu servidor prepara el archivo y hace la llamada.
-
-![Claude + MCP WhatsApp: ejemplo de transcripción de audio](./assets/mcp_whatsapp_3.png)
-
-## Las limitaciones: macOS only
-
-Este servidor es macOS only. Las rutas de WhatsApp son específicas de Mac.
-
-Depende de:
-
-- WhatsApp Desktop instalado
-
+- WhatsApp Desktop installed
 - FFmpeg (`brew install ffmpeg`)
+- OpenAI SDK (`npm i openai`) with `OPENAI_API_KEY` configured
+- Internet connection
 
-- OpenAI SDK (`npm i openai`) y `OPENAI_API_KEY` configurada
+We also skip Prompts and Resource Templates.
 
-- Conexión a Internet
+Security depends on the host. Claude can ask for approval before it runs tools.
 
-Tampoco implementamos Prompts ni Resource Templates.
+## Build your own MCP server
 
-La seguridad depende del host. Claude puede pedir aprobación antes de ejecutar tools.
+The pattern is simple:
 
-## Construye tu propio MCP server
+1. **Identify valuable local data** (email, documents, databases)
+2. **Define which actions make sense** (search, analyze, transform)
+3. **Implement the MCP server**
+4. **Hook it into your favorite host** (Claude, Cursor, your own app)
 
-El patrón es simple:
+MCP is just a protocol that connects AI with the real world.
 
-1. **Identifica datos locales valiosos** (emails, documentos, bases de datos)
+## Conclusion
 
-2. **Define qué acciones tienen sentido** (buscar, analizar, transformar)
+Your AI assistant can now reach YOUR data, use YOUR tools, work in YOUR context.
 
-3. **Implementa el servidor MCP**
+The WhatsApp server is just one illustrative idea. Once you realize any program that speaks STDIN/STDOUT can be an MCP server, the possibilities get wild.
 
-4. **Conéctalo a tu host favorito** (Claude, Cursor, tu propia app)
-
-MCP es solo un protocolo que conectar la IA con el mundo real.
-
-## Conclusión
-
-Tu asistente de IA ahora puede acceder a TUS datos, usar TUS herramientas, trabajar en TU contexto.
-
-El servidor de WhatsApp es solo una idea ilustrativa. Una vez que entiendes que cualquier programa que hable por STDIN/STDOUT puede ser un servidor MCP las posibilidades son infinitas.
-
-La próxima vez que pienses "ojalá Claude pudiera acceder a...", recuerda: seguramente pueda. Solo necesitas construir el puente.
+Next time you think "I wish Claude could access...", remember: it probably can. You just need to build the bridge.
