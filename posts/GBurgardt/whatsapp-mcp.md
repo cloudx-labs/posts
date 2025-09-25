@@ -85,7 +85,7 @@ The server lives on three tools each with a specific role:
 - `searchAudios(query, date?)`: narrows the list by name or date when the history is large. We get filtering without touching SQLite directly.
 - `transcribeAudio(audioPath)`: turns a path into text with Whisper. It finishes the loop by delivering the result we care about.
 
-The goal was a minimal set: find, refine, transcribe. Every tool maps to that path.
+The goal was a minimal set: find, refine, transcribe. Each tool lines up with one of those stages.
 
 ```typescript
 {
