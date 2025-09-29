@@ -5,6 +5,7 @@ description: Build a local MCP server that surfaces WhatsApp voice notes and tra
 tags: 'mcp, ai, whisper, automation'
 cover_image: ./assets/cover_mcp_whatsapp.png
 id: 2877031
+date: '2025-09-29T19:39:53Z'
 ---
 
 ## Introduction
