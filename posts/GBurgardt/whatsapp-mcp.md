@@ -1,6 +1,6 @@
 ---
 title: 'WhatsApp + MCP: automatic audio transcription'
-published: false
+published: true
 description: Build a local MCP server that surfaces WhatsApp voice notes and transcribes them with Whisper.
 tags: 'mcp, ai, whisper, automation'
 cover_image: ./assets/cover_mcp_whatsapp.png
