@@ -6,8 +6,6 @@ tags: 'ai, agents, productivity, technology'
 cover_image: ./assets/cover.png
 ---
 
-# Bicycles Are All Your AI Agents Need - By Fede Pascarella
-
 ## Introduction - From Condors to Code
 
 Somewhere between a condor and a keyboard lies human genius.
@@ -68,10 +66,8 @@ At CloudX, we’ve learned that innovation often hides in simplicity. Building e
 Write clean, focused, well-documented tools. Think in micro-tooling: small parts, big impact. Keep your agent’s toolbox sharp, organized, and light.
 Because when your tools are great, your agents stop crawling and start flying—on two beautifully engineered wheels.
 So, next time you’re debugging that stubborn Python function, just remember:
-You’re not fixing a bug. You’re tuning a bicycle for the mind of an AI. 🚲
-
+You're not fixing a bug. You're tuning a bicycle for the mind of an AI. 🚲
 
 ## References
 
-Fede Pacarella
-
+Fede Pascarella
