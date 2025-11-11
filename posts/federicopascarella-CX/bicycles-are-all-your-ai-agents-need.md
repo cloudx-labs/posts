@@ -1,18 +1,17 @@
 ---
-
 title: Bicycles Are All Your AI Agents Need
 published: false
 description: How simple, reliable tools make AI agents effective
 tags: 'ai, agents, productivity, technology'
 cover_image: ./assets/cover.png
--------------------------------
+---
 
 ## From Condors to Code
 
-Somewhere between a condor and a keyboard lies human genius. Steve Jobs once told a story about how humans are terrible movers compared to animals. The condor beats us easily in the race of energy efficiency, but put a person on a bicycle and they fly. 
-The bicycle, Jobs said, is “a tool that amplifies our efficiency.” Computers, he added, are bicycles for the mind. 
-That thought never left me. And now, with AI agents evolving super-fast, I can’t help seeing the same pattern repeat.
-My humble view is that tools are still the key. Only this time, the cyclists are our AI agents with its brain (the LLM), and the bicycles are the functions we build for them.  
+Somewhere between a condor and a keyboard lies human genius. Steve Jobs once told a story about how humans are terrible movers compared to animals. The condor beats us easily in the race of energy efficiency, but put a person on a bicycle and they fly.
+The bicycle, Jobs said, is "a tool that amplifies our efficiency." Computers, he added, are bicycles for the mind.
+That thought never left me. And now, with AI agents evolving super-fast, I can't help seeing the same pattern repeat.
+My humble view is that tools are still the key. Only this time, the cyclists are our AI agents with its brain (the LLM), and the bicycles are the functions we build for them.
 With the right tools, an agent moves with purpose. With clumsy tools, it stalls.
 
 ## The Engineering of Great Tools
@@ -162,13 +161,13 @@ A concrete example makes the difference clear. Here is the same task, done with 
 
 **Task:** Extract newly signed customers from a CSV in cloud storage, enrich each with firmographic data, and email an account summary.
 
-**Agent with poorly designed tools**
+#### Agent with poorly designed tools
 
 1. Calls a generic `process_file()` that auto-detects type and tries to parse everything.
 2. Uses one do everything `enrich_user()` that accepts many flags, then times out on third party rate limits.
 3. Prints logs to stdout, returns a mixed string summary, and the agent fails to decide what to send.
 
-**Decision flow with weak tools**
+#### Decision flow with weak tools
 
 * Input: blob path
 * Branch: auto-detect format, guess schema
@@ -176,13 +175,13 @@ A concrete example makes the difference clear. Here is the same task, done with 
 * Output: unstructured string
 * Failure mode: retries loop, hallucinates missing fields, no clear errors
 
-**Agent with well designed tools**
+#### Agent with well designed tools
 
 1. `load_csv(path, schema)` returns a typed dataframe.
 2. `batch_enrich(users, provider, rate_limit)` yields structured rows with retry metadata.
 3. `render_account_summary(users)` returns JSON for `send_email(to, subject, body_html)`.
 
-**Decision flow with strong tools**
+#### Decision flow with strong tools
 
 * Input: explicit path and schema
 * Transform: strict parser
@@ -194,5 +193,5 @@ Result: same goal, three clean steps, easy to test and to explain.
 
 ## Conclusion
 
-I believe that innovation often hides in simplicity. Building efficient AI agents isn’t about giving them infinite intelligence; it’s about giving them great tools. Write them clean, focused, and well-documented; think in micro-tooling: small parts, big impact. 
-So, next time you’re debugging that stubborn Python function, just remember: you're not fixing a bug. You're tuning a bicycle for the mind of an AI.
+I believe that innovation often hides in simplicity. Building efficient AI agents isn't about giving them infinite intelligence; it's about giving them great tools. Write them clean, focused, and well-documented; think in micro-tooling: small parts, big impact.
+So, next time you're debugging that stubborn Python function, just remember: you're not fixing a bug. You're tuning a bicycle for the mind of an AI.
