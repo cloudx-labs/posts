@@ -161,13 +161,13 @@ A concrete example makes the difference clear. Here is the same task, done with 
 
 **Task:** Extract newly signed customers from a CSV in cloud storage, enrich each with firmographic data, and email an account summary.
 
-#### Agent with poorly designed tools
+### Agent with poorly designed tools
 
 1. Calls a generic `process_file()` that auto-detects type and tries to parse everything.
 2. Uses one do everything `enrich_user()` that accepts many flags, then times out on third party rate limits.
 3. Prints logs to stdout, returns a mixed string summary, and the agent fails to decide what to send.
 
-#### Decision flow with weak tools
+### Decision flow with weak tools
 
 * Input: blob path
 * Branch: auto-detect format, guess schema
@@ -175,13 +175,13 @@ A concrete example makes the difference clear. Here is the same task, done with 
 * Output: unstructured string
 * Failure mode: retries loop, hallucinates missing fields, no clear errors
 
-#### Agent with well designed tools
+### Agent with well designed tools
 
 1. `load_csv(path, schema)` returns a typed dataframe.
 2. `batch_enrich(users, provider, rate_limit)` yields structured rows with retry metadata.
 3. `render_account_summary(users)` returns JSON for `send_email(to, subject, body_html)`.
 
-#### Decision flow with strong tools
+### Decision flow with strong tools
 
 * Input: explicit path and schema
 * Transform: strict parser
