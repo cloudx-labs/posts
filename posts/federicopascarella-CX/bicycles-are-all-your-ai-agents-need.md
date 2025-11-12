@@ -1,9 +1,10 @@
 ---
 title: Bicycles Are All Your AI Agents Need
 published: false
-description: How simple, reliable tools make AI agents effective
+description: 'How simple, reliable tools make AI agents effective'
 tags: 'ai, agents, productivity, technology'
 cover_image: ./assets/cover.png
+id: 3017254
 ---
 
 ## From Condors to Code
