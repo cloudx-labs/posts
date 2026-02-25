@@ -18,7 +18,7 @@ We saw this firsthand. You ask a model to write about how a framework works, it 
 
 One-shot generation produces documents that _look_ correct. The only way they actually end up correct is when the human stays in the middle of the process: iterating with intention, actively verifying, acting as the quality filter on every pass.
 
-![Documentation workflow cycle: Debate, Transcribe, Draft, Review, Verify, Iterate](./assets/how_we_delivered_process_cycle.jpg)
+![How transcription, LLM drafting, coding agents, and web search feed each other](./assets/how_we_delivered_tools_in_combination.jpg)
 
 ## How We Actually Built It
 
@@ -113,7 +113,7 @@ The tool became central to the entire process. Before, it was unthinkable to bui
 
 The value is in the combination of tools. It's a compounding effect: each tool amplifies the others. Transcription feeds the LLM, the LLM generates drafts that get verified with web search, doubts get resolved with coding agents, and the validated result goes back into the document. Each pass through the cycle produces a better result than the last.
 
-![How transcription, LLM drafting, coding agents, and web search feed each other](./assets/how_we_delivered_tools_in_combination.jpg)
+![Raw spoken ideas being transformed into clean, structured text](./assets/how_we_delivered_transcription_signal_flow.jpg)
 
 ## Hard Lessons from the Process
 
@@ -126,8 +126,6 @@ A few things that weren't obvious at the start:
 **The debate format surfaces things solo work doesn't.** When two people challenge each other, wrong assumptions get caught early. "Wait, are you sure that's how eviction works?" is a question that doesn't come up when you're writing alone.
 
 **Transcription removes the bottleneck.** Writing detailed technical content by typing is slow and painful. Speaking is natural. Transcription tools convert that natural flow into raw material that LLMs can process. This single change made the entire methodology viable.
-
-![Raw spoken ideas being transformed into clean, structured text](./assets/how_we_delivered_transcription_signal_flow.jpg)
 
 ## What We Delivered
 
