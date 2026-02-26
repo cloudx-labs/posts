@@ -1,12 +1,12 @@
 ---
-title: How We Delivered 70 Pages of Technical Docs with AI
+title: How We Delivered a Full Technical Implementation Document with AI
 published: false
-description: We delivered a 70-page technical implementation document by combining debate, transcription, verification, and coding agents in iterative cycles.
+description: We delivered a full technical implementation document by combining debate, transcription, verification, and coding agents in iterative cycles.
 tags: "ai, whisper, productivity, tutorial"
 cover_image: ./assets/cover_how_we_delivered_70_pages_documentation.jpeg
 ---
 
-We recently built a 70-page implementation document for a multi-agent system. It covers agent architecture, tool design, integration patterns, and evaluation frameworks. It has working code, verified assumptions, and design decisions debated from multiple angles.
+We recently built a large implementation document for a multi-agent system. It covers agent architecture, tool design, integration patterns, and evaluation frameworks. It has working code, verified assumptions, and design decisions debated from multiple angles.
 
 We didn't write it the traditional way. We used AI tools at every step. The key insight: **iteration is everything**.
 
@@ -46,7 +46,7 @@ The model is good at filtering noise. It pulls the structure out of a messy deba
 
 This is where it gets serious. We read the draft line by line. Every claim gets questioned:
 
-- "Does DeepAgents actually behave this way?"
+- "Does the framework actually behave this way?"
 - "Is this the right pattern for this use case?"
 - "This assumption about state persistence, did we verify it?"
 
@@ -66,7 +66,7 @@ With AI tools, each cycle takes minutes instead of hours.
 
 Something we used a lot and that makes a huge difference: the web search tool built into the models. In our case we used Claude, but any AI with web search access works.
 
-We'd tell the model: "these claims about how DeepAgents works and how it handles state, go search the official documentation and verify if they're correct." The model searches, cross-references with real documentation, and reports discrepancies. We found several claims we had written based on assumptions or partial information.
+We'd tell the model: "these claims about how the framework works and how it handles state, go search the official documentation and verify if they're correct." The model searches, cross-references with real documentation, and reports discrepancies. We found several claims we had written based on assumptions or partial information.
 
 ### Step 6: Proof of Concept On The Fly
 
@@ -80,13 +80,19 @@ All of this in 20 minutes, without leaving the workflow. What used to require a 
 
 To make this tangible, a concrete example of how this methodology saved us.
 
-In the first draft, the AI wrote with full confidence that you could attach images and PDFs to an agent's context and they'd naturally persist throughout the conversation. Sounded logical. We didn't question it on the first pass.
+Our use case needed a subagent with heavy multimodal context: multiple documents and several images loaded simultaneously, persisted across turns so the agent could reason over all of them. The natural approach was delivering these files through tool results.
 
-On the second iteration, during the debate, the doubt surfaced. We asked the AI to search the official documentation. What we found was that the situation is considerably more complicated than the initial draft suggested. It depends heavily on the framework. In Google ADK, attachments don't persist in the history, they disappear after the first turn. In DeepAgents (the framework we use), there's a state persistence mechanism, but with a catch: there's an eviction system that removes heavy content from context after a certain token threshold.
+The first draft described this with full confidence. Tools return attachments, the agent analyzes them, everything persists.
+Second iteration, during the debate, the doubt surfaced. We searched the official docs. What we found: tools cannot return binary content reliably. And each framework handles this differently.
 
-We built several proofs of concept on the fly with a coding agent. We tried overriding the eviction middleware. We tried injecting attachments as HumanMessage directly into the state. We verified each approach with real code, running the agent and observing whether the image persisted after multiple turns. We ended up choosing the HumanMessage approach because it's more robust, simpler, and doesn't depend on middleware ordering.
+Google ADK uses an "artifacts" abstraction. When a tool injects an image, it exists only for that turn. On subsequent turns, ADK re-sends the conversation without the attachments. First turn works. Every turn after that, the model references content it can no longer see.
 
-That finding, with the verified workaround and working code, would have been a bug discovered in production if it weren't for the iterative process.
+DeepAgents is fundamentally text-oriented. It has state persistence, but also an eviction system: when tool results exceed a token threshold, the framework offloads them to the filesystem and replaces the content with a file pointer. Fine for text. Breaks multimodal completely.
+Both frameworks fail at this, just for different reasons.
+
+We built proofs of concept on the fly. Tried overriding the eviction middleware. Tried re-attaching on history reconstruction. The solution we landed on: don't return binary content as a tool result at all. Instead, the tool injects a HumanMessage with the attachments directly into the conversation state, simulating a user message. The tool returns a lightweight text confirmation, but the real payload enters as a HumanMessage, which is never evicted.
+
+That finding would have been a bug discovered in production if we'd trusted the first draft.
 
 ![First draft vs investigated behavior for attachment persistence, including workaround](./assets/how_we_delivered_attachment_persistence_findings.jpg)
 
@@ -119,7 +125,7 @@ The value is in the combination of tools. It's a compounding effect: each tool a
 
 A few things that weren't obvious at the start:
 
-**The model takes your assumptions as truth.** If you say "I think DeepAgents works like this," the model will run with it. It won't question you. You need explicit verification passes where you tell it: "These are claims in the document. Go verify each one against official sources." Without that instruction, it produces confident-sounding content built on your mistakes.
+**The model takes your assumptions as truth.** If you say "I think the framework works like this," the model will run with it. It won't question you. You need explicit verification passes where you tell it: "These are claims in the document. Go verify each one against official sources." Without that instruction, it produces confident-sounding content built on your mistakes.
 
 **Models are eager to resolve, not to doubt.** Especially Claude, it wants to start coding, start writing, start producing. That energy is useful but dangerous. You have to build doubt into the process deliberately. The iteration cycles are how you inject that doubt.
 
@@ -129,7 +135,7 @@ A few things that weren't obvious at the start:
 
 ## What We Delivered
 
-The document we produced covers agent architecture, framework selection with verified trade-offs, integration patterns for Snowflake, Google Drive and Slack, tool design with actionable error patterns, and an evaluation framework with concrete metrics.
+The document we produced covers agent architecture, framework selection with verified trade-offs, integration patterns for databases, cloud storage and messaging platforms, tool design with actionable error patterns, and an evaluation framework with concrete metrics.
 
 Everything was debated, verified against official documentation, and validated with real proofs of concept.
 
