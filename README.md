@@ -55,10 +55,15 @@ Such as:
 title: The title of your article
 published: false
 description: A description for your article
-tags: 'one-tag, another-tag'
+tags: 'onetag, anothertag'
 cover_image: ./assets/path-to-cover.png
 ---
 ```
+
+For the `tags` front-matter field:
+
+- Maximum `4` tags (DEV.to does not support more than four).
+- Tags must not contain hyphens (`-`).
 
 You can see an actual published article with the header [here](./posts/pabloromeo/1.docker-multi-arch.md).
 
