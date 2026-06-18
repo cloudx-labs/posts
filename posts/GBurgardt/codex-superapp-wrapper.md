@@ -64,9 +64,9 @@ That's the whole thing. The important part was turning one of my frictions into 
 
 That's the mental shift: a super-app can be small and concrete; it gathers the operations that used to be scattered across your head, your terminal, your notes, and your prompts.
 
-![Conceptual diagram of one agent splitting into two coordinated sessions while keeping shared context](./assets/codex-superapp-subagents-context-bridge.png)
+![Illustrative screenshot of a main Codex session delegating context to a subagent session](./assets/subagent-session-screenshot.png)
 
-<!-- Screenshot slot: dark desktop app with one main session on the left and one delegated session on the right. The child session shows a parallel task inheriting context; the main session keeps its focus. -->
+_Example: one main session keeps focus while a delegated subagent inherits context and tests edge cases._
 
 ## Context is everything
 
