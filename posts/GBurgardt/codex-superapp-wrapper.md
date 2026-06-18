@@ -86,9 +86,13 @@ Subagents were the first one. Then I looked at the rest of my day and saw the sa
 
 **Codex writes code; Claude explains it.** Codex writes great code. Claude makes it easier to understand. So when a turn finishes, my wrapper hands the raw output to Claude with one simple rule: don't summarize, re-explain.
 
-<!-- Screenshot slot: dark desktop app showing USER ORIGINAL PROMPT and TRANSFORMED PROMPT FOR CLARITY blocks, plus the improver's short reasoning lines. -->
+![Example of a prompt transformer restructuring a vague user prompt into a clear XML-style task brief](./assets/transformer-screenshot-1-prompt-comparison.png)
 
-<!-- Screenshot slot: explanation modal with dense Codex output on one side and a clear Claude explanation on the other: what was broken / what was done / what to do now. -->
+_Example: how the transformer restructures a vague prompt into clarity._
+
+![Example of Claude turning dense Codex output into a clear explanation with next steps](./assets/transformer-screenshot-2-explanation-modal.png)
+
+_Example: how Claude explains what Codex output was missing and how to improve it._
 
 Notice the pattern: GPT writes, Claude explains, Codex executes, and my wrapper coordinates. At that point, the UI layer turns into something else: a personal super-app for working with agents.
 
