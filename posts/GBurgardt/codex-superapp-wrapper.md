@@ -1,7 +1,7 @@
 ---
-title: 'How I Built a Personal AI SuperAPP by Wrapping Codex App Server'
+title: 'How I Built a Personal AI super-app by Wrapping Codex App Server'
 published: false
-description: 'How codex app-server turned a terminal AI workflow into a personal super-app with subagents, shared context, prompt improvement, and output explanations.'
+description: 'How Codex app-server turned a terminal AI workflow into a personal super-app with subagents, shared context, prompt improvement, and output explanations.'
 tags: 'ai, codex, agents, cli'
 cover_image: ./assets/codex-superapp-cover.png
 ---
