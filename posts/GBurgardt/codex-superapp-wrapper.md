@@ -8,13 +8,13 @@ cover_image: ./assets/codex-superapp-cover.png
 
 ![Hero banner showing a Codex App Server wrapper becoming a personal AI super-app](./assets/codex-superapp-cover.png)
 
-For months I used Codex like everyone else: one terminal, one session, one long output. Then I found `codex app-server`: the same engine exposed as JSON-RPC over stdio. It gave me a more useful idea: building my own interface for the work I actually do.
+For months I used Codex like everyone else: one terminal, one session, one long output. Then I found `codex app-server`, the same engine exposed as JSON-RPC over stdio. It gave me a more useful idea, building my own interface for the work I actually do.
 
 ## What a super-app means today
 
 OpenAI has been pretty explicit about this: a [**unified AI superapp**](https://openai.com/index/next-phase-of-enterprise-ai/) is a place where agents, tools, context, and history live together. Instead of jumping from chat to terminal, from terminal to browser, from browser to docs, everything happens in one working surface.
 
-Theo built a very concrete version of that intuition with [T3 Chat](https://t3.chat): he got tired of waiting for the perfect chat app and built his own. My version started from a similar feeling, Codex was already great, but the way I actually work needed a different interface on top.
+Theo built a version of that intuition with [T3 Chat](https://t3.chat): he got tired of waiting for the perfect chat app and built his own. My version started from a similar feeling, Codex was already great, but the way I actually work needed a different interface on top.
 
 ## I built my own super-app
 
@@ -22,7 +22,7 @@ Some context first. Over the last months I've been building a desktop app that w
 
 I never planned a product. I automated my own frictions, one at a time, until the wrapper became the place where I actually work. Theo did the same thing with [T3 Chat](https://t3.chat): no existing AI chat fit him, so he built his own.
 
-My point is that you can build yours too. The engine is already exposed, sitting on your machine. You just need to find the door.
+My point is that you can build yours too. The harness is already exposed, you just need to find the door.
 
 ## The super-app starts with a small door
 
@@ -76,7 +76,7 @@ The briefing packs project name, working directory, current focus, and a snapsho
 
 The briefing also tells the child something that matters a lot in practice: you are not alone in this repository. The parent session is still working next to you. Inspect the current file state, respect parallel changes, and keep your scope tight.
 
-And the door swings both ways. When the child is created, the parent gets a coordination note with `turn/steer` or `turn/start`. When the child finishes or gets stuck, it reports back explicitly: `task_completed`, `blocked`.
+And the door swings both ways. When the child is created, the parent gets a coordination note with `turn/steer`. When the child finishes or gets stuck, it reports back explicitly: `task_completed`, `blocked`.
 
 ## The timeline became the backbone
 
