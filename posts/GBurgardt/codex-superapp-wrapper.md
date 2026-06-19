@@ -5,6 +5,7 @@ description: 'How Codex app-server turned a terminal AI workflow into a personal
 tags: 'ai, codex, agents, cli'
 cover_image: ./assets/codex-superapp-cover.png
 id: 3942842
+date: '2026-06-19T20:10:30Z'
 ---
 
 ![Hero banner showing a Codex App Server wrapper becoming a personal AI super-app](./assets/codex-superapp-cover.png)
