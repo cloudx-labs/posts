@@ -17,9 +17,9 @@ The role of the designer is shifting from a mechanical builder to a product dire
 
 Here is a realistic guide on implementing these instruments across every stage of the product cycle, paired with the vital warnings you must understand before diving in.
 
-![Typing slowly](./assets/typing-slow.png)
+![The Augmented Ecosystem](./assets/augmented-ecosystem.png)
 
-_Writing detailed prompts manually can be slow._
+_The five phases of the workflow, from research to functional code._
 
 ## 1. UX Research & Strategy (The Video-to-Text Pipeline)
 
@@ -34,9 +34,9 @@ Effective design starts with understanding the user. But user testing and interv
 - Step 1b: The Core Analysis: Once you have the plain text, feed the transcript into Claude to act as your strategic sorting assistant: *"Analyze this interview transcript. Extract explicit mentions of user friction during the checkout flow, group them by severity, and pull the exact time-stamped quotes."*
 - Step 1c: The Synthesis: Take those extracted pain points and drop them into FigJam. Use FigJam AI to instantly cluster hundreds of messy digital sticky notes into thematic groups, saving you hours of manual sorting.
 
-![Typing slowly](./assets/typing-slow.png)
+![Phase 1 & 2: The Foundation](./assets/phase-1-2-foundation .png)
 
-_Writing detailed prompts manually can be slow._
+_Turning raw video into structured insight, and code into design tokens._
 
 ## 2. Design System Definition (Bridging the Code-to-Design Gap)
 
@@ -66,9 +66,9 @@ Open Stitch's infinite canvas to engage in fast architectural exploration. Inste
 
 Stitch will generate a connected flow of screens. Don't consider this outcome the final design. Instead, treat it as a sacrificial wireframe and use your voice to refine the layout dynamically. (*"Remove that card, make the search bar prominent"*). You get a structural baseline to stress-test with your Product Manager before committing to high-fidelity design.
 
-![Typing slowly](./assets/typing-slow.png)
+![Phase 3 & 4: The Formation](./assets/phase-3-4-formation.png)
 
-_Writing detailed prompts manually can be slow._
+_From a blank canvas to a structural baseline ready for real UI polish._
 
 ## 4. UI Design & Refinement (The Human Eye)
 
@@ -97,9 +97,9 @@ Instead of trying to wire up 200 prototype spaghetti lines in Figma to simulate 
 
 Now, put a real user in front of this live URL for your usability test. The behavioral data you gather here is accurate to software reality, allowing you to catch structural UX flaws before development begins.
 
-![Typing slowly](./assets/typing-slow.png)
+![Phase 5: The Realization](./assets/phase-5-realization.png)
 
-_Writing detailed prompts manually can be slow._
+_From a prototype that simulates working to an application that actually does._
 
 
 Worth naming before moving on: none of these five tools talk to each other automatically. Moving data between Gemini, Claude, FigJam, Stitch, Figma Make, and Lovable is manual work, you're the one deciding what information matters and where it needs to go next. That translation layer between tools is part of the craft now, not an inconvenience waiting to be automated away.
@@ -135,9 +135,7 @@ Before pitching this workflow to your leadership, you need to calculate the tool
 | 4. UI Design | Figma Make | Data population, state variations, translation adjustments. | Aesthetic execution, micro-interactions, pixel refinement. | Paid subscription. Native to premium Figma plans. |
 | 5. Validation | Lovable | Writing clean code, database provisioning, deployment. | Usability observation, behavioral analysis, product iteration. | Usage-based cost. Can scale in price rapidly. |
 
-![Typing slowly](./assets/typing-slow.png)
-
-_Writing detailed prompts manually can be slow._
+_What the machine handles, and what stays human, phase by phase._
 
 ## Conclusion: Play It Smart, Not Scared
 
