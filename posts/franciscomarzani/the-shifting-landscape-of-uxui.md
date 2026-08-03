@@ -34,7 +34,7 @@ Effective design starts with understanding the user. But user testing and interv
 - Step 1b: The Core Analysis: Once you have the plain text, feed the transcript into Claude to act as your strategic sorting assistant: *"Analyze this interview transcript. Extract explicit mentions of user friction during the checkout flow, group them by severity, and pull the exact time-stamped quotes."*
 - Step 1c: The Synthesis: Take those extracted pain points and drop them into FigJam. Use FigJam AI to instantly cluster hundreds of messy digital sticky notes into thematic groups, saving you hours of manual sorting.
 
-![Phase 1 & 2: The Foundation](./assets/phase-1-2-foundation .png)
+![Phase 1 & 2: The Foundation](./assets/phase-1-2-foundation.png)
 
 _Turning raw video into structured insight, and code into design tokens._
 
