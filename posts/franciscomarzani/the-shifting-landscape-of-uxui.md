@@ -5,7 +5,6 @@ description: The role of the designer is shifting from a mechanical builder to a
 tags: "ai, tooling, design, tools"
 cover_image: ./assets/shifting-landscape-uxui-cover.png
 ---
-# The Shifting Landscape of UX/UI: An Honest Guide to AI Workflows (From Research to Real Code)
 
 Let's be honest: the current anxiety surrounding AI in product design is completely justified. We've all seen the automated UI generators, the shifting job market, and the creeping fear that the skills we spent years perfecting are being commoditized.
 
@@ -62,7 +61,7 @@ Staring at a blank canvas while trying to map out a multi-screen user flow is an
 
 Open Stitch's infinite canvas to engage in fast architectural exploration. Instead of manually drawing boxes for an onboarding flow, use text or real-time voice commands to wireframe concepts instantly:
 
-*"Generate a 5-screen connected flow for a healthcare onboarding process, focusing on insurance intake and prescription management."*
+> "Generate a 5-screen connected flow for a healthcare onboarding process, focusing on insurance intake and prescription management."
 
 Stitch will generate a connected flow of screens. Don't consider this outcome the final design. Instead, treat it as a sacrificial wireframe and use your voice to refine the layout dynamically. (*"Remove that card, make the search bar prominent"*). You get a structural baseline to stress-test with your Product Manager before committing to high-fidelity design.
 
@@ -101,9 +100,7 @@ Now, put a real user in front of this live URL for your usability test. The beha
 
 _From a prototype that simulates working to an application that actually does._
 
-
 Worth naming before moving on: none of these five tools talk to each other automatically. Moving data between Gemini, Claude, FigJam, Stitch, Figma Make, and Lovable is manual work, you're the one deciding what information matters and where it needs to go next. That translation layer between tools is part of the craft now, not an inconvenience waiting to be automated away.
-
 
 ## The Blind Spots: Where This Workflow Shatters
 
