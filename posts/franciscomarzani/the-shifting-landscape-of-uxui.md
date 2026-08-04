@@ -1,6 +1,6 @@
 ---
 title: 'The Shifting Landscape of UX/UI: An Honest Guide to AI Workflows (From Research to Real Code)'
-published: false
+published: true
 description: 'The role of the designer is shifting from a mechanical builder to a product director. To survive this shift, we need to understand exactly where the current AI ecosystem fits into our workflow.'
 tags: 'ai, tooling, design, tools'
 cover_image: ./assets/shifting-landscape-uxui-cover.png
