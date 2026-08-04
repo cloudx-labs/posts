@@ -5,6 +5,7 @@ description: 'The role of the designer is shifting from a mechanical builder to 
 tags: 'ai, tooling, design, tools'
 cover_image: ./assets/shifting-landscape-uxui-cover.png
 id: 4315228
+date: '2026-08-04T21:26:25Z'
 ---
 
 Let's be honest: the current anxiety surrounding AI in product design is completely justified. We've all seen the automated UI generators, the shifting job market, and the creeping fear that the skills we spent years perfecting are being commoditized.
