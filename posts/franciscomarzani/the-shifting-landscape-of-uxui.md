@@ -1,9 +1,10 @@
 ---
-title: "The Shifting Landscape of UX/UI: An Honest Guide to AI Workflows (From Research to Real Code)"
+title: 'The Shifting Landscape of UX/UI: An Honest Guide to AI Workflows (From Research to Real Code)'
 published: false
-description: The role of the designer is shifting from a mechanical builder to a product director. To survive this shift, we need to understand exactly where the current AI ecosystem fits into our workflow.
-tags: "ai, tooling, design, tools"
+description: 'The role of the designer is shifting from a mechanical builder to a product director. To survive this shift, we need to understand exactly where the current AI ecosystem fits into our workflow.'
+tags: 'ai, tooling, design, tools'
 cover_image: ./assets/shifting-landscape-uxui-cover.png
+id: 4315228
 ---
 
 Let's be honest: the current anxiety surrounding AI in product design is completely justified. We've all seen the automated UI generators, the shifting job market, and the creeping fear that the skills we spent years perfecting are being commoditized.
