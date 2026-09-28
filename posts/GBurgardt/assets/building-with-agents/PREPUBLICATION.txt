@@ -1,36 +1,31 @@
-PREPARATION ONLY — DO NOT OPEN PR OR MERGE YET
+PREPARATION ONLY — NO PUSH, PR OR MERGE PERFORMED
 
 Source: Fermin Articles, Building with Agents: QA and UX in the Loop.
-Article ID: a-162cabb0-029e-434f-b73f-83324a6b69bc; version 13.
+Article ID: a-162cabb0-029e-434f-b73f-83324a6b69bc.
+Includes the approved English Micro Lista adapted trace and clarification
+that using WhatsApp and making the API call were the agent's decisions.
+Provider-specific Twilio claims and the unverified credential-search claim
+were removed from this episode; the recorded call uses WhatsApp's API client.
 
-Included: three original images and say-video-simulador.mp4 (with audio).
-Only export adaptations: repository frontmatter, relative asset paths,
-title moved to frontmatter, and an HTML video instead of the private
-Fermin video reference. Source version 13 was not modified.
+ASSETS COMPLETE
+Four images, including micro-lista-trace-en.png, and
+say-video-simulador.mp4 with audio are present. No content placeholders remain.
+The trace is adapted, not a literal screenshot; the article caption says so.
 
-BEFORE PR
-1. Supply the real WhatsApp agent trace screenshot for the explicit
-   PERSONAL EVIDENCE PLACEHOLDER. Redact credentials, phone numbers,
-   private domains, and unrelated project information before adding it.
-2. After an authorized public branch push, check the pinned GitHub raw
-   video URL and a DEV preview, especially playback and enabling audio.
-   Forem permits video, src and controls; its HTML parser currently adds
-   autoplay, loop and muted by default, preserving explicit controls.
-   The video URL is pinned to the existing asset commit 65f3791. It will
-   not resolve publicly until that commit has been pushed. No external
-   video host is required by the source implementation. Actual DEV
-   deployment/browser compatibility remains to be checked in preview.
-   Sources:
-   https://github.com/forem/forem/blob/main/app/services/markdown_processor.rb
-   https://github.com/forem/forem/blob/main/app/services/html/parser.rb
-3. Review the complete video before publishing: it includes background
-   terminal/chat content. Contact-sheet inspection is not a full privacy
-   audit. Redact or crop if necessary before any public push.
-4. Review all changes, resolve the article placeholder and remove this checklist,
-   and rerun markdownlint before opening the PR.
+REMAINING REVIEW
+1. Author's final read-through.
+2. Watch the complete video before any public push: it contains background
+   terminal/chat content. Prior contact-sheet inspection is not a full
+   privacy review. Crop or redact anything sensitive if needed.
+3. After an authorized branch push, verify the pinned GitHub raw MP4 URL
+   and playback with sound in the actual DEV draft/preview. The commit in
+   the URL (65f3791) is local until pushed. Do not merge merely as a test.
+4. Run the PR's author-folder lint and publisher dry-run. Existing unrelated
+   articles in the same author folder can also affect those checks.
+5. Remove this preparation checklist from the branch before opening the PR.
 
 SAFETY
-The destination repository is public. This preparation is local only.
-published: false does not prevent the merge workflow from contacting DEV
-and creating/updating a draft. Do not merge as a test.
-No PR, push, publication, secrets, or workflows are part of this preparation.
+published: false is retained: a merge triggers the existing DEV sync workflow
+and can create/update drafts. It is not a no-op. No workflow or secret changed.
+The DEV organization assignment may require a manual check after draft sync,
+as described in README.md. Publishing publicly remains a separate decision.

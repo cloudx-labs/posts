@@ -12,21 +12,25 @@ cover_image: ./assets/building-with-agents/grocery-store-cover.png
 
 I was at the grocery store when I received a WhatsApp message from Puky.
 
-Puky was the name of a Twilio number I had configured for another project. It was also the name of the Mac running my agents. Originally, the name came from my cat.
+Puky was the name of a WhatsApp number I had configured for another project. It was also the name of the Mac running my agents. Originally, the name came from my cat.
 
 The message contained a link to install an iPhone app I had left an agent building.
 
 I had never mentioned WhatsApp in that session. The app had nothing to do with WhatsApp.
 
-The agent had uploaded the build to one of my domains and needed me to validate the installation. I wasn't answering in the coding session, so it searched the Mac, found a WhatsApp integration from another project, used an approved Twilio template, and reached me there.
+The agent had uploaded the build to one of my domains and needed me to validate the installation. The iPhone wasn't reachable directly, so it used an existing WhatsApp integration to get the link to me. When the free-form message was rejected, it called the WhatsApp API directly to send an approved notification template.
+
+That was the part I hadn't asked for: the agent decided to use WhatsApp and make that API call on its own. I had asked it to build and install the app, not to message me.
 
 My phone buzzed. Puky had sent me the build.
 
-> **PERSONAL EVIDENCE PLACEHOLDER — WHATSAPP TRACE:** Insert the real trace screenshot here. Redact credentials, phone numbers, private domains, and unrelated project data.
+![Micro Lista agent trace showing the decision to send the installation link through WhatsApp and call its API directly](./assets/building-with-agents/micro-lista-trace-en.png)
+
+*Trace adapted and translated into English with GPT Image 2.5.*
 
 That made me laugh. But it was useful: I could install the app, try it, and send back the next correction without returning to my desk.
 
-For a repeatable setup, I'd want that delivery route and its permissions defined explicitly. Searching unrelated projects for credentials is not something to rely on. What interested me was being able to keep trying the app while the agent worked on it.
+For a repeatable setup, I'd want that delivery route and its permissions defined explicitly. Having an integration available shouldn't mean unrestricted permission to use it. What interested me was being able to keep trying the app while the agent worked on it.
 
 ## Where I'm Coming From
 
