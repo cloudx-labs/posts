@@ -88,11 +88,11 @@ I was outside when I heard the Mac talking to the Simulator.
 
 It looked ridiculous. But now the agent had an interface to use, audio to send, and a result to check. That gave it something much more useful than rereading the recording function.
 
-<!-- BEFORE PR: replace this local video link with a DEV-supported embed URL. The original MP4 is included; do not publish this placeholder. -->
+<video controls playsinline preload="metadata" width="464" src="https://raw.githubusercontent.com/cloudx-labs/posts/65f3791e5cabd0d571343a949816c8d624dff502/posts/GBurgardt/assets/building-with-agents/say-video-simulador.mp4">
+  <a href="https://raw.githubusercontent.com/cloudx-labs/posts/65f3791e5cabd0d571343a949816c8d624dff502/posts/GBurgardt/assets/building-with-agents/say-video-simulador.mp4">Watch the recording with sound (MP4).</a>
+</video>
 
-[Watch the Mac speaking to the iPhone Simulator using say (MP4, with sound)](./assets/building-with-agents/say-video-simulador.mp4)
-
-*The Mac uses say to test the Simulator microphone. Real recording, with sound.*
+*The Mac uses say to test the Simulator microphone. Real recording — turn on sound.*
 
 The Simulator makes this easy to repeat. It doesn't prove that every microphone or audio route works on my iPhone. I keep those hardware checks separate, as [Apple's device-testing guidance](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) recommends.
 

@@ -5,21 +5,28 @@ Article ID: a-162cabb0-029e-434f-b73f-83324a6b69bc; version 13.
 
 Included: three original images and say-video-simulador.mp4 (with audio).
 Only export adaptations: repository frontmatter, relative asset paths,
-title moved to frontmatter, and a provisional MP4 link instead of the
-private Fermin video reference. Source version 13 was not modified.
+title moved to frontmatter, and an HTML video instead of the private
+Fermin video reference. Source version 13 was not modified.
 
 BEFORE PR
 1. Supply the real WhatsApp agent trace screenshot for the explicit
    PERSONAL EVIDENCE PLACEHOLDER. Redact credentials, phone numbers,
    private domains, and unrelated project information before adding it.
-2. Choose an approved public video host supported by DEV embeds, supply
-   its URL, and replace the provisional MP4 link and BEFORE PR comment.
-   The MP4 is already included; it does not need to be supplied again.
-   Reference: https://dev.to/p/editor_guide
+2. After an authorized public branch push, check the pinned GitHub raw
+   video URL and a DEV preview, especially playback and enabling audio.
+   Forem permits video, src and controls; its HTML parser currently adds
+   autoplay, loop and muted by default, preserving explicit controls.
+   The video URL is pinned to the existing asset commit 65f3791. It will
+   not resolve publicly until that commit has been pushed. No external
+   video host is required by the source implementation. Actual DEV
+   deployment/browser compatibility remains to be checked in preview.
+   Sources:
+   https://github.com/forem/forem/blob/main/app/services/markdown_processor.rb
+   https://github.com/forem/forem/blob/main/app/services/html/parser.rb
 3. Review the complete video before publishing: it includes background
    terminal/chat content. Contact-sheet inspection is not a full privacy
    audit. Redact or crop if necessary before any public push.
-4. Review all changes, remove the article placeholders and this checklist,
+4. Review all changes, resolve the article placeholder and remove this checklist,
    and rerun markdownlint before opening the PR.
 
 SAFETY
