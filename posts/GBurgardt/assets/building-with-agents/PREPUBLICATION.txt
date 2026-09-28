@@ -1,0 +1,29 @@
+PREPARATION ONLY — DO NOT OPEN PR OR MERGE YET
+
+Source: Fermin Articles, Building with Agents: QA and UX in the Loop.
+Article ID: a-162cabb0-029e-434f-b73f-83324a6b69bc; version 13.
+
+Included: three original images and say-video-simulador.mp4 (with audio).
+Only export adaptations: repository frontmatter, relative asset paths,
+title moved to frontmatter, and a provisional MP4 link instead of the
+private Fermin video reference. Source version 13 was not modified.
+
+BEFORE PR
+1. Supply the real WhatsApp agent trace screenshot for the explicit
+   PERSONAL EVIDENCE PLACEHOLDER. Redact credentials, phone numbers,
+   private domains, and unrelated project information before adding it.
+2. Choose an approved public video host supported by DEV embeds, supply
+   its URL, and replace the provisional MP4 link and BEFORE PR comment.
+   The MP4 is already included; it does not need to be supplied again.
+   Reference: https://dev.to/p/editor_guide
+3. Review the complete video before publishing: it includes background
+   terminal/chat content. Contact-sheet inspection is not a full privacy
+   audit. Redact or crop if necessary before any public push.
+4. Review all changes, remove the article placeholders and this checklist,
+   and rerun markdownlint before opening the PR.
+
+SAFETY
+The destination repository is public. This preparation is local only.
+published: false does not prevent the merge workflow from contacting DEV
+and creating/updating a draft. Do not merge as a test.
+No PR, push, publication, secrets, or workflows are part of this preparation.
