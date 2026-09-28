@@ -8,11 +8,9 @@ cover_image: ./assets/building-with-agents/grocery-store-cover.png
 
 *What I learned by giving agents a way to use my apps, test changes, and help me improve the experience.*
 
-![An iPhone showing a message from Puky with a link to a test build, in a grocery store](./assets/building-with-agents/grocery-store-cover.png)
+![An iPhone showing a message from Codex with a link to a test build, in a grocery store](./assets/building-with-agents/grocery-store-cover.png)
 
-I was at the grocery store when I received a WhatsApp message from Puky.
-
-Puky was the name of a WhatsApp number I had configured for another project. It was also the name of the Mac running my agents. Originally, the name came from my cat.
+I was at the grocery store when I received a WhatsApp message from Codex.
 
 The message contained a link to install an iPhone app I had left an agent building.
 
@@ -22,7 +20,7 @@ The agent had uploaded the build to one of my domains and needed me to validate 
 
 That was the part I hadn't asked for: the agent decided to use WhatsApp and make that API call on its own. I had asked it to build and install the app, not to message me.
 
-My phone buzzed. Puky had sent me the build.
+My phone buzzed. Codex had sent me the build.
 
 ![Micro Lista agent trace showing the decision to send the installation link through WhatsApp and call its API directly](./assets/building-with-agents/micro-lista-trace-en.png)
 
@@ -34,7 +32,7 @@ For a repeatable setup, I'd want that delivery route and its permissions defined
 
 ## Where I'm Coming From
 
-I work in R&D. We build proofs of concept, automate things, and try different ways to solve problems. I also build tools for myself. Most of the examples here come from those personal apps, which I use and keep changing.
+I work in R&D and we build proofs of concept, automate things, and try different ways to solve problems. I also build tools for myself. Most of the examples here come from those personal apps, which I use and keep changing.
 
 On a small project, sometimes with just one or two developers, it's natural to move between implementing a feature, testing it, and deciding whether it's comfortable to use. That's how a lot of this work feels to me. I make something, try it, notice what bothers me, and ask the agent to improve it.
 
@@ -108,7 +106,7 @@ I've built quite a few iPhone apps, and I use `./install-ios.sh --iphone` to get
 
 Inside it, `verify_installed_app` uses Apple's `devicectl` to compare the installed app identifier, version, and build number with the artifact we just built. Otherwise, I could be testing yesterday's app and reporting a problem already fixed.
 
-A locked iPhone caused another little complication. This excerpt from `launch_app`, with the log message translated into English, handles that case after attempting to launch the installed app:
+A locked iPhone caused another little complication. This excerpt from `launch_app` handles that case after attempting to launch the installed app:
 
 ```sh
 if rg -qi 'locked|unlocked' "$launch_log"; then
@@ -129,7 +127,9 @@ And the agent needs to report what actually happened. A ready link isn't an inst
 
 I use computer-use tools to operate my Mac apps and browser-use tools to navigate and test web apps. I keep sessions for several apps ready, so the agent can return to the flow without setting everything up again.
 
-I have Android environments too, including a two-screen emulator. Same idea: try the flow, see what failed, fix it, and try again. Hardware-dependent behavior still needs a check on the real device.
+I also have an Android environment set up so the agent can launch an app, try the flow, see what failed, fix it, and try again on its own. Hardware-dependent behavior still needs a check on the real device.
+
+All of this runs on a spare Mac at home, not my personal Mac. I keep it on and unlocked, dedicated to Codex and my agents so they can use the apps and keep testing while I'm doing something else. That opens up a lot.
 
 ## Five Minutes Looking at a Spinner
 
