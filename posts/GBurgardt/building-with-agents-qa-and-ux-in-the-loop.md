@@ -78,7 +78,7 @@ For iOS, I configure the Simulator's device and runtime, build for that target, 
 
 One time, I was fixing an audio recorder with a WhatsApp-like flow: press, record, send, and see the result. I explained what should happen and required a test in the iPhone Simulator with audio going through the flow.
 
-Nobody was sitting at the Mac to speak, so the agent used `say`, the speech synthesizer built into macOS.
+I had asked it to test the microphone, not told it how to produce the audio. Nobody was sitting at the Mac to speak, so the agent chose `say`, the speech synthesizer built into macOS. It made the Mac speak to the Simulator so it could run the test itself.
 
 It activated the microphone feature, played a controlled sentence, recorded it through the app, and checked the response. It repeated the cycle around fifteen times.
 
@@ -89,12 +89,6 @@ One instruction was something like:
 I was outside when I heard the Mac talking to the Simulator.
 
 It looked ridiculous. But now the agent had an interface to use, audio to send, and a result to check. That gave it something much more useful than rereading the recording function.
-
-<video controls playsinline preload="metadata" width="464" src="https://raw.githubusercontent.com/cloudx-labs/posts/65f3791e5cabd0d571343a949816c8d624dff502/posts/GBurgardt/assets/building-with-agents/say-video-simulador.mp4">
-  <a href="https://raw.githubusercontent.com/cloudx-labs/posts/65f3791e5cabd0d571343a949816c8d624dff502/posts/GBurgardt/assets/building-with-agents/say-video-simulador.mp4">Watch the recording with sound (MP4).</a>
-</video>
-
-*The Mac uses say to test the Simulator microphone. Real recording — turn on sound.*
 
 The Simulator makes this easy to repeat. It doesn't prove that every microphone or audio route works on my iPhone. I keep those hardware checks separate, as [Apple's device-testing guidance](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) recommends.
 
