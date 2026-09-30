@@ -28,7 +28,7 @@ My phone buzzed. Codex had sent me the build.
 
 That made me laugh. But it was useful: I could install the app, try it, and send back the next correction without returning to my desk.
 
-For a repeatable setup, I'd want that delivery route and its permissions defined explicitly. Having an integration available shouldn't mean unrestricted permission to use it. What interested me was being able to keep trying the app while the agent worked on it.
+This time, the surprise was useful. Next time, it might not be. I'd want clear guardrails: which tools the agent can use, who it can message, and when it needs to ask me first. What interested me was being able to keep trying the app while the agent worked on it.
 
 ## Where I'm Coming From
 
@@ -149,7 +149,7 @@ I also try to shorten the boring part between a fix and the next test. If only p
 
 These sound like small details, but I repeat this process all day. Less time getting the build ready means I can try the next change sooner.
 
-The boundaries matter too: separate test data, known device targets, and explicit permission for anything that publishes or changes production. Asking for several iterations isn't permission to touch everything.
+I want the agent to experiment, but within limits I set: test data, specific devices, and approval before sending messages, publishing, or touching production. Those limits should be enforced through tool permissions, not just written in a prompt. “Keep trying” doesn't mean “do whatever.”
 
 Anthropic's preliminary study of roughly 400,000 Claude Code sessions found that people generally made most planning decisions while Claude made most execution decisions. Domain expertise was associated with better outcomes, inferred from session evidence rather than observation of every resulting product. That fits my experience of needing to understand what I'm asking for and what came back. ([Anthropic research](https://www.anthropic.com/research/claude-code-expertise))
 
