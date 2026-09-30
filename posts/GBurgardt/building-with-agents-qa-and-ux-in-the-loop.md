@@ -32,9 +32,9 @@ For a repeatable setup, I'd want that delivery route and its permissions defined
 
 ## Where I'm Coming From
 
-I work in R&D and we build proofs of concept, automate things, and try different ways to solve problems. I also build tools for myself. Most of the examples here come from those personal apps, which I use and keep changing.
+I work in R&D, where we use AI to build proofs of concept, automate things, and try different ways to solve problems. Outside work, I use agents to build tools for things I actually need. Most of the examples here come from those personal apps. I actually use them, so when something doesn't work, it gets in my way. I want it fixed because I need the app, not just because I found a bug.
 
-On a small project, sometimes with just one or two developers, it's natural to move between implementing a feature, testing it, and deciding whether it's comfortable to use. That's how a lot of this work feels to me. I make something, try it, notice what bothers me, and ask the agent to improve it.
+On a small project, sometimes with just one or two developers, it's natural to move between implementing a feature, testing it, and deciding whether it's comfortable to use. That's what iteration looks like for me: I make something, try it, notice what bothers me, and ask the agent to improve it. Then I try it again.
 
 If a change takes minutes to implement, I want to try it in that same session. Otherwise, I lose the context and leave obvious problems sitting there until the next time I open the app.
 
