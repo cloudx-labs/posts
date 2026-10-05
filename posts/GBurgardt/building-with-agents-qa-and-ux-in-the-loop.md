@@ -1,6 +1,6 @@
 ---
 title: 'Building with Agents: QA and UX in the Loop'
-published: false
+published: true
 description: 'What I learned by giving agents a way to use my apps, test changes, and help me improve the experience.'
 tags: 'ai, agents, testing, ux'
 cover_image: ./assets/building-with-agents/grocery-store-cover.png
