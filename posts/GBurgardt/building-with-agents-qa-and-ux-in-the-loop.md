@@ -5,6 +5,7 @@ description: 'What I learned by giving agents a way to use my apps, test changes
 tags: 'ai, agents, testing, ux'
 cover_image: ./assets/building-with-agents/grocery-store-cover.png
 id: 4802139
+date: '2026-10-05T15:09:22Z'
 ---
 
 *What I learned by giving agents a way to use my apps, test changes, and help me improve the experience.*
